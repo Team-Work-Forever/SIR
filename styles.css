@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
+
+:root {
+    --font-family: 'Amarante', 'Arial', serif;
+
+    --main-color: #00454B;
+    --selection-color: #FF9608;
+
+    --mid-blue: #577590;
+    --mid-green: #006D77;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    --bs-body-font-family: var(--font-family);
+}
+
+nav {
+    background-color: var(--main-color);
+}
+
+.nav-item > .nav-link {
+    color: white;
+}
+
+.nav-item.active > .nav-link {
+    color: var(--selection-color);
+}
+
+section {
+    background-image: url("/assets/background.svg");
+}
+
+.btn {
+    color: white;
+    --bs-btn-link-hover-color: pink;
+}
+
+.btn.green {
+    --bs-btn-bg: var(--mid-green);
+}
+
+.btn.blue {
+    --bs-btn-bg: var(--mid-blue);
+}
