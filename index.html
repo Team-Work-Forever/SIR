@@ -1,63 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Os Mestres da Culinária</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <div class="vh-100">
-        <nav class="d-flex w-100 position-fixed justify-content-between navbar navbar-expand-lg px-2">
-            <a class=" navbar-brand" href="#">
-                <img src="/assets/icon.svg" alt="">
-            </a>
+      <nav
+        class="d-flex w-100 position-fixed justify-content-between navbar navbar-expand-lg px-2"
+      >
+        <a class="navbar-brand" href="#">
+          <img src="/assets/icon.svg" alt="" />
+        </a>
 
-            <div class="d-flex justify-content-center collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Objetivo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Funcionalidades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre nós</a>
-                    </li>
-                </ul>
-            </div>
+        <div
+          class="d-flex justify-content-center collapse navbar-collapse"
+          id="navbarTogglerDemo02"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Objetivo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Funcionalidades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sobre nós</a>
+            </li>
+          </ul>
+        </div>
 
-            <div class="my-2 my-lg-0">
-                <button class="btn green" my-2 my-sm-0 type="submit">Registar</button>
-                <button class="btn blue" type="submit">Iniciar Sessão</button>
-            </div>
-        </nav>
+        <div class="my-2 my-lg-0">
+          <button class="btn green" my-2 my-sm-0 type="submit">Registar</button>
+          <button class="btn blue" type="submit">Iniciar Sessão</button>
+        </div>
+      </nav>
 
-        <!-- Main Content -->
-        <section class="container-fluid h-100 d-flex justify-content">
-            <div class="col-md-5"></div>
-            <div class="row col-md-7 h-100">
-                <img src="/assets/landpage-icon.svg" alt="">
-                <h2 class="text-light text-center">
-                    O seu site de gestão de receitas e de inspiração!
-                </h2>
+      <!-- Main Content -->
+      <section class="home container-fluid h-100 d-flex justify-content">
+        <div class="col-md-5"></div>
+        <div class="row col-md-7 h-100">
+          <img src="/assets/landpage-icon.svg" alt="" />
+          <h2 class="text-light text-center">
+            O seu site de gestão de receitas e de inspiração!
+          </h2>
+        </div>
+      </section>
+      <!--Objetives-->
+      <section class="objetives container-fluid h-100 d-flex justify-content">
+        <div
+          class="text-bottom-page col h-100 d-flex justify-content-center align-items-center"
+        >
+          <h2 class="text-light text-center">
+            <p>
+              Um site que permite criar as suas próprias receitas, procurar e
+              seguir os passos para obter um prato delicioso!
+            </p>
+            <p>
+              O nosso objetivo é facilitar o acesso e fornecer uma sequência de
+              passos para refazer os seus pratos favoritos.
+            </p>
+          </h2>
+        </div>
+      </section>
+      <!--Features-->
+      <section class="container-fluid h-100 d-flex justify-content">
+        <div
+          class="col-12 col-md-6 h-100 d-flex align-items-center justify-content-center"
+        >
+          <!--Feature Cards-->
+          <div class="container-fluid">
+            <!--Card 1-->
+            <div
+              class="card-feature d-flex align-items-center justify-content-center"
+            >
+              <div class="row g-0">
+                <div class="col-4">
+                  <img
+                    src="assets/create_recipe.svg"
+                    class="img-fluid rounded-start"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="col-8 d-flex align-items-center justify-content-center"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Criar Receitas</h5>
+                    <p class="card-text">
+                      Crie as suas próprias receitas, com os seu próprios
+                      ingredientes e passos
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+            <!--Card 2-->
+            <div
+              class="card-feature d-flex align-items-center justify-content-center"
+            >
+              <div class="row g-0">
+                <div class="col-4">
+                  <img
+                    src="assets/see_recipe.svg"
+                    class="img-fluid rounded-start"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="col-8 d-flex align-items-center justify-content-center"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Visualizar Receitas</h5>
+                    <p class="card-text">
+                      Volte a fazer as suas receitas ou experimente novas
+                      receitas
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Card 3-->
+            <div
+              class="card-feature d-flex align-items-center justify-content-center"
+            >
+              <div class="row g-0">
+                <div class="col-4">
+                  <img
+                    src="assets/share_recipe.svg"
+                    class="img-fluid rounded-start"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="col-8 d-flex align-items-center justify-content-center"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Partilhar Receitas</h5>
+                    <p class="card-text">
+                      Partilhe as suas receitas favoritas com os seus amigos
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-6 h-100 d-flex align-items-center justify-content-center d-none d-sm-flex"
+        >
+          <img
+            src="/assets/image_features.svg"
+            class="scaled-image img-fluid"
+            alt=""
+          />
+        </div>
+      </section>
+      <!--About Us-->
+      <section class="about-us container-fluid h-100 d-flex justify-content">
+        <div class="row">
+          <div class="col-12 team d-flex justify-content-center flex-wrap">
+            <!--Diogo-->
+            <div
+              class="col-12 col-md-4 card person-card text-center position-relative"
+            >
+              <img src="assets/cooking_hat.svg" alt="" class="cooking-hat" />
+
+              <div class="col d-flex justify-content-center">
+                <img src="assets/diogo.png" class="person-image" alt="" />
+              </div>
+              <div class="card-body">
+                <h2 class="card-title text-center">Diogo Machado Assunção</h2>
+              </div>
+              <div>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="icon bi bi-instagram"></i
+                ></a>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="icon bi bi-facebook"></i
+                ></a>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="icon bi bi-linkedin"></i
+                ></a>
+              </div>
+            </div>
+            <!--David-->
+            <div
+              class="col-12 col-md-4 card person-card text-center position-relative"
+            >
+              <img src="assets/wooden_spoon.svg" alt="" class="wooden-spoon" />
+              <div class="col d-flex justify-content-center">
+                <img src="assets/david.png" class="person-image" alt="" />
+              </div>
+              <div class="card-body">
+                <h2 class="card-title text-center">David Sousa Braga</h2>
+              </div>
+              <div>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="icon bi bi-instagram"></i
+                ></a>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="icon bi bi-facebook"></i
+                ></a>
+                <a href="https://www.instagram.com" target="_blank"
+                  ><i class="icon bi bi-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card description">
+              <div class="card-body text-center">
+                <h4>
+                  Somos alunos do Curso de Engenharia Informática do IPVC ESTG
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
