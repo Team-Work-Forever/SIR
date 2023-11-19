@@ -5,6 +5,7 @@
 
     --main-color: #00454B;
     --selection-color: #FF9608;
+    --hover-link-color: #F9C784;
 
     --hover: #ffffff;
     --mid-blue: #577590;
@@ -36,18 +37,22 @@ nav {
     color: white;
 }
 
-.nav-item.active > .nav-link {
+.nav-link:hover {
+    color: var(--hover-link-color);
+}
+
+.nav-item > .nav-link.active {
     color: var(--selection-color);
 }
 
 .home {
-    background-image: url("/assets/background.svg");
+    background-image: url("./assets/background.svg");
     background-size: cover;
     background-position: center center;
 }
 
 .objetives {
-    background-image: url("/assets/background_2.svg");
+    background-image: url("./assets/background_2.svg");
     background-size: cover;
     background-position: center center;
 }
@@ -71,6 +76,31 @@ nav {
     --bs-btn-bg: var(--mid-blue);
 }
 
+.goDown {
+    color: var(--main-color);
+    font-size: 26px;
+    animation: bounce 1.2s ease infinite;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
 .card {
     border: 2px solid;
     border-radius: 5px;
@@ -78,11 +108,10 @@ nav {
 }
 
 .text-bottom-page {
-    margin-top: 70px;
+    margin-top: 100px;
 }
 
 .card-feature {
-    margin-bottom: 28px;
     height: 180px;
     padding: 6px;
     border: 2px solid;
@@ -98,8 +127,13 @@ nav {
     transform: scale(.65);
   }
 
+.features-image {
+    max-height: 560px;
+}
+
 .person-card {
     max-width: 290px;
+    max-height: 350px;
     padding-top: 36px;
     padding-bottom: 36px;
     margin-bottom: 12px;
@@ -108,11 +142,11 @@ nav {
 }
 
 .team {
-    margin-top: 130px;
+    margin-top: 60px;
 }
 
 .icon {
-    color: #000;
+    color: black;
     font-size: 26px;
     margin-left: 6px;
     margin-right: 6px;
@@ -142,6 +176,36 @@ nav {
 
 .description {
     margin-top: 26px;
-    margin-left: 26px;
-    margin-right: 26px;
+    margin-bottom: 106px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.carousel-inner {
+    height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 64px;
+  width: 64px;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 2px solid var(--main-color);
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 36px;
+  color: var(--main-color);
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 36px;
+  color: var(--main-color);
 }
