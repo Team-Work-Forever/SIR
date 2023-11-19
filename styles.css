@@ -11,6 +11,14 @@
     --mid-green: #006D77;
 }
 
+.custom-toggler.navbar-toggler {
+    border-color: var(--hover);
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("assets/cooking_hat.svg");
+}
+
 body {
     margin: 0;
     padding: 0;
