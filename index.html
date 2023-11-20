@@ -66,7 +66,14 @@
           >
             Registar
           </button>
-          <button class="btn blue" type="submit">Iniciar Sessão</button>
+          <button
+            class="btn blue"
+            type="submit"
+            data-bs-toggle="modal"
+            data-bs-target="#login"
+          >
+            Iniciar Sessão
+          </button>
         </div>
       </nav>
       <!-- Main Content -->
@@ -521,9 +528,66 @@
           </div>
           <div class="modal-footer row m-5">
             <button type="button" class="btn green" data-bs-dismiss="modal">
-              Fechar
+              Cancelar
             </button>
             <button type="button" class="btn blue">Registar Conta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h2 class="modal-title">Iniciar Sessão</h2>
+          </div>
+          <div class="modal-body">
+            <div class="col my-2">
+              <!-- E-mail -->
+              <input
+                id="e_mail"
+                type="email"
+                class="form-control"
+                placeholder="E-mail"
+                required
+              />
+            </div>
+            <div class="col my-2">
+              <!-- Password -->
+              <input
+                id="password"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="row mx-2">
+              <!-- Forgot Password -->
+              <a href="#" class="col forgot-password-link"
+                >Esqueceu-se da password?</a
+              >
+              <!-- Remember Me -->
+              <div class="col form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="remember"
+                />
+                <label class="form-check-label" for="remember">
+                  Lembrar-se de mim
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer row m-5">
+            <button type="button" class="btn green" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="button" class="btn blue">Iniciar Sessão</button>
           </div>
         </div>
       </div>
