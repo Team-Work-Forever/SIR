@@ -25,3 +25,34 @@
     });
     });
   });
+
+  var daySelect = document.getElementById("day");
+  for (var i = 1; i <= 31; i++) {
+    var option = document.createElement("option");
+    option.value = i;
+    option.text = i;
+    daySelect.appendChild(option);
+  }
+
+  // Preencher os meses
+  var monthSelect = document.getElementById("month");
+  var months = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
+  for (var i = 1; i <= 12; i++) {
+    var option = document.createElement("option");
+    option.value = i;
+    option.text = months[i - 1];
+    monthSelect.appendChild(option);
+  }
+
+  // Preencher os anos (assumindo um intervalo de 100 anos)
+  var yearSelect = document.getElementById("year");
+  var currentYear = new Date().getFullYear();
+  for (var i = currentYear; i >= currentYear - 100; i--) {
+    var option = document.createElement("option");
+    option.value = i;
+    option.text = i;
+    yearSelect.appendChild(option);
+  }
