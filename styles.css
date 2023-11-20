@@ -24,6 +24,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 
     --bs-body-font-family: var(--font-family);
 }
@@ -133,7 +134,7 @@ nav {
 
 .person-card {
     max-width: 290px;
-    max-height: 350px;
+    max-height: 450px;
     padding-top: 36px;
     padding-bottom: 36px;
     margin-bottom: 12px;
