@@ -218,3 +218,8 @@ nav {
 .modal-footer {
     border: none;
 }
+
+.forgot-password-link {
+    text-decoration: underline;
+    color: var(--main-color);
+}
