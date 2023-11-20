@@ -209,3 +209,12 @@ nav {
   font-size: 36px;
   color: var(--main-color);
 }
+
+.modal-header {
+    border-color: var(--main-color);
+    border-width: 3px;
+}
+
+.modal-footer {
+    border: none;
+}
