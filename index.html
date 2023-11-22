@@ -276,26 +276,28 @@
         <div class="modal-header justify-content-center">
           <h2 class="modal-title">Registar Conta</h2>
         </div>
-        <div class="modal-body">
-          <div class="row my-2">
-            <div class="col">
-              <!-- First Name -->
-              <input id="first_name" type="text" class="form-control" placeholder="Nome Próprio" required />
+        <div class="modal-body d-flex gap-3 flex-column">
+          <div class="model-section col">
+            <div class="row my-2">
+              <div class="col">
+                <!-- First Name -->
+                <input id="first_name" type="text" class="form-control" placeholder="Nome Próprio" required />
+              </div>
+              <div class="col">
+                <!-- Last Name -->
+                <input id="last_name" type="text" class="form-control" placeholder="Apelido" required />
+              </div>
             </div>
-            <div class="col">
-              <!-- Last Name -->
-              <input id="last_name" type="text" class="form-control" placeholder="Apelido" required />
+            <div class="col my-2">
+              <!-- E-mail -->
+              <input id="e_mail" type="email" class="form-control" placeholder="E-mail" required />
+            </div>
+            <div class="col my-2">
+              <!-- Password -->
+              <input id="password" type="password" class="form-control" placeholder="Password" required />
             </div>
           </div>
-          <div class="col my-2">
-            <!-- E-mail -->
-            <input id="e_mail" type="email" class="form-control" placeholder="E-mail" required />
-          </div>
-          <div class="col my-2">
-            <!-- Password -->
-            <input id="password" type="password" class="form-control" placeholder="Password" required />
-          </div>
-          <div class="col my-2">
+          <div class="model-section col">
             <!-- Birth Date -->
             <label for="birthDate">Data de Nascimento</label>
             <div class="row">
@@ -315,10 +317,10 @@
               </select>
             </div>
           </div>
-          <div class="col my-2">
+          <div class="model-section col">
             <!-- Gender -->
             <label for="gender">Género</label>
-            <div class="row mx-2">
+            <div class="col mx-2">
               <!-- Masculino -->
               <div class="col form-check">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
@@ -326,7 +328,7 @@
                 <label class="form-check-label" for="inlineRadio1">Masculino</label>
               </div>
               <!-- Feminino -->
-              <div class="col mx-2 form-check">
+              <div class="col form-check">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
                   value="option2" />
                 <label class="form-check-label" for="inlineRadio2">Feminino</label>
@@ -337,16 +339,13 @@
                   value="option3" />
                 <label class="form-check-label" for="inlineRadio3">Outro</label>
               </div>
-            </div>
-            <!-- Prefiro Não Divulgar -->
-            <div class="col mx-2 form-check">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"
                 checked />
               <label class="form-check-label" for="inlineRadio4">Prefiro Não Divulgar</label>
             </div>
           </div>
         </div>
-        <div class="modal-footer row m-5">
+        <div class="modal-footer row d-flex justify-content-center mt-5">
           <button type="button" class="btn green" data-bs-dismiss="modal">
             Cancelar
           </button>
@@ -384,7 +383,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer row m-5">
+        <div class="modal-footer row d-flex justify-content-center mt-5">
           <button type="button" class="btn green" data-bs-dismiss="modal">
             Cancelar
           </button>

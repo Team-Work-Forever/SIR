@@ -217,6 +217,11 @@ nav {
   color: var(--main-color);
 }
 
+.model-section > label {
+    margin-bottom: 0.5em;
+    font-size: large;
+}
+
 .modal-header {
     border-color: var(--main-color);
     border-width: 3px;
