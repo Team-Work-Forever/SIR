@@ -34,6 +34,10 @@ nav {
     background-color: var(--main-color);
 }
 
+section {
+    height: 100vh;
+}
+
 .nav-item > .nav-link {
     color: white;
 }
@@ -164,7 +168,6 @@ nav {
     height: 150px;
     border-radius: 50%;
 }
-
 
 .cooking-hat {
     position: absolute;

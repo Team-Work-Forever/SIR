@@ -12,70 +12,65 @@
 </head>
 
 <body>
-  <div class="vh-100">
-    <nav class="d-flex w-100 position-fixed justify-content-between navbar navbar-expand-lg px-2">
-      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <nav class="d-flex w-100 position-fixed justify-content-between navbar navbar-expand-lg px-4">
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <a class="navbar-brand" href="#">
-        <img src="./assets/icon.svg" alt="" />
-      </a>
+    <a class="navbar-brand" href="#">
+      <img src="./assets/icon.svg" alt="" />
+    </a>
 
-      <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav m-1">
-          <li class="nav-item">
-            <a class="nav-link active" href="#home">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#objetives">Objetivo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#features">Funcionalidades</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about-us">Sobre nós</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-flex justify-content-end bg-back flex-grow-1">
-          <li class="d-flex gap-3 justify-content-between">
-            <button class="btn green btn-block" my-2 my-sm-0 type="submit" data-bs-toggle="modal"
-              data-bs-target="#register">
-              Registar
-            </button>
-            <button class="btn blue btn-block" type="submit" data-bs-toggle="modal" data-bs-target="#login">
-              Iniciar Sessão
-            </button>
-          </li>
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <ul class="navbar-nav m-1">
+        <li class="nav-item">
+          <a class="nav-link active" href="#home">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#objetives">Objetivo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#features">Funcionalidades</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about-us">Sobre nós</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav d-flex justify-content-end bg-back flex-grow-1">
+        <li class="d-flex gap-3 justify-content-between">
+          <button class="btn green btn-block" type="submit" data-bs-toggle="modal" data-bs-target="#register">
+            Registar
+          </button>
+          <button class="btn blue btn-block" type="submit" data-bs-toggle="modal" data-bs-target="#login">
+            Iniciar Sessão
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="home" class="home container-fluid">
+    <div class="row d-flex justify-content-center align-items-md-end h-100">
+      <div class="col-md-5"></div>
+      <div class="row col-12 col-md-7">
+        <img src="./assets/landpage-icon.svg" alt="" />
+        <h2 class="text-light text-center">
+          O seu site de gestão de receitas e de inspiração!
+        </h2>
       </div>
-
-      <!-- <div class="my-2 my-lg-0">
-        
-      </div> -->
-    </nav>
-    <!-- Main Content -->
-    <section id="home" class="home container-fluid h-100 d-flex flex-column py-4">
-      <div class="row d-flex justify-content-end h-100">
-        <div class="col-md-5"></div>
-        <div class="row col-md-7">
-          <img src="./assets/landpage-icon.svg" alt="" />
-          <h2 class="text-light text-center">
-            O seu site de gestão de receitas e de inspiração!
-          </h2>
-        </div>
-      </div>
-      <div class="row align-self-center">
+      <div class="row d-flex justify-content-center align-items-end pb-4">
         <a href="#objetives" class="goDown">
           <i class="bi bi-arrow-down-circle"></i>
         </a>
       </div>
-    </section>
-    <!-- Objetives -->
-    <section id="objetives" class="objetives container-fluid d-flex flex-column py-4 h-100">
-      <div class="row text-bottom-page align-items-center flex-grow-1">
+    </div>
+  </section>
+
+  <section id="objetives" class="objetives container-fluid">
+    <div class="row d-flex justify-content-center h-100 align-items-end">
+      <div class="row text-bottom-page">
         <h2 class="text-light text-center">
           <p>
             Um site que permite criar as suas próprias receitas, procurar e
@@ -87,87 +82,86 @@
           </p>
         </h2>
       </div>
-      <div class="row align-self-center">
+      <div class="row d-flex justify-content-center align-items-end pb-4">
         <a href="#features" class="goDown">
           <i class="bi bi-arrow-down-circle"></i>
         </a>
       </div>
-    </section>
-    <!-- Features -->
-    <section id="features" class="container-fluid d-flex flex-column py-4 h-100">
-      <div class="row d-flex align-items-center flex-grow-1">
-        <div class="col-12 col-md-6">
-          <!-- Feature Cards -->
-          <div class="container-fluid">
-            <!-- Card 1 -->
-            <div class="card-feature d-flex align-items-center justify-content-center my-2">
-              <div class="row g-0">
-                <div class="col-4">
-                  <img src="./assets/create_recipe.svg" class="img-fluid rounded-start" alt="" />
-                </div>
-                <div class="col-8 d-flex align-items-center justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">Criar Receitas</h5>
-                    <p class="card-text">
-                      Crie as suas próprias receitas, com os seu próprios
-                      ingredientes e passos
-                    </p>
-                  </div>
+    </div>
+  </section>
+
+  <section id="features" class="container-fluid px-4">
+    <div class="d-flex flex-column h-100">
+      <div class="row h-100">
+        <div class="col-md-6 col-12 d-flex flex-column d-flex justify-content-center gap-4">
+          <div class="card-feature d-flex align-items-center justify-content-center">
+            <div class="row g-0">
+              <div class="col-4">
+                <img src="./assets/create_recipe.svg" class="img-fluid rounded-start" alt="" />
+              </div>
+              <div class="col-8 d-flex align-items-center justify-content-center">
+                <div class="card-body">
+                  <h5 class="card-title">Criar Receitas</h5>
+                  <p class="card-text">
+                    Crie as suas próprias receitas, com os seu próprios
+                    ingredientes e passos
+                  </p>
                 </div>
               </div>
             </div>
-            <!-- Card 2 -->
-            <div class="card-feature d-flex align-items-center justify-content-center my-2">
-              <div class="row g-0">
-                <div class="col-4">
-                  <img src="./assets/see_recipe.svg" class="img-fluid rounded-start" alt="" />
-                </div>
-                <div class="col-8 d-flex align-items-center justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">Visualizar Receitas</h5>
-                    <p class="card-text">
-                      Volte a fazer as suas receitas ou experimente novas
-                      receitas
-                    </p>
-                  </div>
+          </div>
+          <div class="card-feature d-flex align-items-center justify-content-center">
+            <div class=" row g-0">
+              <div class="col-4">
+                <img src="./assets/see_recipe.svg" class="img-fluid rounded-start" alt="" />
+              </div>
+              <div class="col-8 d-flex align-items-center justify-content-center">
+                <div class="card-body">
+                  <h5 class="card-title">Visualizar Receitas</h5>
+                  <p class="card-text">
+                    Volte a fazer as suas receitas ou experimente novas
+                    receitas
+                  </p>
                 </div>
               </div>
             </div>
-            <!-- Card 3 -->
-            <div class="card-feature d-flex align-items-center justify-content-center">
-              <div class="row g-0">
-                <div class="col-4">
-                  <img src="./assets/share_recipe.svg" class="img-fluid rounded-start" alt="" />
-                </div>
-                <div class="col-8 d-flex align-items-center justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">Partilhar Receitas</h5>
-                    <p class="card-text">
-                      Partilhe as suas receitas favoritas com os seus amigos
-                    </p>
-                  </div>
+          </div>
+          <div class="card-feature d-flex align-items-center justify-content-center">
+            <div class="row g-0">
+              <div class="col-4">
+                <img src="./assets/share_recipe.svg" class="img-fluid rounded-start" alt="" />
+              </div>
+              <div class="col-8 d-flex align-items-center justify-content-center">
+                <div class="card-body">
+                  <h5 class="card-title">Partilhar Receitas</h5>
+                  <p class="card-text">
+                    Partilhe as suas receitas favoritas com os seus amigos
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="features-image col-md-6 d-none d-md-flex">
-          <img src="./assets/image_features.svg" class="scaled-image img-fluid" alt="" />
+        <div class="col-6 d-flex">
+          <div class="d-none d-md-flex">
+            <img src="./assets/image_features.svg" class="scaled-image img-fluid" alt="" />
+          </div>
         </div>
       </div>
-      <div class="row align-self-center">
+      <div class="row d-flex justify-content-center align-items-end pb-4 ">
         <a href="#about-us" class="goDown alternative">
           <i class="bi bi-arrow-down-circle"></i>
         </a>
       </div>
-    </section>
-    <section id="about-us" class="about-us container-fluid d-flex flex-column h-100">
-      <div class="row flex-grow-1 d-flex align-items-center">
-        <!-- Carousel -->
+    </div>
+  </section>
+
+  <section id="about-us" class="about-us container-fluid bg-black">
+    <div class="row h-100">
+      <div class="d-flex flex-column justify-content-end">
         <div id="carouselExampleIndicators" class="carousel slide d-md-none" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="2000">
-              <!-- Card Diogo -->
               <div class="d-flex align-items-center justify-content-center">
                 <div class="col-12 col-md-4 card person-card text-center position-relative">
                   <img src="./assets/cooking_hat.svg" alt="" class="cooking-hat" />
@@ -189,7 +183,6 @@
               </div>
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-              <!-- Card David -->
               <div class="d-flex align-items-center justify-content-center">
                 <div class="col-12 col-md-4 card person-card text-center position-relative">
                   <img src="./assets/wooden_spoon.svg" alt="" class="wooden-spoon" />
@@ -222,7 +215,6 @@
         </div>
         <div class="col-md-12 d-none d-md-flex flex-grow-1">
           <div class="col-12 team d-flex justify-content-center flex-wrap">
-            <!-- Diogo -->
             <div class="col-12 col-md-4 card person-card text-center position-relative d-none d-sm-block">
               <img src="./assets/cooking_hat.svg" alt="" class="cooking-hat" />
               <div class="col d-flex justify-content-center">
@@ -238,7 +230,6 @@
                 <a href="https://github.com/DiogoCC7" target="_blank"><i class="icon bi bi-github"></i></a>
               </div>
             </div>
-            <!-- David -->
             <div class="col-12 col-md-4 card person-card text-center position-relative d-none d-sm-block">
               <img src="./assets/wooden_spoon.svg" alt="" class="wooden-spoon" />
               <div class="col d-flex justify-content-center">
@@ -257,17 +248,17 @@
           </div>
         </div>
       </div>
-      <div class="row description d-flex justify-content-center">
+      <div class="h-auto d-flex flex-row justify-content-center align-items-start">
         <div class="card">
-          <div class="card-body text-center">
+          <div class="card-body text-center p-4">
             <h4>
               Somos alunos do Curso de Engenharia Informática do IPVC ESTG
             </h4>
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <!-- Register Modal -->
   <div class="modal" id="register" tabindex="-1">
@@ -392,6 +383,7 @@
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
