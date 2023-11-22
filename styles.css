@@ -66,6 +66,7 @@ nav {
 
 .btn {
     color: white;
+    width: 150px;
     --bs-btn-hover-bg: var(--hover);
 }
 
