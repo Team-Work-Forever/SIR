@@ -35,8 +35,24 @@ nav {
 }
 
 section {
-    height: 100vh;
-    width: 100%;
+    min-height: 100vh;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    flex: auto;
+}
+
+.home-image{
+    max-width: 600px;
+}
+
+.text-multiline {
+    overflow: hidden;
+    white-space: normal;
+    max-width: 100%;
 }
 
 .nav-item > .nav-link {
@@ -138,7 +154,9 @@ section {
 
 .person-card {
     max-width: 290px;
+    min-width: 200px;
     max-height: 450px;
+    min-height: 400px;
     padding-top: 36px;
     padding-bottom: 36px;
     margin-bottom: 12px;

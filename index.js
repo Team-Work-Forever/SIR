@@ -6,7 +6,7 @@
       var scrollPosition = window.scrollY;
 
       sections.forEach(function (section) {
-        var sectionTop = section.offsetTop -10;
+        var sectionTop = section.offsetTop;
         var sectionBottom = sectionTop + section.offsetHeight;
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
