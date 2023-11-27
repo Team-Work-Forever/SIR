@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
+
+:root {
+    --font-family: 'Amarante', 'Arial', serif;
+
+    --main-color: #00454B;
+    --selection-color: #FF9608;
+    --hover-link-color: #F9C784;
+
+    --hover: #ffffff;
+    --mid-blue: #577590;
+    --mid-green: #006D77;
+}
+
+.custom-toggler.navbar-toggler {
+    border-color: var(--hover);
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("assets/cooking_hat.svg");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+
+    --bs-body-font-family: var(--font-family);
+}
+
+nav {
+    z-index: 5;
+    background-color: var(--main-color);
+}
+
+section {
+    height: 100vh;
+}
+
+.nav-item > .nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: var(--hover-link-color);
+}
+
+.nav-item > .nav-link.active {
+    color: var(--selection-color);
+}
+
+.home {
+    background-image: url("./assets/background.svg");
+    background-size: cover;
+    background-position: center center;
+}
+
+.objetives {
+    background-image: url("./assets/background_2.svg");
+    background-size: cover;
+    background-position: center center;
+}
+
+.about-us {
+    background-image: url("assets/background_3.svg");
+    background-size: cover;
+    background-position: center center;
+}
+
+.btn {
+    color: white;
+    width: 150px;
+    --bs-btn-hover-bg: var(--hover);
+}
+
+.btn.green {
+    --bs-btn-bg: var(--mid-green);
+}
+
+.btn.blue {
+    --bs-btn-bg: var(--mid-blue);
+}
+
+.goDown {
+    color: var(--main-color);
+    font-size: 26px;
+    animation: bounce 1.2s ease infinite;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.goDown.alternative {
+    color: white;
+    background-color: var(--main-color);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.card {
+    border: 2px solid;
+    border-radius: 5px;
+    border-color: var(--main-color);
+}
+
+/* .text-bottom-page {
+    margin-top: 100px;
+} */
+
+.card-feature {
+    height: 180px;
+    padding: 6px;
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: var(--main-color);
+}
+
+.card-feature img {
+    object-fit: cover;
+}
+
+.scaled-image {
+    transform: scale(.65);
+  }
+
+.features-image {
+    max-height: 560px;
+}
+
+.person-card {
+    max-width: 290px;
+    max-height: 450px;
+    padding-top: 36px;
+    padding-bottom: 36px;
+    margin-bottom: 12px;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.team {
+    margin-top: 60px;
+}
+
+.icon {
+    color: black;
+    font-size: 26px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.person-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.cooking-hat {
+    position: absolute;
+    z-index: 1;
+    left: 90px;
+    top: -80px;
+}
+
+.wooden-spoon {
+    position: absolute;
+    z-index: 1;
+    left: -10px;
+    top: 20px;
+    transform: scale(0.80);
+}
+
+.description {
+    margin-top: 26px;
+    margin-bottom: 106px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.carousel-inner {
+    height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 64px;
+  width: 64px;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 2px solid var(--main-color);
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 36px;
+  color: var(--main-color);
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 36px;
+  color: var(--main-color);
+}
+
+.model-section > label {
+    margin-bottom: 0.5em;
+    font-size: large;
+}
+
+.modal-header {
+    border-color: var(--main-color);
+    border-width: 3px;
+}
+
+.modal-footer {
+    border: none;
+}
+
+.forgot-password-link {
+    text-decoration: underline;
+    color: var(--main-color);
+}
