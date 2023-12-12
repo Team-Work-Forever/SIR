@@ -1,0 +1,49 @@
+{% extends 'base.twig' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<div class="vh-100 vw-100 d-flex flex-row">
+    <aside class="side-menu shadow-sm compact min-vh-100 d-flex flex-column flex-shrink-0 px-4 py-3">
+        <div class="d-flex justify-content-end mb-3">
+            <button type="button">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        <div class="d-flex justify-content-center align-items-center py-3 rounded badge">
+            <img src="{{ loadAsset('icon.svg') }}" alt="Os Mestres da Culinária" class="img-fluid">
+            <img src="{{ loadAsset('hat.svg') }}" alt="Os Mestres da Culinária" class="img-fluid">
+        </div>
+        <hr class="align-self-center my-5">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" aria-current="page">
+                    <i class="bi me-2 bi-house-door-fill"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="bi me-2 bi-book"></i>
+                    <span>Minhas Receitas</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="bi me-2 bi-person-fill"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
+        </ul>
+        <div class="side-footer nav nav-pills flex-column">
+            <li class="nav-item">
+                <a href="#" class="nav-link exit" aria-current="page">
+                    <i class="bi me-2 bi-door-open"></i>
+                    <span>Terminar Sessão</span>
+                </a>
+            </li>
+        </div>
+    </aside>
+    {% block outlet %}{% endblock %}
+</div>
+<script src="{{ loadJs('side-menu.js') }}"></script>
+{% endblock %}

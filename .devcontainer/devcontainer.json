@@ -3,25 +3,28 @@
 	"dockerComposeFile": "../docker/dev/docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/home/appuser/app",
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/fish-apt-get:1": {}
-	},
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"terminal.integrated.defaultProfile.linux": "fish",
-				"terminal.integrated.profiles.linux": {
-					"fish": {
-						"path": "fish"
-					}
-				}
-			},
-			"extensions": [
-				"xdebug.php-pack"
-			]
-		}
-	},
-	"forwardPorts": [80],
+	// "features": {
+	// 	"ghcr.io/devcontainers-contrib/features/fish-apt-get:1": {}
+	// },
+	// "customizations": {
+	// 	"vscode": {
+	// 		"settings": {
+	// 			"terminal.integrated.defaultProfile.linux": "fish",
+	// 			"terminal.integrated.profiles.linux": {
+	// 				"fish": {
+	// 					"path": "fish"
+	// 				}
+	// 			}
+	// 		},
+	// 		"extensions": [
+	//             "bmewburn.vscode-intelephense-client",
+	//             "xdebug.php-debug"
+	// 		]
+	// 	}
+	// },
+	"forwardPorts": [
+		80
+	],
 	"mounts": [
 		"source=${localWorkspaceFolder},target=/home/appuser/app,type=bind"
 	]

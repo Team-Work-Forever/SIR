@@ -7,7 +7,10 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    sudo
+
+RUN apt-get install -y nodejs npm
 
 RUN groupadd -g 999 appuser && useradd -r -u 999 -g appuser appuser
 
@@ -26,13 +29,14 @@ COPY --chown=appuser:appuser . .
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R +x /var/www/html
 
+RUN echo "appuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/appuser
+
 USER appuser
 
-RUN ln -s /home/appuser/app/src /var/www/html
+RUN ln -s /home/appuser/app/ /var/www/html
 
 RUN composer global require laravel/installer
-
-# RUN set -gx PATH $PATH /home/appuser/.composer/vendor/bin/
+ENV PATH="${PATH}:/home/appuser/.composer/vendor/bin"
 
 EXPOSE 80
 CMD ["apache2-foreground"]

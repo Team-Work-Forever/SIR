@@ -7,12 +7,14 @@ services:
       dockerfile: ./docker/dev/Dockerfile
 
   db:
-    image: mysql:latest
+    build:
+      context: ../db
+      dockerfile: Dockerfile
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_PASSWORD: root
-      MYSQL_USER: root
+      - MYSQL_DATABASE=cooking-masters
+      - MYSQL_USER=quim
+      - MYSQL_PASSWORD=barreiros
+      - MYSQL_ROOT_PASSWORD=root
     volumes:
       - dbdata:/var/lib/mysql
     ports:

@@ -1,0 +1,30 @@
+{% extends 'dashboard/dashboard.twig' %}
+{% block title %} Bem vindo! {% endblock %}
+
+{% block outlet %}
+<div class="bg-white min-vh-100 flex-fill text-black">
+    <!-- Header -->
+    <header class="m-5">
+        <form clas action="">
+            <div class="text-field">
+                <input placeholder="Pesquisar" type="text">
+                <span>
+                    <button>
+                        <i class="bi bi-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center mt-4">
+            <div class="selector"></div>
+        </div>
+    </header>
+
+    <!-- Tendencies -->
+    <section class="bg-black" style="height: 100%;">
+        hello
+    </section>
+    <!-- My Recipes -->
+</div>
+<script src="{{ loadJs('selector.js') }}"></script>
+{% endblock %}
