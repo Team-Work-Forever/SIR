@@ -7,6 +7,9 @@
     --selection-color: #FF9608;
     --hover-link-color: #F9C784;
 
+    --title-color: #001524;
+    --title-card-color: #212529;
+
     --red-color: #8C1C13;
     --hover: #ffffff;
     --mid-blue: #577590;
@@ -115,6 +118,7 @@ section {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
 }
 
 .goDown.alternative {
@@ -418,8 +422,9 @@ section {
 }
 
 .selector .selector-element {
-    color: #6C757D;
+    color: var(--dark-gray);
     width: 114px;
+    height: 43px;
     border: 2px solid var(--gray-selection);
     border-radius: 6px;
     padding: 6px;
@@ -431,7 +436,203 @@ section {
     border: 2px solid var(--dark-gray);
     border-radius: 6px;
     width: 114px;
-    background-color: transparent;
     height: 43px;
+    background-color: transparent;
     transition: all 150ms ease-in-out;
+}
+
+/* Sections Dashboard */
+.title {
+    color: var(--title-color);
+}
+
+.scrollDashboardSpace {
+    height: calc(100% - 9rem);
+    width: calc(100% - 4rem);
+}
+
+.line {
+    height: 4px;
+    background-color: var(--title-color);
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.goBack {
+    color: var(--main-color);
+    font-size: 26px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+    transform: rotate(90deg);
+}
+
+.infoImage {
+    width: 580px;
+    height: 280px;
+    margin: 4px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 1%;
+}
+
+/* Tendencies Section */
+.cardItem {
+    width: 380px;
+    min-width: 380px;
+    height: 413px;
+    min-height: 413px;
+    border: 1px solid var(--dark-gray);
+    margin: 4px;
+}
+
+.cardItem img {
+    height: 60%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+
+.cardItem .card-title {
+    color: var(--title-card-color);
+}
+
+.cardItem .card-text {
+    color: var(--dark-gray);
+}
+
+.cardItem a {
+    color: var(--title-card-color);
+    height: 24px;
+    width: 24px;
+}
+
+/* My Recipes Page */
+.create {
+    color: var(--main-color);
+    font-size: 36px;
+    background-color: white;
+    position: fixed;
+    bottom: 46px;
+    right: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+}
+
+/* Tables */
+
+.table-container {
+    position: relative;
+    width: 95%;
+}
+
+.remove {
+    size: 24px;
+    color: var(--title-color);
+}
+
+.add {
+    color: var(--main-color);
+    font-size: 24px;
+    background-color: white;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+}
+
+/* Details Recipe */
+
+.link {
+    color: var(--main-color);
+}
+
+.buttonOptions {
+    background-color: var(--gray-mid);
+    border-radius: 5px;
+    border: 2px solid var(--gray-selection);
+}
+
+.orangeText {
+    color: var(--selection-color);
+}
+
+.backgroundTransparent {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid var(--gray-selection);
+}
+
+.addButton {
+    width: 50px;
+    height: 50px;
+}
+
+.edit {
+    color: var(--main-color);
+    font-size: 36px;
+    background-color: white;
+    position: fixed;
+    top: 46px;
+    right: 126px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+}
+
+.delete {
+    color: var(--main-color);
+    font-size: 36px;
+    background-color: white;
+    position: fixed;
+    top: 46px;
+    right: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+}
+
+/* Profile Section */
+
+.profileImage {
+    width: 300px;
+    height: 280px;
+    margin: 4px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+}
+
+.editProfileImage {
+    width: 80px;
+    height: 80px;
+    margin: 4px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
 }

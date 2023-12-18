@@ -1,5 +1,5 @@
 {% extends 'dashboard/dashboard.twig' %}
-{% block title %} Bem vindo! {% endblock %}
+{% block title %} Minhas Receitas {% endblock %}
 
 {% block outlet %}
 <div class="flex-column vw-100 vh-100">
@@ -23,9 +23,9 @@
     </div>
 
     <main class="overflow-auto d-flex flex-column ms-5 gap-3 py-4 scrollDashboardSpace">
-        <!-- Tendencies -->
+        <!-- My Recipes -->
         <div class="container">
-            <h2 class="title">Tendências</h2>
+            <h2 class="title">Minhas Receitas</h2>
             <div class="d-flex flex-wrap">
                 <div class="card cardItem">
                     <img src="{{ loadAsset('david.png') }}" class="card-img-top" alt="">
@@ -48,12 +48,12 @@
             </div>
         </div>
 
-        <!-- My Recipes -->
+        <!-- Favorites -->
         <div class="container">
-            <h2 class="title">Minhas Receitas</h2>
+            <h2 class="title">Favoritas</h2>
             <div class="d-flex flex-wrap">
                 <div class="card cardItem ">
-                    <img src="{{ loadAsset('david.png') }}" class="card-img-" alt="">
+                    <img src="{{ loadAsset('david.png') }}" class="card-img-top" alt="">
                     <div class="card-body">
                         <div class="row">
                             <h5 class="card-title col-9">Bolo Chocolate</h5>
@@ -74,6 +74,12 @@
             </div>
         </div>
     </main>
+
+
+    <a href="#" class="create">
+        <i class="bi bi-plus-circle"></i>
+    </a>
+
 </div>
 <script src="{{ loadJs('selector.js') }}"></script>
 {% endblock %}
