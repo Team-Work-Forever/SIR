@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-class IndexController extends BaseController
+class IndexController
 {
     public function index()
     {
-        return view("index");
+        return view("public/index");
     }
 }

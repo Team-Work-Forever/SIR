@@ -1,0 +1,126 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Conta {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="m-4 d-flex justify-content-center">
+                <h1>Quim Barreiros</h1>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpace">
+        <div class="mx-3 px-2 py-2">
+            <!-- Info -->
+            <div class="row">
+                <div class="container col-xl-4 col-12 info">
+                    <div class="row d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ loadAsset('david.png') }}" class="profileImage image-fluid col-6" alt="">
+                    </div>
+                </div>
+                <div class="container flex-column col-xl-8 col-12 d-flex justify-content-start">
+                    <!-- Buttons -->
+                    <div class="d-flex flex-wrap gap-2 justify-content-end my-2 mx-4 px-1">
+                        <button type="button" class="btn buttonOptions text-black d-flex justify-content-around">
+                            Partilhar
+                            <i class="bi bi-share-fill"></i>
+                        </button>
+                    </div>
+                    <div class="my-2">
+                        <!-- Description -->
+                        <p>Uma Breve Descrição, só isso.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="container">
+                    <h2 class="title">Minhas Receitas</h2>
+                    <div class="d-flex flex-wrap">
+                        <div class="card cardItem">
+                            <img src="{{ loadAsset('david.png') }}" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="card-title col-9">Bolo Chocolate</h5>
+                                    <a href="#" class="col-1">
+                                        <i class="bi bi-share-fill"></i>
+                                    </a>
+                                    <a href="#" class="col-1">
+                                        <i class="bi bi-star"></i>
+                                    </a>
+                                </div>
+
+                                <p class="card-text">Bolo de chocolate é um bolo simples ou confeitado, que leva
+                                    chocolate
+                                    derretido ou em pó.</p>
+                                <p class="card-text"><small class="text-body-secondary">Criado à 3 minutos</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Owner Options -->
+    <a class="edit" type="submit" data-bs-toggle="modal" data-bs-target="#editProfile">
+        <i class="bi bi-pencil"></i>
+    </a>
+
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal" id="editProfile" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h2 class="modal-title">Editar Conta</h2>
+            </div>
+            <div class="modal-body d-flex gap-3 flex-column">
+                <div class="model-section col">
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <div class="col">
+                                <!-- First Name -->
+                                <input id="first_name" type="text" class="form-control" placeholder="Nome Próprio"
+                                    required />
+                            </div>
+                            <div class="col mt-2">
+                                <!-- Last Name -->
+                                <input id="last_name" type="text" class="form-control" placeholder="Apelido" required />
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center align-items-center">
+                            <img src="{{ loadAsset('david.png') }}" class="editProfileImage image-fluid col-6" alt="">
+                        </div>
+                    </div>
+                    <div class="col my-2">
+                        <!-- E-mail -->
+                        <input id="e_mail" type="email" class="form-control" placeholder="E-mail" required />
+                    </div>
+                    <div class="col my-2">
+                        <!-- Password -->
+                        <input id="password" type="password" class="form-control" placeholder="Password" required />
+                    </div>
+                    <div class="col my-2">
+                        <!-- Description -->
+                        <input id="description" type="text" class="form-control" placeholder="Descrição" required />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row d-flex justify-content-center mt-5">
+                <button type="button" class="btn green" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn blue">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ loadJs('selector.js') }}"></script>
+{% endblock %}

@@ -1,17 +1,20 @@
 {
-    "name": "appuser/app",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/app",
-            "Core\\": "core/"
-        },
-        "files": [
-            "core/helpers.php"
-        ]
+  "name": "appuser/app",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "David\\ExampleSir\\": "src/",
+      "App\\": "src/app",
+      "Config\\": "src/config/"
     },
-    "require": {
-        "twig/twig": "^3.0"
-    }
+    "files": [
+      "src/config/helpers.php"
+    ]
+  },
+  "require": {
+    "php": "8.3.0",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "twig/twig": "^3.0"
+  }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-class MyRecipesController extends BaseController
+class MyRecipesController
 {
     public function index()
     {
-        return view("dashboard/my_recipes");
+        return view("secure/user/my_recipes");
     }
 }

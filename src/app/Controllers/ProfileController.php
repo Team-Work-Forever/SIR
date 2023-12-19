@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-class ProfileController extends BaseController
+class ProfileController
 {
     public function index()
     {
-        return view("dashboard/profile");
+        return view("secure/user/profile");
     }
 }

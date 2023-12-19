@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mc_db:
+    build:
+      context: docker/db
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_DATABASE=${CM_DB_NAME}
+      - MYSQL_USER=${CM_DB_USER}
+      - MYSQL_PASSWORD=${CM_DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "${CM_DB_PORT}:3306"
+
+volumes:
+  dbdata:
