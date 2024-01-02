@@ -296,7 +296,7 @@ section {
     border-radius: 5px;
 }
 
-.side-menu button {
+.side-menu button.hamburger {
     color: black;
     border: #CED4DA 2px solid;
     border-radius: 5px;
@@ -316,6 +316,10 @@ section {
 
 .side-menu .nav-link.exit {
     color: var(--red-color);
+}
+
+.side-menu button {
+    border: none;
 }
 
 /* Side Menu Compact */
@@ -442,6 +446,42 @@ section {
 }
 
 /* Sections Dashboard */
+.editImageWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.editImage {
+    color: var(--main-color);
+    font-size: 24px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+    z-index: 6;
+    cursor: pointer;
+}
+
+.inputImage {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display:none;
+}
+
+.buttonTransparent { 
+    border: none;
+    background-color: transparent;
+}
+
 .title {
     color: var(--title-color);
 }
@@ -490,6 +530,7 @@ section {
     min-height: 413px;
     border: 1px solid var(--dark-gray);
     margin: 4px;
+    cursor: pointer;
 }
 
 .cardItem img {
@@ -537,9 +578,24 @@ section {
     width: 95%;
 }
 
+.table-description {
+    max-width: 600px; 
+    word-break: break-all;
+}
+
+.profile-description {
+    max-width: 800px;
+    word-break: break-all;
+}
+
 .remove {
     size: 24px;
-    color: var(--title-color);
+    color: var(--red-color);
+}
+
+.editIcon {
+    size: 24px;
+    color: var(--mid-blue);
 }
 
 .add {
@@ -559,6 +615,46 @@ section {
 }
 
 /* Details Recipe */
+
+.tip{
+    height: 55px;
+    margin-top: 1px;
+}
+
+.tipInput {
+    display: none;
+}
+
+.tipImage {
+    width: 460px;
+    height: 280px;
+    margin: 2px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 1%;
+}
+
+.imageTipContainer {
+    width: 475px;
+    height: 295px;
+    background-color: var(--gray-mid);
+    margin: 2px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 1%;
+    border: 1px solid var(--gray-selection);
+}
+
+.hidden-submit {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.detailsDescriptionWidth {
+    max-width: 700px;
+    word-break: break-all;
+}
 
 .link {
     color: var(--main-color);
@@ -599,6 +695,21 @@ section {
     height: 64px;
     border-radius: 50%;
     box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+    z-index: 6;
+}
+
+.send {
+    size: 24px;
+    color: var(--main-color);
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--main-color);
 }
 
 .delete {
@@ -615,6 +726,7 @@ section {
     height: 64px;
     border-radius: 50%;
     box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
+    z-index: 6;
 }
 
 /* Profile Section */
@@ -635,4 +747,70 @@ section {
     object-fit: cover;
     object-position: center center;
     border-radius: 50%;
+}
+
+/* Toast */
+.toast {
+    top: auto;
+    left: auto;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    position: fixed;
+    color: white;
+    border-radius: 7px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 30px 35px 30px 25px;
+    min-width: 580px;
+    transform: translateX(calc(100% + 30px));
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toast.active {
+    transform: translateX(0%);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* TODO: MAKE THIS HAPPEN */
+.toast .close {
+    z-index: 6;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    display: none;
+}
+
+.toast.error {
+    background-color: var(--red-color);
+}
+
+.toast.warning {
+    background-color: var(--selection-color);
+}
+
+.toast.success {
+    background-color: var(--mid-green);
+}
+
+@media screen and (max-width: 767px) {
+    .toast {
+        font-size: 14px;
+        padding: 20px;
+        margin: auto auto;
+        min-width: calc(100% - 35px);
+        transform: translateY(calc(100% + 30px));
+        transition: all 0.5s ease-in-out;
+    }
+
+    
+    .toast.active {
+        transform: translateY(0%);
+    }
 }

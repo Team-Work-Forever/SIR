@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once __DIR__ . '/../infra/repositories/userRepository.php';
+require_once __DIR__ . '/../infra/repositories/user-repository.php';
 
 function isAuthenticated()
 {
-    return isset($_SESSION['id']) ? true : false;
+    return isset($_SESSION['id']);
 }
 
 function user()
@@ -24,6 +24,5 @@ function userId()
 function administrator()
 {
     $user = user();
-    return $user['administrator'] ? true : false;
+    return $user['is_admin'] == 1 ? true : false;
 }
-?>

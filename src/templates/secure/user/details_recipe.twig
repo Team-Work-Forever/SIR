@@ -8,12 +8,12 @@
         <header class="p-3">
             <div class="row p-4">
                 <div class="col-1">
-                    <a href="#" class="goBack">
+                    <a href="javascript:history.go(-1)" class="goBack">
                         <i class="bi bi-arrow-down-circle"></i>
                     </a>
                 </div>
                 <div class="col-10 d-flex justify-content-center">
-                    <h1>Bolo de Chocolate</h1>
+                    <h1>{{ recipe.getTitle }}</h1>
                 </div>
             </div>
             <div class="line"></div>
@@ -22,6 +22,14 @@
 
     <main class="overflow-auto scrollDashboardSpace">
         <div class="mx-3 px-2 py-2">
+            {% if errors_tip %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% for error in errors_tip %}
+                {{ error }}<br>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
             <!-- Info Recipe -->
             <div class="row">
                 <div class="container col-xl-6 col-12 info">
@@ -29,56 +37,76 @@
                     <div class="model-section col my-4">
                         <div class="col my-2">
                             <!-- Description -->
-                            <p>Bolo de chocolate é um bolo simples ou confeitado, que leva chocolate derretido ou em pó.
+                            <p class="detailsDescriptionWidth"> {{ recipe.getDescription }}
                             </p>
                         </div>
                     </div>
-                    <div class="model-section row my-4">
+                    <div class="model-section row mt-4">
                         <!-- Portions -->
                         <div class="col-xl-6 col-12 row">
                             <h4 class="col-4">Porções</h4>
                             <div class="col-8 px-4 py-2">
-                                <p>3-4 Pessoas</p>
+                                <p>{{ recipe.getServings }}</p>
                             </div>
                         </div>
                         <!-- Time -->
                         <div class="col-xl-6 col-12 row">
                             <h4 class="col-4">Tempo</h4>
                             <div class="col-8 px-4 py-2">
-                                <p>1h30m</p>
+                                <p>{{ recipe.getExecutionTimeFormatted }}</p>
                             </div>
+                        </div>
+                    </div>
+                    <div class="model-section row mb-4">
+                        <!-- Portions -->
+                        <h4 class="col-4">Categoria</h4>
+                        <div class="col-8 px-4 py-2">
+                            <p>{{ recipe.getCategory }}</p>
                         </div>
                     </div>
                     <!-- Created by -->
                     <div class="row">
                         <h4 class="col-4">Criado por:</h4>
                         <div class="col-8 row py-2">
-                            <a href="" class="col-5 link">
-                                Quim Barreiros
+                            <a href="/app/profile?id={{recipe.getCreatorId}}" class="col-5 link">
+                                {{ recipe.getCreatorName }}
                             </a>
-                            <p class="col-4">12/11/2023</p>
+                            <p class="col-4">{{ recipe.getCreatedAtFormatted }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="container flex-column col-xl-6 col-12 d-flex justify-content-center">
                     <!-- Buttons -->
                     <div class="d-flex flex-wrap gap-2 justify-content-end my-2 mx-4 px-1">
-                        <!-- <button type="button" class="btn buttonOptions text-black d-flex justify-content-around">
-                            Privado
-                            <i class="bi bi-lock-fill"></i>
-                        </button> -->
-                        <button type="button" class="btn buttonOptions text-black d-flex justify-content-around">
-                            Favorito
-                            <i class="bi bi-star"></i>
-                        </button>
-                        <button type="button" class="btn buttonOptions text-black d-flex justify-content-around">
+                        {% if admin %}
+                        <form action="/src/services/recipe/recipe.php" method="post">
+                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                            <button type="submit" name="state" value="changeState" class="btn buttonOptions text-black d-flex justify-content-around">
+                                {% if recipe.getIsPrivate == 1 %}
+                                Privada
+                                {% else %}
+                                Pública
+                                {% endif %}
+                                <i class="bi bi-lock-fill"></i>
+                            </button>
+                        </form>
+
+                        {% endif %}
+                        <form action="/src/services/recipe/recipe.php" method="post">
+                            <input type="hidden" name="id" value="{{ recipe.getId }}">
+                            <button type="submit" name="favorite" value="changeFavoriteDetails" class="btn buttonOptions text-black d-flex justify-content-around">
+                                Favorito
+                                <i class="{% if recipe.getIsFavorite %}bi bi-star-fill{% else %}bi bi-star{% endif %}"></i>
+                            </button>
+                        </form>
+                        <button onclick="share('URL da receita copiado para a área de transferência! (para partilhar a receita colocar como pública)', 'success')" type="button" class="btn buttonOptions text-black d-flex justify-content-around">
                             Partilhar
                             <i class="bi bi-share-fill"></i>
                         </button>
                     </div>
                     <!-- Image -->
                     <div class="row justify-content-center">
-                        <img src="{{ loadAsset('david.png') }}" class="infoImage image-fluid" alt="">
+                        <img src="data:{{ recipe.getCover.getType }};base64, {{ recipe.getCover.getContent }}" class="infoImage image-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -89,9 +117,13 @@
                         <div class="col my-2">
                             <!-- Ingredients -->
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-diamond-fill"></i> Item 1</li>
-                                <li><i class="bi bi-diamond-fill"></i> Item 2</li>
-                                <li><i class="bi bi-diamond-fill"></i> Item 3</li>
+                                {% if not recipe.getRecipeIngredients|length %}
+                                <h5 class="d-flex justify-content-center my-5">Não tem nenhum ingrediente!</h5>
+                                {% endif %}
+                                {% for ingredient in recipe.getRecipeIngredients %}
+                                <li><i class="bi bi-diamond-fill"></i> {{ ingredient.getIngredientName }} - {{
+                                    ingredient.getQuantity }} {{ ingredient.getUnitName }}</li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -100,9 +132,12 @@
                         <div class="col my-2">
                             <!-- Actions -->
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-diamond-fill"></i> Passo 1</li>
-                                <li><i class="bi bi-diamond-fill"></i> Passo 2</li>
-                                <li><i class="bi bi-diamond-fill"></i> Passo 3</li>
+                                {% if not recipe.getRecipeSteps|length %}
+                                <h5 class="d-flex justify-content-center my-5">Não tem nenhuma ação!</h5>
+                                {% endif %}
+                                {% for step in recipe.getRecipeSteps %}
+                                <li class="table-description"><i class="bi bi-diamond-fill"></i> {{ step.getDescription }} </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -113,21 +148,50 @@
                         <h4 class="d-flex justify-content-center text-decoration-underline orangeText">
                             Dicas
                         </h4>
-                        <!-- Texts -->
-                        <div class="my-2 px-4">
-                            <div>sadasdas</div>
-                        </div>
-                        <!-- Inputs -->
-                        <div class="row d-flex align-items-end justify-content-center mx-2 px-1">
-                            <form action="" class="col-9">
-                                <div class="text-field backgroundTransparent">
-                                    <input placeholder="Escreva uma mensagem" type="text">
+                    </div>
+
+                    <!-- Texts -->
+                    {% if not recipe.getRecipeTips|length %}
+                    <h5 class="d-flex justify-content-center my-5">Não tem nenhuma dica</h5>
+                    {% endif %}
+                    <div class="my-1 d-flex flex-column ">
+                        {% for tip in recipe.getRecipeTips %}
+                        <div class="d-flex justify-content-end">
+                            {% if tip.getImage is defined  %}
+                            <div class="row my-1 justify-content-end">
+                                <div class="imageTipContainer p-1">
+                                    <img src="data:{{ tip.getImage.getType }};base64, {{ tip.getImage.getContent }}" class="tipImage image-fluid" alt="">
                                 </div>
-                            </form>
-                            <button type="button" class="btn backgroundTransparent addButton text-black col-1">
+                            </div>
+                            {% else %}
+                            <div class="alert alert-light tip my-1" role="alert">
+                                {{ tip.getDescription }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Inputs -->
+                    <div class="row d-flex align-items-end justify-content-center mt-2 mx-2 px-1">
+                        <form action="/src/services/recipe/recipe.php" method="post" class="col-9">
+                            <div class="text-field backgroundTransparent d-flex justify-content-around">
+                                <input name="description" placeholder="Escreva uma mensagem" maxlength="50" minlength="2" type="text">
+                                <span>
+                                    <button name="tip" value="addTip" class="btn send">
+                                        <i class="bi bi-send"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                        </form>
+                        <form action="/src/services/recipe/recipe.php" method="post" class="col-1" enctype="multipart/form-data" id="recipeForm">
+                            <input type="file" name="image" id="imageUpload{{ recipe.getId }}" class="tipInput" onchange="updateButton(event)" data-ms-tipimage="{{ recipe.getId }}" />
+                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                            <button type="submit" name="tip" value="addTipImage" class="hidden-submit" id="hiddenSubmitButton"></button>
+                            <button type="button" class="btn backgroundTransparent addButton text-black col-1" onclick="document.getElementById('imageUpload{{ recipe.getId }}').click(); return false;">
                                 <i class="bi bi-plus"></i>
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -135,15 +199,17 @@
     </main>
 
     <!-- Owner Options -->
-    <!-- <a href="#" class="edit">
+    {% if admin %}
+    <a onclick="goTo('updaterecipe?id={{recipe.getId}}')" class="edit">
         <i class="bi bi-pencil"></i>
     </a>
     <a class="delete" type="submit" data-bs-toggle="modal" data-bs-target="#deleteRecipe">
         <i class="bi bi-trash3"></i>
-    </a> -->
-
+    </a>
+    {% endif %}
 </div>
 
+{% set recipe_id = recipe.getId %}
 <!-- Delete Recipe Modal -->
 <div class="modal" id="deleteRecipe" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -158,11 +224,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn green" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn blue">Apagar</button>
+                <form action="/src/services/recipe/recipe.php" method="post">
+                    <input type="hidden" name="id" value="{{ recipe_id }}">
+                    <button type="submit" class="btn blue" name="recipe" value="removeRecipe">Apagar</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <script src="{{ loadJs('selector.js') }}"></script>
+<script src="{{ loadJs('tips.js') }}"></script>
 {% endblock %}

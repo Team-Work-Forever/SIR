@@ -5,7 +5,7 @@
 <div class="vh-100 vw-100 d-flex flex-row overflow-hidden">
     <aside class="side-menu shadow-sm compact min-vh-100 d-flex flex-column flex-shrink-0 px-4 py-3">
         <div class="d-flex justify-content-end mb-3">
-            <button type="button">
+            <button class="hamburger" type="button">
                 <i class="bi bi-list"></i>
             </button>
         </div>
@@ -15,31 +15,36 @@
         </div>
         <hr class="align-self-center my-5">
         <ul class="nav nav-pills flex-column mb-auto">
+            {% if administrator is not defined %}
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="/app" class="nav-link active" aria-current="page">
                     <i class="bi me-2 bi-house-door-fill"></i>
                     <span>Início</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="/app/myrecipes" class="nav-link">
                     <i class="bi me-2 bi-book"></i>
                     <span>Minhas Receitas</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="/app/profile?id={{profile}}" class="nav-link">
                     <i class="bi me-2 bi-person-fill"></i>
                     <span>Perfil</span>
                 </a>
             </li>
+            {% else %}
+            {% endif %}
         </ul>
         <div class="side-footer nav nav-pills flex-column">
             <li class="nav-item">
-                <a href="#" class="nav-link exit" aria-current="page">
-                    <i class="bi me-2 bi-door-open"></i>
-                    <span>Terminar Sessão</span>
-                </a>
+                <form action="/src/services/auth/signin.php" method="post">
+                    <button class="nav-link exit" type="submit" name="user" value="logout">
+                        <i class="bi me-2 bi-door-open"></i>
+                        <span>Terminar Sessão</span>
+                    </button>
+                </form>
             </li>
         </div>
     </aside>

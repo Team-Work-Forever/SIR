@@ -3,9 +3,7 @@
 
 {% block content %}
 <nav class="d-flex w-100 position-fixed justify-content-between navbar navbar-expand-lg px-4">
-    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
-        aria-label="Toggle navigation">
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -162,12 +160,9 @@
                                     </h2>
                                 </div>
                                 <div>
-                                    <a href="https://www.facebook.com/diogo.assuncao.1011" target="_blank"><i
-                                            class="icon bi bi-facebook"></i></a>
-                                    <a href="https://www.linkedin.com/in/diogo-assunc%C3%A3o-0a1ab921b/"
-                                        target="_blank"><i class="icon bi bi-linkedin"></i></a>
-                                    <a href="https://github.com/DiogoCC7" target="_blank"><i
-                                            class="icon bi bi-github"></i></a>
+                                    <a href="https://www.facebook.com/diogo.assuncao.1011" target="_blank"><i class="icon bi bi-facebook"></i></a>
+                                    <a href="https://www.linkedin.com/in/diogo-assunc%C3%A3o-0a1ab921b/" target="_blank"><i class="icon bi bi-linkedin"></i></a>
+                                    <a href="https://github.com/DiogoCC7" target="_blank"><i class="icon bi bi-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -183,24 +178,19 @@
                                     <h2 class="card-title text-center">David Sousa Braga</h2>
                                 </div>
                                 <div>
-                                    <a href="https://www.facebook.com/david.braga.902266/" target="_blank"><i
-                                            class="icon bi bi-facebook"></i></a>
-                                    <a href="https://www.linkedin.com/in/david-braga-9093252a0/" target="_blank"><i
-                                            class="icon bi bi-linkedin"></i></a>
-                                    <a href="https://github.com/David-Ogrande" target="_blank"><i
-                                            class="icon bi bi-github"></i></a>
+                                    <a href="https://www.facebook.com/david.braga.902266/" target="_blank"><i class="icon bi bi-facebook"></i></a>
+                                    <a href="https://www.linkedin.com/in/david-braga-9093252a0/" target="_blank"><i class="icon bi bi-linkedin"></i></a>
+                                    <a href="https://github.com/David-Ogrande" target="_blank"><i class="icon bi bi-github"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -216,10 +206,8 @@
                             <h2 class="card-title text-center">Diogo Machado Assunção</h2>
                         </div>
                         <div>
-                            <a href="https://www.facebook.com/diogo.assuncao.1011" target="_blank"><i
-                                    class="icon bi bi-facebook"></i></a>
-                            <a href="https://www.linkedin.com/in/diogo-assunc%C3%A3o-0a1ab921b/" target="_blank"><i
-                                    class="icon bi bi-linkedin"></i></a>
+                            <a href="https://www.facebook.com/diogo.assuncao.1011" target="_blank"><i class="icon bi bi-facebook"></i></a>
+                            <a href="https://www.linkedin.com/in/diogo-assunc%C3%A3o-0a1ab921b/" target="_blank"><i class="icon bi bi-linkedin"></i></a>
                             <a href="https://github.com/DiogoCC7" target="_blank"><i class="icon bi bi-github"></i></a>
                         </div>
                     </div>
@@ -232,12 +220,9 @@
                             <h2 class="card-title text-center">David Sousa Braga</h2>
                         </div>
                         <div>
-                            <a href="https://www.facebook.com/david.braga.902266/" target="_blank"><i
-                                    class="icon bi bi-facebook"></i></a>
-                            <a href="https://www.linkedin.com/in/david-braga-9093252a0/" target="_blank"><i
-                                    class="icon bi bi-linkedin"></i></a>
-                            <a href="https://github.com/David-Ogrande" target="_blank"><i
-                                    class="icon bi bi-github"></i></a>
+                            <a href="https://www.facebook.com/david.braga.902266/" target="_blank"><i class="icon bi bi-facebook"></i></a>
+                            <a href="https://www.linkedin.com/in/david-braga-9093252a0/" target="_blank"><i class="icon bi bi-linkedin"></i></a>
+                            <a href="https://github.com/David-Ogrande" target="_blank"><i class="icon bi bi-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -258,125 +243,125 @@
 <!-- Register Modal -->
 <div class="modal" id="register" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <h2 class="modal-title">Registar Conta</h2>
-            </div>
-            <div class="modal-body d-flex gap-3 flex-column">
-                <div class="model-section col">
-                    <div class="row my-2">
-                        <div class="col">
-                            <!-- First Name -->
-                            <input id="first_name" type="text" class="form-control" placeholder="Nome Próprio"
-                                required />
+        <form action="/src/services/auth/signup.php" method="post">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h2 class="modal-title">Registar Conta</h2>
+                </div>
+                <div class="modal-body d-flex gap-3 flex-column">
+                    {% if errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for error in errors %}
+                        {{ error }}<br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    <div class="model-section col">
+                        <div class="row my-2">
+                            <div class="col">
+                                <!-- First Name -->
+                                <input type="text" class="form-control" name="first_name" value="{{ app.request.get('first_name') is defined ? app.request.get('first_name') : '' }}" placeholder="Nome Próprio" minlength="2" maxlength="25" required />
+                            </div>
+                            <div class="col">
+                                <!-- Last Name -->
+                                <input type="text" class="form-control" name="last_name" value="{{ app.request.get('last_name') is defined ? app.request.get('last_name') : '' }}" placeholder="Apelido" minlength="2" maxlength="25" required />
+                            </div>
                         </div>
-                        <div class="col">
-                            <!-- Last Name -->
-                            <input id="last_name" type="text" class="form-control" placeholder="Apelido" required />
+                        <div class="col my-2">
+                            <!-- E-mail -->
+                            <input type="email" class="form-control" name="email" placeholder="E-mail" required />
+                        </div>
+                        <div class="col my-2">
+                            <!-- Password -->
+                            <input type="password" class="form-control" name="password" minlength="6" placeholder="Palavra-chave" required />
                         </div>
                     </div>
-                    <div class="col my-2">
-                        <!-- E-mail -->
-                        <input id="e_mail" type="email" class="form-control" placeholder="E-mail" required />
+                    <div class="model-section col">
+                        <!-- Birth Date -->
+                        <label for="birthDate">Data de Nascimento</label>
+                        <div class="row">
+                            <!-- Day -->
+                            <select id="day" class="col mx-2 form-select" aria-label="Dia" name="day" required>
+                            </select>
+                            <!-- Month -->
+                            <select id="month" class="col mx-2 form-select" aria-label="Mês" name="mounth" required>
+                            </select>
+                            <!-- Year -->
+                            <select id="year" class="col mx-2 form-select" aria-label="Ano" name="year" required>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col my-2">
-                        <!-- Password -->
-                        <input id="password" type="password" class="form-control" placeholder="Password" required />
+                    <div class="model-section col">
+                        <!-- Gender -->
+                        <label for="gender">Género</label>
+                        <div class="col mx-2">
+                            {% for gender in genders %}
+                            <div class="col form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="gender" value="{{ gender.getId }}" />
+                                <label class="form-check-label" for="gender">{{ gender.getName }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-                <div class="model-section col">
-                    <!-- Birth Date -->
-                    <label for="birthDate">Data de Nascimento</label>
-                    <div class="row">
-                        <!-- Day -->
-                        <select id="day" class="col mx-2 form-select" aria-label="Dia">
-                            <option selected>Dia</option>
-                        </select>
-
-                        <!-- Month -->
-                        <select id="month" class="col mx-2 form-select" aria-label="Mês">
-                            <option selected>Mês</option>
-                        </select>
-
-                        <!-- Year -->
-                        <select id="year" class="col mx-2 form-select" aria-label="Ano">
-                            <option selected>Ano</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="model-section col">
-                    <!-- Gender -->
-                    <label for="gender">Género</label>
-                    <div class="col mx-2">
-                        <!-- Masculino -->
-                        <div class="col form-check">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                value="option1" />
-                            <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                        </div>
-                        <!-- Feminino -->
-                        <div class="col form-check">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                value="option2" />
-                            <label class="form-check-label" for="inlineRadio2">Feminino</label>
-                        </div>
-                        <!-- Outro -->
-                        <div class="col form-check">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                value="option3" />
-                            <label class="form-check-label" for="inlineRadio3">Outro</label>
-                        </div>
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
-                            value="option4" checked />
-                        <label class="form-check-label" for="inlineRadio4">Prefiro Não Divulgar</label>
-                    </div>
+                <div class="modal-footer row d-flex justify-content-center mt-5">
+                    <button type="button" class="btn green" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button class="btn blue" type="submit" name="user" value="registerNewUser">Registar
+                        Conta</button>
                 </div>
             </div>
-            <div class="modal-footer row d-flex justify-content-center mt-5">
-                <button type="button" class="btn green" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <button type="button" class="btn blue">Registar Conta</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <!-- Login Modal -->
 <div class="modal" id="login" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <h2 class="modal-title">Iniciar Sessão</h2>
-            </div>
-            <div class="modal-body">
-                <div class="col my-2">
-                    <!-- E-mail -->
-                    <input id="e_mail" type="email" class="form-control" placeholder="E-mail" required />
+        <form action="/src/services/auth/signin.php" method="post">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h2 class="modal-title">Iniciar Sessão</h2>
                 </div>
-                <div class="col my-2">
-                    <!-- Password -->
-                    <input id="password" type="password" class="form-control" placeholder="Password" required />
-                </div>
-                <div class="row mx-2">
-                    <!-- Forgot Password -->
-                    <a href="#" class="col forgot-password-link">Esqueceu-se da password?</a>
-                    <!-- Remember Me -->
-                    <div class="col form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="remember" />
-                        <label class="form-check-label" for="remember">
-                            Lembrar-se de mim
-                        </label>
+                <div class="modal-body">
+                    {% if errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for error in errors %}
+                        {{ error }}<br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    <div class="col my-2">
+                        <!-- E-mail -->
+                        <input type="email" class="form-control" placeholder="E-mail" name="email" id="email" required />
+                    </div>
+                    <div class="col my-2">
+                        <!-- Password -->
+                        <input type="password" class="form-control" placeholder="Palavra-chave" name="password" id="password" minlength="6" required />
+                    </div>
+                    <div class="row mx-2">
+                        <!-- Forgot Password -->
+                        <a href="#" class="col forgot-password-link">Esqueceu-se da password?</a>
+                        <!-- Remember Me -->
+                        <div class="col form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="remember" />
+                            <label class="form-check-label" for="remember">
+                                Lembrar-se de mim
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <div class="modal-footer row d-flex justify-content-center mt-5">
+                    <button type="button" class="btn green" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button class="btn blue" type="submit" name="user" value="login">Iniciar Sessão</button>
+                </div>
             </div>
-            <div class="modal-footer row d-flex justify-content-center mt-5">
-                <button type="button" class="btn green" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <button type="button" class="btn blue">Iniciar Sessão</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endblock %}

@@ -1,8 +1,9 @@
-let isOpen = false;
-const toogleSideMenu = document.querySelector('.side-menu button');
+/* Side Menu */
+const isOpen = false;
+const toggleSideMenu = document.querySelector('.side-menu button');
 const sideMenu = document.getElementsByClassName('side-menu')[0];
 
-toogleSideMenu.addEventListener('click', () => {
+toggleSideMenu.addEventListener('click', () => {
     if (isOpen) {
         sideMenu.classList.add('compact');
     } else {

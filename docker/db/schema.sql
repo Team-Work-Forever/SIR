@@ -1,3 +1,30 @@
+CREATE TABLE images (
+    id VARCHAR(36) NOT NULL,
+    name TEXT NOT NULL,
+    content LONGBLOB NOT NULL,
+    type VARCHAR(15) NOT NULL,
+    deleted_at TIMESTAMP DEFAULT NULL,
+  	primary key (id)
+);
+
+CREATE TABLE genders (
+    id int AUTO_INCREMENT,
+    name VARCHAR(25) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE categories (
+    id int AUTO_INCREMENT,
+    name VARCHAR(25) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE units (
     id int AUTO_INCREMENT,
     name varchar(25) NOT NULL,
@@ -25,35 +52,42 @@ CREATE TABLE ingredients (
 
 -- Users Table
 CREATE TABLE users (
-    id VARCHAR(36),
+    id VARCHAR(36) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     salt VARCHAR(255) NOT NULL,
     display_name VARCHAR(25) NOT NULL,
     first_name VARCHAR(25) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
-    description TEXT NOT NULL,
-    avatar_url TEXT NOT NULL,
+    description TEXT,
+    avatar VARCHAR(36) DEFAULT NULL,
+    birth_date VARCHAR(10) NOT NULL,
+    gender_id int NOT NULL,
     is_admin BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP DEFAULT NULL,
-  	primary key (id)
+  	primary key (id),
+    constraint gender_id_fk
+        foreign key (gender_id)
+            references genders (id),
+    constraint avatar_fk2
+        foreign key (avatar)
+            references images (id)
 );
 
 CREATE INDEX idx_display_name ON users (display_name);
 
 -- Recipe Table
-
 CREATE TABLE recipes (
-    id VARCHAR(36),
-    title VARCHAR(20) UNIQUE NOT NULL,
-    execution_time date NOT NULL,
-    servings VARCHAR(10) NOT NULL,
-    cover text NOT NULL,
+    id VARCHAR(36) NOT NULL,
+    title VARCHAR(20) NOT NULL,
+    execution_time int NOT NULL,
+    servings int NOT NULL,
+    cover VARCHAR(36) NOT NULL,
     is_private boolean default true,
-    creator_id VARCHAR(36) NOT NULL,
-    category int default 0,
+    creator_id varchar(36) NOT NULL,
+    category_id int NOT NULL,
     description TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -61,13 +95,19 @@ CREATE TABLE recipes (
   	primary key (id),
     constraint creator_id_fk
         foreign key (creator_id)
-            references users (id)
+            references users (id),
+    constraint category_id_fk2
+        foreign key (category_id)
+            references categories (id),
+    constraint cover_fk3
+        foreign key (cover)
+            references images (id)
 );
 
-CREATE TABLE recipeTips (
+CREATE TABLE recipesTips (
     id int AUTO_INCREMENT,
-    name varchar(25) NOT NULL,
     description text NOT NULL,
+    image_id VARCHAR(36) DEFAULT NULL,
     recipe_id varchar(36) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -75,7 +115,10 @@ CREATE TABLE recipeTips (
     primary key (id),
     constraint recipe_id_fk
         foreign key (recipe_id)
-            references recipes (id)
+            references recipes (id),
+    constraint image_id_fk2
+        foreign key (image_id)
+            references images (id)
 );
 
 CREATE TABLE recipesIngredients (
@@ -92,7 +135,7 @@ CREATE TABLE recipesIngredients (
     constraint recipe_id_fk1
         foreign key (recipe_id)
             references recipes (id),
-    constraint ingredient_id_fk
+    constraint ingredient_id_fk2
         foreign key (ingredient_id)
             references ingredients (id),
     constraint unit_fk
@@ -115,6 +158,21 @@ CREATE TABLE recipesSteps (
         foreign key (parent_step_id)
             references recipesSteps (id),
     constraint recipe_id_fk2
+        foreign key (recipe_id)
+            references recipes (id)
+);
+
+CREATE TABLE recipesFavorites (
+    user_id varchar(36) NOT NULL,
+    recipe_id varchar(36) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP DEFAULT NULL,
+    primary key (user_id, recipe_id),
+    constraint user_id_fk
+        foreign key (user_id)
+            references users (id),
+    constraint recipe_fav_id_fk2
         foreign key (recipe_id)
             references recipes (id)
 );

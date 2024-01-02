@@ -1,0 +1,345 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Criar Receita
+{% endblock %}
+
+{% block outlet %}
+{% set errors = errors %}
+
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="row p-4">
+                <div class="col-1">
+                    <a href="/app/myrecipes" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ title }}</h1>
+                </div>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpace">
+        <form action="/src/services/recipe/recipe.php" enctype="multipart/form-data" method="post">
+            <div class="mx-3 px-2 py-2">
+                {% if errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {% for error in errors %}
+                    {{ error }}<br>
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+                <!-- Info Recipe -->
+                <div class="row">
+                    <div class="container col-xl-6 col-12 info">
+                        <h2 class="title text-decoration-underline">Informação da Receita</h2>
+                        <div class="model-section col my-4">
+                            <input type="hidden" name="creator_id" value="{{ profile }}">
+                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                            <div class="col my-2">
+                                <!-- Name -->
+                                <input id="name" name="name" type="text" class="form-control" placeholder="Nome"
+                                    minlength="2" maxlength="20" required
+                                    value="{{ app.request.get('name') is defined ? app.request.get('name') : recipe.getTitle }}" />
+                            </div>
+                            <div class="col my-2">
+                                <!-- Description -->
+                                <input id="description" name="description" type="text" class="form-control"
+                                    placeholder="Descrição" minlength="2" maxlength="80" required
+                                    value="{{ app.request.get('description') is defined ? app.request.get('description') : recipe.getDescription }}" />
+                            </div>
+                        </div>
+                        <div class="model-section row my-4 mx-1">
+                            <!-- Portions -->
+                            <div class="col-6 row">
+                                <div class="col-6 row">
+                                    <input id="servings" name="servings" type="number" class="form-control"
+                                        placeholder="Porções" required
+                                        value="{{ app.request.get('servings') is defined ? app.request.get('servings') : recipe.getServings }}" />
+                                </div>
+                            </div>
+                            <!-- Time -->
+                            <div class="col-6 row">
+                                <input id="execution_time" name="execution_time" type="number" class="form-control"
+                                    placeholder="Tempo (min)" required
+                                    value="{{ app.request.get('execution_time') is defined ? app.request.get('execution_time') : recipe.getExecutionTime }}" />
+                            </div>
+                        </div>
+                        <div class="model-section row my-4">
+                            <!-- Category -->
+                            <label class="col-3 py-1" for="category">Categoria</label>
+                            <div class="col-9">
+                                <select id="category_id" class="form-select" name="category_id">
+                                    {% if action == 'updateRecipe' %}
+                                    <option selected value="{{ recipe.getCategoryId }}">{{ recipe.getCategory }}
+                                    </option>
+                                    {% endif %}
+                                    {% for category in categories %}
+                                    <option value="{{ category.getId }}">{{ category.getName }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="model-section row my-4">
+                            <label class="col-2 py-1">Imagem</label>
+                            <div class="col-9 editImageWrapper">
+                                <label for="coverInput{{ recipe.getId }}" class="editImage">
+                                    <input id="coverInput{{ recipe.getId }}" type="file" class="inputImage" name="cover"
+                                        onchange="changeCover(event)" data-ms-recipeid="{{recipe.getId}}" />
+                                    <i class="bi bi-pencil"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container col-xl-6 col-12 d-flex justify-content-center">
+                        <img id="selectedCover{{ recipe.getId }}"
+                            src="data:{{ recipe.getCover.getType }};base64, {{ recipe.getCover.getContent }}"
+                            class="infoImage image-fluid" alt="">
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center mt-2 mb-5">
+                    <button class="btn blue" type="submit" name="recipe" value="{{ action }}">{{ submit }}</button>
+                </div>
+                <div class="row mt-4">
+                    {% if action != 'createRecipe' %}
+                    <!-- Ingredients and Actions -->
+                    <div class="container col-xl-6 col-12">
+                        <h2 class="title text-decoration-underline">Ingredientes</h2>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Apagar</th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ingredient in recipe.getRecipeIngredients %}
+                                    <tr>
+                                        <th>
+                                            <form action="/src/services/recipe/recipe.php" method="post">
+                                                <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                                <input type="hidden" name="id" value="{{ ingredient.getId }}">
+                                                <button class="remove buttonTransparent" name="ingredient"
+                                                    value="removeIngredient">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        </th>
+                                        <th>
+                                            <a id="updateIngredientButton" data-bs-toggle="modal"
+                                                data-bs-target="#addIngredients" class="editIcon buttonTransparent">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                        </th>
+
+                                        <td>{{ ingredient.getIngredientName }}</td>
+                                        <td>{{ ingredient.getQuantity }} {{ ingredient.getUnitName }} </td>
+                                    </tr>
+                                    {% endfor %}
+                                    <a class="add" type="submit" data-bs-toggle="modal"
+                                        data-bs-target="#addIngredients">
+                                        <i class="bi bi-plus-circle"></i>
+                                    </a>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="container col-xl-6 col-12">
+                        <h2 class="title text-decoration-underline">Preparação</h2>
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Apagar</th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Ordem</th>
+                                        <th scope="col">Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for step in recipe.getRecipeSteps %}
+                                    <tr>
+                                        <th>
+                                            <form action="/src/services/recipe/recipe.php" method="post">
+                                                <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                                <input type="hidden" name="id" value="{{ step.getId }}">
+                                                <button class="remove buttonTransparent" name="step" value="removeStep">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        </th>
+                                        <th>
+                                            <a onclick="setVariablesStep('{{ step.getId }}', '{{ step.getStepNumber }}', '{{ step.getDescription }}', '{{ step.getName }}'); checkStepId()"
+                                                id="updateStepButton" data-bs-toggle="modal" data-bs-target="#addAction"
+                                                class="editIcon buttonTransparent">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                        </th>
+                                        <th>{{ step.getStepNumber }}</th>
+                                        <td class="table-description">
+                                            <div class="d-flex flex-wrap">
+                                                {{ step.getDescription }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    <a id="addStepButton" onclick="checkStepId()" class="add" type="submit"
+                                        data-bs-toggle="modal" data-bs-target="#addAction">
+                                        <i class="bi bi-plus-circle"></i>
+                                    </a>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<!-- Add Ingredients Modal -->
+<div class="modal" id="addIngredients" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="/src/services/recipe/recipe.php" method="post">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <div class="row p-4">
+                        <div class="col-1">
+                            <a href="" class="goBack">
+                                <i class="bi bi-arrow-down-circle"></i>
+                            </a>
+                        </div>
+                        <h2 class="col-11 d-flex justify-content-center modal-title">Ingredientes</h2>
+                    </div>
+                </div>
+                <div class="modal-body d-flex gap-3 flex-column">
+                    {% if errors_ingredient %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for error in errors_ingredient %}
+                        {{ error }}<br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+
+                    <!-- SearchBar -->
+                    <div class="model-section col">
+                        <div class="text-field">
+                            <input id="ingredientSearch" placeholder="Pesquisar" type="text">
+                            <span>
+                                <button>
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Results -->
+                    {% if not ingredients|length %}
+                    <h4 class="d-flex justify-content-center my-5">Não existe nenhum ingrediente!</h4>
+                    {% endif %}
+                    <div class="model-section">
+                        {% for ingredient in ingredients %}
+                        <div class="row mx-2">
+                            <div class="form-check py-2 col-5">
+                                <label>
+                                    {{ ingredient.getName }}
+                                </label>
+                            </div>
+                            <div class="col-4">
+                                <!-- Quantity -->
+                                <input
+                                    onchange="AddIngredient('{{ingredient.getId}}', this.value, '{{ingredient.getUnitId}}')"
+                                    id="quantity" type="number" class="form-control" placeholder="Quantidade"
+                                    value="" />
+                            </div>
+                            <!-- Type of Measurement -->
+                            <div class="col-3">
+                                <label class="py-2">
+                                    {{ ingredient.getUnitName }}
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer row d-flex justify-content-center mt-5">
+                    <button onclick="clearIngredients();" type="button" class="btn green" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <input type="hidden" id="ingredients" value="" name="ingredients">
+                    <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                    <button onsubmit="clearIngredients();" type="submit" class="btn blue" name="ingredient"
+                        value="addIngredient">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Action Modal -->
+<div class="modal" id="addAction" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <div class="row p-4">
+                    <div class="col-1">
+                        <a href="" class="goBack">
+                            <i class="bi bi-arrow-down-circle"></i>
+                        </a>
+                    </div>
+                    <h2 class="col-11 d-flex justify-content-center modal-title">Ação</h2>
+                </div>
+            </div>
+            <div class="modal-body d-flex gap-3 flex-column">
+                {% if errors_step %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {% for error in errors_step %}
+                    {{ error }}<br>
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                <form action="/src/services/recipe/recipe.php" method="post">
+                    <!-- Action text -->
+                    <div class="model-section col">
+                        <div class="col my-2">
+                            <textarea id="step_description" type="text" class="form-control" placeholder="Descrição"
+                                name="description" value="" required></textarea>
+                        </div>
+                        <div class="col my-2">
+                            <input id="step_number" type="number" class="form-control" placeholder="Passo Número"
+                                name="step_number" value="" required />
+                        </div>
+                        <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                        <input type="hidden" id="step_id" name="id" value="">
+                        <input type="hidden" id="step_name" name="name" value="">
+                    </div>
+                    <div class="modal-footer row d-flex justify-content-center mt-5">
+                        <button onclick="clearStepVariables();" type="button" class="btn green" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button onsubmit="clearStepVariables();" type="submit" name="step" value="" id="submitButton"
+                            class="btn blue">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ loadJs('search-ingredients.js') }}"></script>
+<script src="{{ loadJs('recipe.js') }}"></script>
+{% endblock %}

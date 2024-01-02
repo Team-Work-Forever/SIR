@@ -6,8 +6,22 @@
     <div class="text-black">
         <!-- Header -->
         <header class="p-3">
-            <div class="m-4 d-flex justify-content-center">
-                <h1>Quim Barreiros</h1>
+            <div class="row p-2">
+                {% if not admin %}
+                <div class="col-1">
+                    <a href="javascript:history.go(-1)" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ user.getDisplayName }}</h1>
+                </div>
+                {% endif %}
+                {% if admin %}
+                <div class="col-12 d-flex justify-content-center">
+                    <h1>{{ user.getDisplayName }}</h1>
+                </div>
+                {% endif %}
             </div>
             <div class="line"></div>
         </header>
@@ -19,47 +33,54 @@
             <div class="row">
                 <div class="container col-xl-4 col-12 info">
                     <div class="row d-flex flex-column justify-content-center align-items-center">
-                        <img src="{{ loadAsset('david.png') }}" class="profileImage image-fluid col-6" alt="">
+                        <img src="data:image/jpeg;base64,{{ user.getAvatar.getContent }}" class="profileImage image-fluid col-6" alt="">
                     </div>
                 </div>
                 <div class="container flex-column col-xl-8 col-12 d-flex justify-content-start">
                     <!-- Buttons -->
                     <div class="d-flex flex-wrap gap-2 justify-content-end my-2 mx-4 px-1">
-                        <button type="button" class="btn buttonOptions text-black d-flex justify-content-around">
+                        <button onclick="share('URL do perfil copiado para a área de transferência!', 'success')" type="button" class="btn buttonOptions text-black d-flex justify-content-around">
                             Partilhar
                             <i class="bi bi-share-fill"></i>
                         </button>
                     </div>
                     <div class="my-2">
                         <!-- Description -->
-                        <p>Uma Breve Descrição, só isso.</p>
+                        <p class="profile-description">{{ user.getDescription }}</p>
                     </div>
                 </div>
             </div>
             <div class="row my-2">
                 <div class="container">
                     <h2 class="title">Minhas Receitas</h2>
+                    {% if not recipes|length %}
+                    <h4 class="d-flex justify-content-center my-5">Não tem nenhuma receita!</h4>
+                    {% endif %}
                     <div class="d-flex flex-wrap">
-                        <div class="card cardItem">
-                            <img src="{{ loadAsset('david.png') }}" class="card-img-top" alt="">
+                        {% for recipe in recipes %}
+                        <div class="card cardItem" onclick="goTo('detailsrecipe?id={{ recipe.getId }}')">
+                            <img src="data:{{ recipe.getCover.getType }};base64, {{  recipe.getCover.getContent  }}" class="card-img-top" alt="">
                             <div class="card-body">
                                 <div class="row">
-                                    <h5 class="card-title col-9">Bolo Chocolate</h5>
-                                    <a href="#" class="col-1">
+                                    <h5 class="card-title col-9">{{ recipe.getTitle }}</h5>
+                                    <button class="buttonTransparent col-1 mt-1" onclick="shareRecipe('{{ host }}', '{{ recipe.getId }}', event)">
                                         <i class="bi bi-share-fill"></i>
-                                    </a>
-                                    <a href="#" class="col-1">
-                                        <i class="bi bi-star"></i>
-                                    </a>
+                                    </button>
+                                    <form action="/src/services/recipe/recipe.php" method="post" class="mx-2 py-2 col-1">
+                                        <input type="hidden" name="id" value="{{ recipe.getId }}">
+                                        <input type="hidden" name="creator_id" value="{{ user.getId }}">
+                                        <button class="buttonTransparent" type="submit" name="favorite" value="changeFavoriteProfile">
+                                            <i class="{% if recipe.getIsFavorite %}bi bi-star-fill{% else %}bi bi-star{% endif %}"></i>
+                                        </button>
+                                    </form>
                                 </div>
 
-                                <p class="card-text">Bolo de chocolate é um bolo simples ou confeitado, que leva
-                                    chocolate
-                                    derretido ou em pó.</p>
-                                <p class="card-text"><small class="text-body-secondary">Criado à 3 minutos</small>
-                                </p>
+                                <p class="card-text">{{ recipe.getDescription }}</p>
+                                <p class="card-text"><small class="text-body-secondary">{{recipe.getLastModificationTimeText}}
+                                        {{ recipe.getLastModificationTime }} </small></p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -67,60 +88,84 @@
     </main>
 
     <!-- Owner Options -->
+    {% if admin %}
     <a class="edit" type="submit" data-bs-toggle="modal" data-bs-target="#editProfile">
         <i class="bi bi-pencil"></i>
     </a>
-
+    {% endif %}
 </div>
 
 <!-- Edit Profile Modal -->
 <div class="modal" id="editProfile" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <h2 class="modal-title">Editar Conta</h2>
-            </div>
-            <div class="modal-body d-flex gap-3 flex-column">
-                <div class="model-section col">
-                    <div class="row my-2">
-                        <div class="col-6">
-                            <div class="col">
-                                <!-- First Name -->
-                                <input id="first_name" type="text" class="form-control" placeholder="Nome Próprio"
-                                    required />
+        <form action="/src/services/user/user.php" enctype="multipart/form-data" method="post">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h2 class="modal-title">Editar Conta</h2>
+                </div>
+                <div class="modal-body d-flex gap-3 flex-column">
+                    {% if errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for error in errors %}
+                        {{ error }}<br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    <div class="model-section col">
+                        <div class="row my-2">
+                            <div class="col-6">
+                                <div class="col">
+                                    <!-- First Name -->
+                                    <input id="first_name" name="first_name" type="text" class="form-control" placeholder="Nome Próprio" value="{{ app.request.get('first_name') is defined ? app.request.get('first_name') : user.getFirstName }}" required />
+                                </div>
+                                <div class="col mt-2">
+                                    <!-- Last Name -->
+                                    <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Apelido" value="{{ app.request.get('last_name') is defined ? app.request.get('last_name') : user.getLastName }}" required />
+                                </div>
                             </div>
-                            <div class="col mt-2">
-                                <!-- Last Name -->
-                                <input id="last_name" type="text" class="form-control" placeholder="Apelido" required />
+                            <!-- Image -->
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <img id="selectedAvatar{{ user.getId }}" src="data:{{ user.getAvatar.getType }};base64,{{ user.getAvatar.getContent }}" class="editProfileImage image-fluid col-6" alt="">
+                                <div class="editImageWrapper mt-4">
+                                    <label for="avatarInput{{ user.getId }}" class="editImage">
+                                        <input id="avatarInput{{ user.getId }}" class="inputImage" type="file" name="avatar" onchange="changeAvatar(event)" data-ms-avatar="{{ user.getId }}" />
+                                        <i class="bi bi-pencil"></i>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6 d-flex justify-content-center align-items-center">
-                            <img src="{{ loadAsset('david.png') }}" class="editProfileImage image-fluid col-6" alt="">
+                        <div class="col my-2">
+                            <!-- E-mail -->
+                            <input id="e_mail" name="email" type="email" class="form-control" placeholder="E-mail" value="{{ app.request.get('email') is defined ? app.request.get('email') : user.getEmail }}" required />
                         </div>
-                    </div>
-                    <div class="col my-2">
-                        <!-- E-mail -->
-                        <input id="e_mail" type="email" class="form-control" placeholder="E-mail" required />
-                    </div>
-                    <div class="col my-2">
-                        <!-- Password -->
-                        <input id="password" type="password" class="form-control" placeholder="Password" required />
-                    </div>
-                    <div class="col my-2">
-                        <!-- Description -->
-                        <input id="description" type="text" class="form-control" placeholder="Descrição" required />
+                        <div class="col my-2">
+                            <!-- Password -->
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Nova palavra-chave" value="" />
+                        </div>
+                        <div class="col my-2">
+                            <!-- Description -->
+                            <textarea id="description" name="description" class="form-control" placeholder="Descrição">
+                            {% if app.request.get('description') is defined %}
+                                {{ app.request.get('description') }}
+                            {% else %}
+                                {{ user.getDescription }}
+                            {% endif %}
+                        </textarea>
+                        </div>
                     </div>
                 </div>
+                <input type="hidden" name="id" value="{{ user.getId }}">
+                <div class="modal-footer row d-flex justify-content-center mt-5">
+                    <button type="button" class="btn green" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" name="user" value="updateUser" class="btn blue">Confirmar</button>
+                </div>
             </div>
-            <div class="modal-footer row d-flex justify-content-center mt-5">
-                <button type="button" class="btn green" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <button type="button" class="btn blue">Confirmar</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
-<script src="{{ loadJs('selector.js') }}"></script>
+<script src="{{ loadJs('profile.js') }}"></script>
 {% endblock %}
