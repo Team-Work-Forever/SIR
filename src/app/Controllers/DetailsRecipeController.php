@@ -20,9 +20,9 @@ class DetailsRecipeController
                 $errors_tip = $_SESSION['errors_tip'];
                 unset($_SESSION['errors_tip']);
                 return view("secure/user/details_recipe", ['recipe' => $recipe, 'admin' => $admin, 'profile' => $_SESSION['id'], 'errors_tip' =>  $errors_tip]);
-            } else redirect($GLOBALS['pc']->pop());
+            } else header('Location: /app');
         } else {
-            return redirect($GLOBALS['pc']->pop());
+            return header('Location: /app');
         }
     }
 }

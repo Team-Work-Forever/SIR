@@ -33,7 +33,7 @@ function getUnitById($id)
 
 function getAllUnits()
 {
-    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM units and deleted_at is null;');
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM units WHERE deleted_at is null;');
     $units = [];
     while ($unitsLits = $PDOStatement->fetch()) {
         $units[] = $unitsLits;

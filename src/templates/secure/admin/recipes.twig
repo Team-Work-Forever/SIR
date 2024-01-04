@@ -1,0 +1,184 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Receitas {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <main class="overflow-auto scrollDashboardSpaceAdmin">
+        <div class="mt-5 mx-3 px-2 py-2">
+            <div class="row">
+                <div class="container col-12">
+                    <!-- Public Recipes -->
+                    <h2 class="title text-decoration-underline">Receitas Públicas</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Abrir Receita</th>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Tempo de execução</th>
+                                    <th scope="col">Porções</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for recipe in publicRecipes %}
+                                <tr>
+                                    <th class="py-5">
+                                        <a href="/admin/users/userprofile/recipe?id={{ recipe.getId }}"
+                                            class="selectionIcon">
+                                            <i class="bi bi-egg-fill"></i>
+                                        </a>
+                                    </th>
+                                    <th class="py-5">
+                                        <form action="/src/services/recipe/recipe.php" method="post">
+                                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                            <input type="hidden" name="creator_id" value="{{ recipe.getCreatorId }}">
+                                            <input type="hidden" name="path" value="/admin/recipes">
+                                            <button class="remove buttonTransparent" name="recipe" value="removeRecipe">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                    <th class="py-5">
+                                        <!-- TODO: UPDATE RECEITA -->
+                                        <a href="">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </th>
+                                    <td class="py-5">{{ recipe.getTitle }}</td>
+                                    <td class="py-5">{{ recipe.getExecutionTime }} </td>
+                                    <td class="py-5">{{ recipe.getServings }} </td>
+                                    <td class="py-5">{{ recipe.getCategory }} </td>
+                                    <td class="py-5 table-description">
+                                        <div class="d-flex flex-wrap">
+                                            {{ user.getDescription }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- TODO: ADD RECEITA -->
+                                <a href="" class="add" type="submit">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="container col-12">
+                    <!-- Private Recipes -->
+                    <h2 class="title text-decoration-underline">Receitas Privadas</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Abrir Receita</th>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Tempo de execução</th>
+                                    <th scope="col">Porções</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for recipe in privateRecipes %}
+                                <tr>
+                                    <th class="py-5">
+                                        <a href="/admin/users/userprofile/recipe?id={{ recipe.getId }}"
+                                            class="selectionIcon">
+                                            <i class="bi bi-egg-fill"></i>
+                                        </a>
+                                    </th>
+                                    <th class="py-5">
+                                        <form action="/src/services/recipe/recipe.php" method="post">
+                                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                            <input type="hidden" name="creator_id" value="{{ recipe.getCreatorId }}">
+                                            <input type="hidden" name="path" value="/admin/recipes">
+                                            <button class="remove buttonTransparent" name="recipe" value="removeRecipe">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                    <th class="py-5">
+                                        <!-- TODO: UPDATE RECEITA -->
+                                        <a href="">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </th>
+                                    <td class="py-5">{{ recipe.getTitle }}</td>
+                                    <td class="py-5">{{ recipe.getExecutionTime }} </td>
+                                    <td class="py-5">{{ recipe.getServings }} </td>
+                                    <td class="py-5">{{ recipe.getCategory }} </td>
+                                    <td class="py-5 table-description">
+                                        <div class="d-flex flex-wrap">
+                                            {{ user.getDescription }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- TODO: ADD RECEITA -->
+                                <a href="" class="add" type="submit">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="container col-12">
+                    <!-- Removed Recipes -->
+                    <h2 class="title text-decoration-underline">Receitas Apagadas</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Reverter</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Tempo de execução</th>
+                                    <th scope="col">Porções</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for recipe in removedRecipes %}
+                                <tr>
+                                    <th class="py-5">
+                                        <form action="/src/services/recipe/recipe.php" method="post">
+                                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                            <input type="hidden" name="creator_id" value="{{ recipe.getCreatorId }}">
+                                            <input type="hidden" name="path" value="/admin/recipes">
+                                            <button class="remove buttonTransparent" name="recipe"
+                                                value="changeStatusRecipe">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                    <td class="py-5">{{ recipe.getTitle }}</td>
+                                    <td class="py-5">{{ recipe.getExecutionTime }} </td>
+                                    <td class="py-5">{{ recipe.getServings }} </td>
+                                    <td class="py-5">{{ recipe.getCategory }} </td>
+                                    <td class="py-5 table-description">
+                                        <div class="d-flex flex-wrap">
+                                            {{ user.getDescription }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '../../db/connection.php';
 require_once __DIR__ . '../../../utils/uuid.php';
+require_once __DIR__ . '../../../helpers/session.php';
 
 function createNewUser($user)
 {
@@ -46,7 +47,7 @@ function createNewUser($user)
         ':display_name' => $display_name,
         ':first_name' => $user['first_name'],
         ':last_name' => $user['last_name'],
-        ':description' => '',
+        ':description' => $user['description'],
         ':avatar' => 'c93a0f1a-50fd-d119-f984-c7edd07ca624',
         ':birth_date' => $user['birth_date'],
         ':gender_id' => $user['gender'],
@@ -63,9 +64,31 @@ function createNewUser($user)
     return $success;
 }
 
+function getAllUsers()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM users WHERE is_admin = 0 and deleted_at is null;');
+    $users = [];
+    while ($usersLits = $PDOStatement->fetch()) {
+        $users[] = $usersLits;
+    }
+
+    return $users;
+}
+
+function getAllRemovedUsers()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM users WHERE is_admin = 0 and deleted_at is not null;');
+    $users = [];
+    while ($usersLits = $PDOStatement->fetch()) {
+        $users[] = $usersLits;
+    }
+
+    return $users;
+}
+
 function getById($id)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM users WHERE id = ? and deleted_at is null LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM users WHERE id = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $id);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -73,7 +96,7 @@ function getById($id)
 
 function getByEmail($email)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM users WHERE email = ? and deleted_at is null LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM users WHERE email = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $email);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -87,22 +110,6 @@ function getByEmailIfDeleted($email)
     return $PDOStatement->fetch();
 }
 
-function changePrivilege($user)
-{
-    $sqlUpdate = "UPDATE  
-            users SET
-                is_admin = CASE WHEN is_admin = true THEN false ELSE true END
-            WHERE id = :id ;";
-
-    $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
-
-    $success = $PDOStatement->execute([
-        ':id' => $user['id']
-    ]);
-
-    return $success;
-}
-
 function updateUser($user)
 {
     $sqlUpdate = "UPDATE  
@@ -112,7 +119,7 @@ function updateUser($user)
                 first_name = :first_name,
                 last_name = :last_name,
                 description = :description
-            WHERE id = :id ;";
+            WHERE id = :id;";
 
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 
@@ -122,7 +129,7 @@ function updateUser($user)
         ':first_name' => $user['first_name'],
         ':last_name' => $user['last_name'],
         ':description' => $user['description'],
-        ':id' => $user['id']
+        ':id' => $user['user_id']
     ]);
 
     return $success;
@@ -139,7 +146,7 @@ function updateUserPassword($user)
 
     $success = $PDOStatement->execute([
         ':password' => password_hash($user['password'], PASSWORD_DEFAULT),
-        ':id' => $user['id']
+        ':id' => $user['user_id']
     ]);
 
     return $success;
@@ -162,7 +169,23 @@ function updateUserImage($user, $image)
     return $success;
 }
 
-function deleteUser($user)
+function changeUserStatus($id)
+{
+    $sqlUpdate = "UPDATE  
+            users SET
+                deleted_at = null
+            WHERE id = :id;";
+
+    $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
+
+    $success = $PDOStatement->execute([
+        ':id' => $id
+    ]);
+
+    return $success;
+}
+
+function deleteUser($id)
 {
     $sqlUpdate = "UPDATE  
             users SET
@@ -172,6 +195,6 @@ function deleteUser($user)
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 
     return $PDOStatement->execute([
-        ':id' => $user['id']
+        ':id' => $id
     ]);
 }

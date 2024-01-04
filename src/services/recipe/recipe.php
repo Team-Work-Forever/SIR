@@ -11,6 +11,7 @@ require_once __DIR__ . '/../../helpers/validations/validate-step.php';
 require_once __DIR__ . '/../../helpers/validations/validate-ingredient.php';
 require_once __DIR__ . '/../../helpers/validations/validate-tip.php';
 require_once __DIR__ . '/../../helpers/validations/validate-tip-image.php';
+@require_once __DIR__ . '../../../helpers/session.php';
 
 if (isset($_POST['recipe'])) {
     if ($_POST['recipe'] == 'createRecipe') {
@@ -23,6 +24,10 @@ if (isset($_POST['recipe'])) {
 
     if ($_POST['recipe'] == 'removeRecipe') {
         remove($_POST);
+    }
+
+    if ($_POST['recipe'] == 'changeStatusRecipe') {
+        reverse($_POST);
     }
 }
 
@@ -156,9 +161,21 @@ function update($req)
 
 function remove($req)
 {
-    deleteRecipe($req['id']);
+    deleteRecipe($req['recipe_id']);
+
+    if (administrator()) {
+        header('location: ' . $req['path']);
+        return;
+    }
 
     header('location: /app/myrecipes');
+}
+
+function reverse($req)
+{
+    changeRecipeStatus($req);
+
+    header('location: ' . $req['path']);
 }
 
 function changeFavorite($req)
@@ -220,6 +237,10 @@ function deleteStep($req)
     deleteStepRecipe($req);
     updateRecipeDate($req['recipe_id']);
 
+    if (administrator()) {
+        header('location: /admin/users/userprofile/recipe?id=' . $req['recipe_id']);
+        return;
+    }
 
     header('location: /app/updaterecipe?id=' . $req['recipe_id']);
 }
@@ -283,6 +304,10 @@ function deleteIngredient($req)
     deleteIngredientRecipe($req);
     updateRecipeDate($req['recipe_id']);
 
+    if (administrator()) {
+        header('location: /admin/users/userprofile/recipe?id=' . $req['recipe_id']);
+        return;
+    }
 
     header('location: /app/updaterecipe?id=' . $req['recipe_id']);
 }

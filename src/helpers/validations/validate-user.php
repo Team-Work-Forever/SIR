@@ -38,7 +38,7 @@ function isUserValid($req, $image)
         $errors['email'] = 'The Email field must not be empty and must have an email format, such as: name@example.com.';
     }
 
-    $data = getById($req['id']);
+    $data = getById($req['user_id']);
 
     if ($req['email'] != $data['email']) {
         if (getByEmail($req['email'])) {
@@ -50,6 +50,21 @@ function isUserValid($req, $image)
     if (!empty($req['password']) && strlen($req['password']) < 6) {
         $errors['password'] = 'The Password field cannot be empty and must be at least 6 characters long.';
     }
+
+    if (isset($errors)) {
+        return ['invalid' => $errors];
+    }
+    return $req;
+}
+
+function isNewUserValid($req, $image)
+{
+
+    if (empty($req['gender'])) {
+        $errors['gender'] = 'The Gender field cannot be empty.';
+    }
+
+    $req = isUserValid($req, $image);
 
     if (isset($errors)) {
         return ['invalid' => $errors];

@@ -68,9 +68,9 @@ function getAllRecipesFromAuthenticatedUser()
     return $recipes;
 }
 
-function getRecipesByUserId($userId)
+function getPrivateRecipesByUserId($userId)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipes WHERE creator_id = ? and is_private = 0 and deleted_at is null;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipes WHERE creator_id = ? and is_private = 1 and deleted_at is null;');
     $PDOStatement->bindValue(1, $userId);
     $PDOStatement->execute();
     $recipes = [];
@@ -81,9 +81,24 @@ function getRecipesByUserId($userId)
     return $recipes;
 }
 
-function getAllPublicRecipes()
+function getRemovedRecipesByUserId($userId)
 {
-    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM recipes WHERE is_private = 0 and deleted_at is null;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipes WHERE creator_id = ? and deleted_at is not null;');
+    $PDOStatement->bindValue(1, $userId);
+    $PDOStatement->execute();
+    $recipes = [];
+    while ($recipesLits = $PDOStatement->fetch()) {
+        $recipes[] = $recipesLits;
+    }
+
+    return $recipes;
+}
+
+function getRecipesByUserId($userId)
+{
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipes WHERE creator_id = ? and is_private = 0 and deleted_at is null;');
+    $PDOStatement->bindValue(1, $userId);
+    $PDOStatement->execute();
     $recipes = [];
     while ($recipesLits = $PDOStatement->fetch()) {
         $recipes[] = $recipesLits;
@@ -98,6 +113,39 @@ function getRecipeById($id)
     $PDOStatement->bindValue(1, $id);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
+}
+
+function getAllPublicRecipes()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM recipes WHERE is_private = 0 and deleted_at is null;');
+    $recipes = [];
+    while ($recipesLits = $PDOStatement->fetch()) {
+        $recipes[] = $recipesLits;
+    }
+
+    return $recipes;
+}
+
+function getAllPrivatesRecipes()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM recipes WHERE is_private = 1 and deleted_at is null;');
+    $recipes = [];
+    while ($recipesLits = $PDOStatement->fetch()) {
+        $recipes[] = $recipesLits;
+    }
+
+    return $recipes;
+}
+
+function getAllRemovedRecipes()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM recipes WHERE deleted_at is not null;;');
+    $recipes = [];
+    while ($recipesLits = $PDOStatement->fetch()) {
+        $recipes[] = $recipesLits;
+    }
+
+    return $recipes;
 }
 
 function updateRecipe($recipe)
@@ -302,6 +350,23 @@ function deleteRecipe($id)
 
     $success = $PDOStatement->execute([
         ':recipe_id' => $id
+    ]);
+
+    return $success;
+}
+
+function changeRecipeStatus($req)
+{
+    $sqlUpdate = "UPDATE  
+            recipes SET
+                deleted_at = null
+            WHERE id = :id and creator_id = :creator_id;";
+
+    $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
+
+    $success = $PDOStatement->execute([
+        ':id' => $req['recipe_id'],
+        ':creator_id' => $req['creator_id']
     ]);
 
     return $success;

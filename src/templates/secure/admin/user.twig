@@ -1,0 +1,118 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Conta {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="row p-2">
+                <div class="col-1">
+                    <a href="javascript:history.go(-1)" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ title }}</h1>
+                </div>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpace">
+        <div class="mx-3 px-2 py-2">
+            <form action="/src/services/user/user.php" enctype="multipart/form-data" method="post">
+                {% if errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {% for error in errors %}
+                    {{ error }}<br>
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                <div class="model-section col">
+                    <div class="row my-2">
+                        <div class="col-xl-6 col-12">
+                            <div class="col">
+                                <!-- First Name -->
+                                <input id="first_name" name="first_name" type="text" class="form-control" placeholder="Nome Próprio" value="{{ app.request.get('first_name') is defined ? app.request.get('first_name') : user.getFirstName }}" required />
+                            </div>
+                            <div class="col mt-2">
+                                <!-- Last Name -->
+                                <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Apelido" value="{{ app.request.get('last_name') is defined ? app.request.get('last_name') : user.getLastName }}" required />
+                            </div>
+                            <div class="col my-2">
+                                <!-- Description -->
+                                <textarea id="description" name="description" class="form-control" placeholder="Descrição">
+                                    {% if app.request.get('description') is defined %}
+                                        {{ app.request.get('description') }}
+                                    {% else %}
+                                        {{ user.getDescription }}
+                                    {% endif %}
+                                </textarea>
+                            </div>
+                            {% if action == 'createUser' %}
+                            <div class="col">
+                                <!-- Birth Date -->
+                                <label for="birthDate">Data de Nascimento</label>
+                                <div class="row">
+                                    <!-- Day -->
+                                    <select id="day" class="col mx-2 form-select" aria-label="Dia" name="day" required>
+                                    </select>
+                                    <!-- Month -->
+                                    <select id="month" class="col mx-2 form-select" aria-label="Mês" name="mounth" required>
+                                    </select>
+                                    <!-- Year -->
+                                    <select id="year" class="col mx-2 form-select" aria-label="Ano" name="year" required>
+                                    </select>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- Image -->
+                        <div class="col-xl-6 col-12 mt-2 d-flex justify-content-center align-items-center">
+                            <img id="selectedAvatar{{ user.getId }}" src="data:{{ user.getAvatar.getType }};base64,{{ user.getAvatar.getContent }}" class="editProfileImageAdmin image-fluid col-6" alt="">
+                            <div class="editImageWrapper mt-4">
+                                <label for="avatarInput{{ user.getId }}" class="editImage">
+                                    <input id="avatarInput{{ user.getId }}" class="inputImage" type="file" name="avatar" onchange="changeAvatar(event)" data-ms-avatar="{{ user.getId }}" />
+                                    <i class="bi bi-pencil"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col my-2">
+                        <!-- E-mail -->
+                        <input id="e_mail" name="email" type="email" class="form-control" placeholder="E-mail" value="{{ app.request.get('email') is defined ? app.request.get('email') : user.getEmail }}" required />
+                    </div>
+                    <div class="col my-2">
+                        <!-- Password -->
+                        <input id="password" name="password" type="password" class="form-control" placeholder="Nova palavra-chave" value="" />
+                    </div>
+                    {% if action == 'createUser' %}
+                    <div class="col">
+                        <!-- Gender -->
+                        <label for="gender">Género</label>
+                        <div class="col mx-2 my-1">
+                            {% for gender in genders %}
+                            <div class="col form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="gender" value="{{ gender.getId }}" />
+                                <label class="form-check-label" for="gender">{{ gender.getName }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <input type="hidden" name="user_id" value="{{ user.getId }}">
+                <input type="hidden" name="path" value="/admin/users">
+                <div class="row d-flex justify-content-center mt-5">
+                    <button type="submit" name="user" value="{{action}}" class="btn blue">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+<script src="{{ loadJs('profile.js') }}"></script>
+{% endblock %}

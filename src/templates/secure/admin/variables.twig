@@ -1,0 +1,185 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Variáveis {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <main class="overflow-auto scrollDashboardSpaceAdmin">
+        <div class="mt-5 mx-3 px-2 py-2">
+            <div class="row">
+                <div class="container col-xl-6 col-12">
+                    <!-- Categories -->
+                    <h2 class="title text-decoration-underline">Categorias</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for category in categories %}
+                                <tr>
+                                    <td class="py-2">
+                                        <form action="/src/services/variables/category.php" method="post">
+                                            <input type="hidden" name="category_id" value="{{ category.getId }}">
+                                            <button class="remove buttonTransparent" name="category" value="removeCategory">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="py-2">
+                                        <!-- TODO: UPDATE CATEGORY -->
+                                        <a href="">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                    <td class="py-2">{{ category.getName }}</td>
+                                </tr>
+                                {% endfor %}
+                                <!-- TODO: ADD CATEGORY -->
+                                <a href="" class="add" type="submit">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container col-xl-6 col-12">
+                    <!-- Genders -->
+                    <h2 class="title text-decoration-underline">Géneros</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for gender in genders %}
+                                <tr>
+                                    <td class="py-2">
+                                        <form action="/src/services/variables/gender.php" method="post">
+                                            <input type="hidden" name="gender_id" value="{{ gender.getId }}">
+                                            <button class="remove buttonTransparent" name="gender" value="removeGender">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="py-2">
+                                        <!-- TODO: UPDATE GENDER -->
+                                        <a href="">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                    <td class="py-2">{{ gender.getName }}</td>
+                                </tr>
+                                {% endfor %}
+                                <!-- TODO: ADD GENDER -->
+                                <a href="" class="add" type="submit">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+
+                <div class="container col-xl-6 col-12">
+                    <!-- Units -->
+                    <h2 class="title text-decoration-underline">Unidades</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Unidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for unit in units %}
+                                <tr>
+                                    <td class="py-2">
+                                        <form action="/src/services/variables/unit.php" method="post">
+                                            <input type="hidden" name="unit_id" value="{{ unit.getId }}">
+                                            <button class="remove buttonTransparent" name="unit" value="removeUnit">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="py-2">
+                                        <!-- TODO: UPDATE UNIT -->
+                                        <a href="">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                    <td class="py-2">{{ unit.getName }}</td>
+                                    <td class="py-2">{{ unit.getUnit }}</td>
+                                </tr>
+                                {% endfor %}
+                                <!-- TODO: ADD UNIT -->
+                                <a href="" class="add" type="submit">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container col-xl-6 col-12">
+                    <!-- Ingredientes -->
+                    <h2 class="title text-decoration-underline">Ingredientes</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Unidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ingredient in ingredients %}
+                                <tr>
+                                    <td>
+                                        <form action="/src/services/variables/ingredient.php" method="post">
+                                            <input type="hidden" name="ingredient_id" value="{{ ingredient.getId }}">
+                                            <button class="remove buttonTransparent" name="ingredient" value="removeIngredient">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <!-- TODO: UPDATE INGREDIENT -->
+                                        <a href="">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+
+                                    <td>{{ ingredient.getName }}</td>
+                                    <td>{{ ingredient.getUnit.getName }}</td>
+                                </tr>
+                                {% endfor %}
+                                <!-- TODO: ADD INGREDIENT -->
+                                <a href="" class="add" type="submit">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

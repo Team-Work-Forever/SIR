@@ -6,18 +6,62 @@ require_once __DIR__ . '/../../helpers/validations/validate-user.php';
 @require_once __DIR__ . '../../../helpers/session.php';
 
 if (isset($_POST['user'])) {
+    if ($_POST['user'] == 'createUser') {
+        create($_POST);
+    }
+
     if ($_POST['user'] == 'updateUser') {
         changeUser($_POST);
+    }
+
+    if ($_POST['user'] == 'updateUserAdmin') {
+        update($_POST);
     }
 
     if ($_POST['user'] == 'deleteUser') {
         removeUser($_POST);
     }
+
+    if ($_POST['user'] == 'changeStatusUser') {
+        changeStatus($_POST);
+    }
 }
 
-function changeUser($req)
+function create($req)
 {
     $image = $_FILES["avatar"];
+    unset($_FILES["avatar"]);
+
+    $data = isNewUserValid($req, $image);
+
+    if (isset($data['invalid'])) {
+
+        $_SESSION['errors'] = $data['invalid'];
+
+        $params = '?' . http_build_query($req);
+
+        //TODO: ERROS EM MODALS
+        header('location: /admin/users/createuser');
+        return;
+    }
+
+    $user = createNewUser($data);
+
+    if ($image['type'] != "") {
+        $image['content'] = file_get_contents($image["tmp_name"]);
+
+        $imageInserted = createImage($image);
+
+        updateUserImage($user['id'], $imageInserted);
+    }
+
+    header('location: ' . $req['path']);
+}
+
+function update($req)
+{
+    $image = $_FILES["avatar"];
+    unset($_FILES["avatar"]);
 
     $data = isUserValid($req, $image);
 
@@ -27,35 +71,75 @@ function changeUser($req)
         $params = '?' . http_build_query($req);
 
         //TODO: ERROS EM MODALS
-        // header('location: /app/profile?id=' . $req['id']);
-    } else {
-        if ($image['type'] != "") {
-            $image['content'] = file_get_contents($image["tmp_name"]);
-
-            $imageInserted = createImage($image);
-
-            updateUserImage($data['id'], $imageInserted);
-        }
-
-        if (!empty($data['password'])) {
-            updateUserPassword($data);
-        }
-        $user = updateUser($data);
-
-        unset($_FILES["avatar"]);
-
-        $_SESSION['display_name'] = $user['display_name'];
-
-        setcookie("display_name", $_SESSION['display_name'], time() + (60 * 60 * 24 * 30), "/app/profile?id=" . $req['id']);
-
-        header('location: /app/profile?id=' . $req['id']);
+        header('location: /admin/users/updateuser?id=' . $req['user_id']);
+        return;
     }
+
+    if ($image['type'] != "") {
+        $image['content'] = file_get_contents($image["tmp_name"]);
+
+        $imageInserted = createImage($image);
+
+        updateUserImage($req['user_id'], $imageInserted);
+    }
+
+    if (!empty($data['password'])) {
+        updateUserPassword($data);
+    }
+
+    updateUser($data);
+
+    header('location: ' . $req['path']);
+}
+
+function changeUser($req)
+{
+    $image = $_FILES["avatar"];
+    unset($_FILES["avatar"]);
+
+    $data = isUserValid($req, $image);
+
+    if (isset($data['invalid'])) {
+        $_SESSION['errors'] = $data['invalid'];
+
+        $params = '?' . http_build_query($req);
+
+        //TODO: ERROS EM MODALS
+        header('location: /app/profile?id=' . $req['user_id']);
+        return;
+    }
+
+    if ($image['type'] != "") {
+        $image['content'] = file_get_contents($image["tmp_name"]);
+
+        $imageInserted = createImage($image);
+
+        updateUserImage($data['user_id'], $imageInserted);
+    }
+
+    if (!empty($data['password'])) {
+        updateUserPassword($data);
+    }
+
+    $user = updateUser($data);
+
+    $_SESSION['display_name'] = $user['display_name'];
+
+    setcookie("display_name", $_SESSION['display_name'], time() + (60 * 60 * 24 * 30), "/app/profile?id=" . $req['user_id']);
+
+    header('location: /app/profile?id=' . $req['user_id']);
 }
 
 function removeUser($req)
 {
-    deleteUser($req['id']);
+    deleteUser($req['user_id']);
 
-    //TODO: VER PÁGINA DO ADMIN
-    header('location: /app');
+    header('location: /admin/users');
+}
+
+function changeStatus($req)
+{
+    changeUserStatus($req['user_id']);
+
+    header('location: ' . $req['path']);
 }

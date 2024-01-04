@@ -42,13 +42,8 @@ class RecipeIngredientModel
         return $this->quantity;
     }
 
-    public function getUnitId(): int
+    public function getUnit()
     {
-        return $this->unit['id'];
-    }
-
-    public function getUnitName(): string
-    {
-        return $this->unit['name'];
+        return $this->unit;
     }
 }

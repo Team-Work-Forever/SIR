@@ -14,8 +14,8 @@
             <img src="{{ loadAsset('hat.svg') }}" alt="Os Mestres da Culinária" class="img-fluid">
         </div>
         <hr class="align-self-center my-5">
+        {% if administrator is not defined %}
         <ul class="nav nav-pills flex-column mb-auto">
-            {% if administrator is not defined %}
             <li class="nav-item">
                 <a href="/app" class="nav-link active" aria-current="page">
                     <i class="bi me-2 bi-house-door-fill"></i>
@@ -34,9 +34,35 @@
                     <span>Perfil</span>
                 </a>
             </li>
-            {% else %}
-            {% endif %}
         </ul>
+        {% else %}
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="/admin" class="nav-link active" aria-current="page">
+                    <i class="bi me-2 bi-house-door-fill"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/users" class="nav-link">
+                    <i class="bi me-2 bi-person-fill"></i>
+                    <span>Utilizadores</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/recipes" class="nav-link">
+                    <i class="bi me-2 bi-egg-fill"></i>
+                    <span>Receitas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/variables" class="nav-link">
+                    <i class="bi me-2 bi-gear-fill"></i>
+                    <span>Outras Variáveis</span>
+                </a>
+            </li>
+        </ul>
+        {% endif %}
         <div class="side-footer nav nav-pills flex-column">
             <li class="nav-item">
                 <form action="/src/services/auth/signin.php" method="post">

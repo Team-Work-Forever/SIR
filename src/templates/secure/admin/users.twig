@@ -1,0 +1,115 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Utilizadores {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <main class="overflow-auto scrollDashboardSpaceAdmin">
+        <div class="mt-5 mx-3 px-2 py-2">
+            <div class="row">
+                <!-- Utilizadores -->
+                <div class="container col-12">
+                    <h2 class="title text-decoration-underline">Utilizadores</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Abrir Perfil</th>
+                                    <th scope="col">Apagar</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Avatar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td class="py-5">
+                                        <a href="/admin/users/userprofile?id={{user.getId}}" class="selectionIcon">
+                                            <i class="bi bi-person-fill"></i>
+                                        </a>
+                                    </td>
+                                    <td class="py-5">
+                                        <form action="/src/services/user/user.php" method="post">
+                                            <input type="hidden" name="user_id" value="{{ user.getId }}">
+                                            <button class="remove buttonTransparent" name="user" value="deleteUser">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="py-5">
+                                        <!-- TODO: UPDATE USER -->
+                                        <a href="/admin/users/updateuser?id={{ user.getId }}">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                    <td class="py-5">{{ user.getEmail }}</td>
+                                    <td class="py-5">{{ user.getDisplayName }} </td>
+                                    <td class="py-5 table-description">
+                                        <div class="d-flex flex-wrap">
+                                            {{ user.getDescription }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="data:{{ user.getAvatar.getType }};base64,{{ user.getAvatar.getContent }}" class="editProfileImage image-fluid col-6" alt="">
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <a href="/admin/users/createuser" class="add">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="container col-12">
+                    <!-- Removed Profiles -->
+                    <h2 class="title text-decoration-underline">Utilizadores Removidos</h2>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Reverter</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Avatar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in removedUsers %}
+                                <tr>
+                                    <th class="py-5">
+                                        <form action="/src/services/user/user.php" method="post">
+                                            <input type="hidden" name="user_id" value="{{ user.getId }}">
+                                            <input type="hidden" name="path" value="/admin/users">
+                                            <button class="remove buttonTransparent" name="user" value="changeStatusUser">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                    <td class="py-5">{{ user.getEmail }}</td>
+                                    <td class="py-5">{{ user.getDisplayName }} </td>
+                                    <td class="py-5 table-description">
+                                        <div class="d-flex flex-wrap">
+                                            {{ user.getDescription }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="data:{{ user.getAvatar.getType }};base64,{{ user.getAvatar.getContent }}" class="editProfileImage image-fluid col-6" alt="">
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

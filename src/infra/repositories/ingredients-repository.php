@@ -48,6 +48,25 @@ function getIngredientsById($id)
     return $PDOStatement->fetch();
 }
 
+function updateIngredient($ingredient)
+{
+    $sqlUpdate = "UPDATE  
+            ingredients SET
+                name = :name,
+                price = :price,
+                unit = :unit 
+            WHERE id = :id;";
+
+    $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
+
+    return $PDOStatement->execute([
+        ':id' => $ingredient['id'],
+        ':name' => $ingredient['name'],
+        ':price' => $ingredient['price'],
+        ':unit' => $ingredient['unit']
+    ]);
+}
+
 function deleteIngredientById($id)
 {
     $sqlUpdate = "UPDATE  

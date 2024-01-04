@@ -122,7 +122,7 @@
                                 {% endif %}
                                 {% for ingredient in recipe.getRecipeIngredients %}
                                 <li><i class="bi bi-diamond-fill"></i> {{ ingredient.getIngredientName }} - {{
-                                    ingredient.getQuantity }} {{ ingredient.getUnitName }}</li>
+                                    ingredient.getQuantity }} {{ ingredient.getUnit.getName }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -225,7 +225,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn green" data-bs-dismiss="modal">Cancelar</button>
                 <form action="/src/services/recipe/recipe.php" method="post">
-                    <input type="hidden" name="id" value="{{ recipe_id }}">
+                    <input type="hidden" name="recipe_id" value="{{ recipe_id }}">
                     <button type="submit" class="btn blue" name="recipe" value="removeRecipe">Apagar</button>
                 </form>
             </div>

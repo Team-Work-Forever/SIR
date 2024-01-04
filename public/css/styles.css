@@ -491,6 +491,11 @@ section {
     width: calc(100% - 4rem);
 }
 
+.scrollDashboardSpaceAdmin {
+    height: calc(100% - 1rem);
+    width: calc(100% - 1rem);
+}
+
 .line {
     height: 4px;
     background-color: var(--title-color);
@@ -573,6 +578,17 @@ section {
 
 /* Tables */
 
+th {
+    text-align: center;
+    border: 1px solid var(--gray-selection);
+}
+
+td {
+    text-align: center;
+    padding: 2px;
+    border: 1px solid var(--gray-mid);
+}
+
 .table-container {
     position: relative;
     width: 95%;
@@ -596,6 +612,11 @@ section {
 .editIcon {
     size: 24px;
     color: var(--mid-blue);
+}
+
+.selectionIcon {
+    size: 24px;
+    color: var(--selection-color);
 }
 
 .add {
@@ -743,6 +764,15 @@ section {
 .editProfileImage {
     width: 80px;
     height: 80px;
+    margin: 4px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+}
+
+.editProfileImageAdmin {
+    width: 160px;
+    height: 160px;
     margin: 4px;
     object-fit: cover;
     object-position: center center;

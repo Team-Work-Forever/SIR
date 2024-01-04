@@ -1,0 +1,175 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Receita {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="row p-4">
+                <div class="col-1">
+                    <a href="javascript:history.go(-1)" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ recipe.getTitle }}</h1>
+                </div>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpaceAdmin">
+        <div class="row m-2">
+            <div class="container col-xl-6 col-12 info">
+                <h2 class="title text-decoration-underline">Informação da Receita</h2>
+                <div class="model-section col my-4">
+                    <div class="col my-2">
+                        <!-- Description -->
+                        <p class="detailsDescriptionWidth"> {{ recipe.getDescription }}
+                        </p>
+                    </div>
+                </div>
+                <div class="model-section row mt-4">
+                    <!-- Portions -->
+                    <div class="col-xl-6 col-12 row">
+                        <h4 class="col-4">Porções</h4>
+                        <div class="col-8 px-4 py-2">
+                            <p>{{ recipe.getServings }}</p>
+                        </div>
+                    </div>
+                    <!-- Time -->
+                    <div class="col-xl-6 col-12 row">
+                        <h4 class="col-4">Tempo</h4>
+                        <div class="col-8 px-4 py-2">
+                            <p>{{ recipe.getExecutionTimeFormatted }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="model-section row mb-4">
+                    <!-- Portions -->
+                    <h4 class="col-4">Categoria</h4>
+                    <div class="col-8 px-4 py-2">
+                        <p>{{ recipe.getCategory }}</p>
+                    </div>
+                </div>
+                <!-- Created by -->
+                <div class="row">
+                    <h4 class="col-4">Criado por:</h4>
+                    <div class="col-8 row py-2">
+                        <div class="col-5">
+                            <p>
+                                {{ recipe.getCreatorName }}
+                            </p>
+                        </div>
+                        <p class="col-4">{{ recipe.getCreatedAtFormatted }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container flex-column col-xl-6 col-12 d-flex justify-content-center">
+                <!-- Image -->
+                <div class="row justify-content-center">
+                    <img src="data:{{ recipe.getCover.getType }};base64, {{ recipe.getCover.getContent }}" class="infoImage image-fluid" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-2 mt-4">
+            <div class="container col-xl-6 col-12">
+                <!-- Ingredients -->
+                <h2 class="title text-decoration-underline">Ingredientes</h2>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Apagar</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ingredient in recipe.getRecipeIngredients %}
+                            <tr>
+                                <td>
+                                    <form action="/src/services/recipe/recipe.php" method="post">
+                                        <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                        <input type="hidden" name="id" value="{{ ingredient.getId }}">
+                                        <button class="remove buttonTransparent" name="ingredient" value="removeIngredient">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <!-- TODO: UPDATE INGREDIENT -->
+                                    <a href="" class="editIcon buttonTransparent">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+
+                                <td>{{ ingredient.getIngredientName }}</td>
+                                <td>{{ ingredient.getQuantity }} {{ ingredient.getUnit.getName }} </td>
+                            </tr>
+                            {% endfor %}
+                            <!-- TODO: ADD INGREDIENT -->
+                            <a href="" class="add">
+                                <i class="bi bi-plus-circle"></i>
+                            </a>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="container col-xl-6 col-12">
+                <h2 class="title text-decoration-underline">Preparação</h2>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Apagar</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Ordem</th>
+                                <th scope="col">Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for step in recipe.getRecipeSteps %}
+                            <tr>
+                                <td>
+                                    <form action="/src/services/recipe/recipe.php" method="post">
+                                        <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                        <input type="hidden" name="id" value="{{ step.getId }}">
+                                        <button class="remove buttonTransparent" name="step" value="removeStep">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <!-- TODO: UPDATE STEP -->
+                                    <a href="" class="editIcon buttonTransparent">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                                <td>{{ step.getStepNumber }}</td>
+                                <td class="table-description">
+                                    <div class="d-flex flex-wrap">
+                                        {{ step.getDescription }}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <!-- TODO: ADD STEP -->
+                            <a href="" class="add">
+                                <i class="bi bi-plus-circle"></i>
+                            </a>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+{% endblock %}

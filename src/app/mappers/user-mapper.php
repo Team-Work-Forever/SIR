@@ -17,3 +17,22 @@ function toUserModel($user)
         toImageModel(getImageById($user['avatar'])),
     );
 }
+
+function toUserModelList($users)
+{
+
+    $list = [];
+
+    foreach ($users as $user) {
+        $list[] = new UserModel(
+            $user['id'],
+            $user['email'],
+            $user['display_name'],
+            $user['first_name'],
+            $user['last_name'],
+            $user['description'],
+            toImageModel(getImageById($user['avatar'])),
+        );
+    }
+    return $list;
+}
