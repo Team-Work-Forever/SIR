@@ -1,0 +1,114 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Receita
+{% endblock %}
+
+{% block outlet %}
+{% set errors = errors %}
+
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="row p-4">
+                <div class="col-1">
+                    <a href="javascript:history.go(-1)" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ title }}</h1>
+                </div>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpace">
+        <form action="/src/services/recipe/recipe.php" enctype="multipart/form-data" method="post">
+            <div class="mx-3 px-2 py-2">
+                {% if errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {% for error in errors %}
+                    {{ error }}<br>
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+                <!-- Info Recipe -->
+                <div class="row">
+                    <div class="container col-xl-6 col-12 info">
+                        <h2 class="title text-decoration-underline">Informação da Receita</h2>
+                        <div class="model-section col my-4">
+                            <input type="hidden" name="creator_id" value="{{ profile.getId }}">
+                            <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                            <div class="col my-2">
+                                <!-- Name -->
+                                <input id="name" name="name" type="text" class="form-control" placeholder="Nome" minlength="2" maxlength="20" required value="{{ app.request.get('name') is defined ? app.request.get('name') : recipe.getTitle }}" />
+                            </div>
+                            <div class="col my-2">
+                                <!-- Description -->
+                                <input id="description" name="description" type="text" class="form-control" placeholder="Descrição" minlength="2" maxlength="80" required value="{{ app.request.get('description') is defined ? app.request.get('description') : recipe.getDescription }}" />
+                            </div>
+                        </div>
+                        <div class="model-section row my-4 mx-1">
+                            <!-- Portions -->
+                            <div class="col-6 row">
+                                <div class="col-6 row">
+                                    <input id="servings" name="servings" type="number" class="form-control" placeholder="Porções" required value="{{ app.request.get('servings') is defined ? app.request.get('servings') : recipe.getServings }}" />
+                                </div>
+                            </div>
+                            <!-- Time -->
+                            <div class="col-6 row">
+                                <input id="execution_time" name="execution_time" type="number" class="form-control" placeholder="Tempo (min)" required value="{{ app.request.get('execution_time') is defined ? app.request.get('execution_time') : recipe.getExecutionTime }}" />
+                            </div>
+                        </div>
+                        <div class="model-section row my-4">
+                            <!-- Category -->
+                            <label class="col-3 py-1" for="category">Categoria</label>
+                            <div class="col-9">
+                                <select id="category_id" class="form-select" name="category_id">
+                                    {% if action == 'updateRecipe' %}
+                                    <option selected value="{{ recipe.getCategoryId }}">{{ recipe.getCategory }}
+                                    </option>
+                                    {% endif %}
+                                    {% for category in categories %}
+                                    <option value="{{ category.getId }}">{{ category.getName }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="model-section row my-4">
+                            <label class="col-2 py-1">Imagem</label>
+                            <div class="col-9 editImageWrapper">
+                                <label for="coverInput{{ recipe.getId }}" class="editImage">
+                                    <input id="coverInput{{ recipe.getId }}" type="file" class="inputImage" name="cover" onchange="changeCover(event)" data-ms-recipeid="{{recipe.getId}}" />
+                                    <i class="bi bi-pencil"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container col-xl-6 col-12 d-flex justify-content-center">
+                        <img id="selectedCover{{ recipe.getId }}" src="data:{{ recipe.getCover.getType }};base64, {{ recipe.getCover.getContent }}" class="infoImage image-fluid" alt="">
+                    </div>
+                </div>
+                {% if action == 'updateRecipe' %}
+                <input type="hidden" name="pathError" value="/admin/recipes/updaterecipe?id={{ profile.getId }}&recipe_id={{ recipe.getId }}">
+                <input type="hidden" name="path" value="/admin/users/userprofile?id={{ profile.getId }}">
+                {% else %}
+                <input type="hidden" name="is_private" value="{{ privacy }}">
+                <input type="hidden" name="pathError" value="/admin/recipes/createrecipe?id={{ profile.getId }}&is_private={{ privacy }}">
+                <input type="hidden" name="path" value="/admin/recipes/updaterecipe?id={{ profile.getId }}&recipe_id=">
+                {% endif %}
+                <div class="col d-flex justify-content-center mt-2 mb-5">
+                    <button class="btn blue" type="submit" name="recipe" value="{{ action }}">{{ submit }}</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script src="{{ loadJs('recipe.js') }}"></script>
+{% endblock %}

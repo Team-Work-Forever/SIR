@@ -5,7 +5,6 @@ require_once __DIR__ . '../../../utils/uuid.php';
 
 function createRecipe($recipe)
 {
-    $userId = userId();
     $idUUID = createUUID();
 
     $sqlCreate = "INSERT INTO
@@ -40,8 +39,8 @@ function createRecipe($recipe)
         ':execution_time' => $recipe['execution_time'],
         ':servings' => $recipe['servings'],
         ':cover' => 'c93a0f1a-50fd-d119-f984-c7edd07ca624',
-        ':is_private' => 0,
-        ':creator_id' => $userId,
+        ':is_private' => $recipe['is_private'],
+        ':creator_id' => $recipe['creator_id'],
         ':category_id' => $recipe['category_id'],
         ':description' => $recipe['description']
     ]);

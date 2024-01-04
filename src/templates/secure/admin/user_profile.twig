@@ -20,7 +20,7 @@
         </header>
     </div>
 
-    <main class="overflow-auto scrollDashboardSpaceAdmin">
+    <main class="overflow-auto scrollDashboardSpace">
         <div class="row m-2">
             <div class="container col-xl-4 col-12 info">
                 <div class="row d-flex flex-column justify-content-center align-items-center">
@@ -72,8 +72,7 @@
                                     </form>
                                 </th>
                                 <th class="py-5">
-                                    <!-- TODO: UPDATE RECEITA -->
-                                    <a href="">
+                                    <a href="/admin/recipes/updaterecipe?id={{ user.getId }}&recipe_id={{ recipe.getId }}">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                 </th>
@@ -83,13 +82,12 @@
                                 <td class="py-5">{{ recipe.getCategory }} </td>
                                 <td class="py-5 table-description">
                                     <div class="d-flex flex-wrap">
-                                        {{ user.getDescription }}
+                                        {{ recipe.getDescription }}
                                     </div>
                                 </td>
                             </tr>
                             {% endfor %}
-                            <!-- TODO: ADD RECEITA -->
-                            <a href="" class="add" type="submit">
+                            <a href="/admin/recipes/createrecipe?id={{ user.getId }}&is_private=0" class="add">
                                 <i class="bi bi-plus-circle"></i>
                             </a>
                         </tbody>
@@ -134,8 +132,7 @@
                                     </form>
                                 </th>
                                 <th class="py-5">
-                                    <!-- TODO: UPDATE RECEITA -->
-                                    <a href="">
+                                    <a href="/admin/recipes/updaterecipe?id={{ user.getId }}&recipe_id={{ recipe.getId }}">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                 </th>
@@ -145,13 +142,12 @@
                                 <td class="py-5">{{ recipe.getCategory }} </td>
                                 <td class="py-5 table-description">
                                     <div class="d-flex flex-wrap">
-                                        {{ user.getDescription }}
+                                        {{ recipe.getDescription }}
                                     </div>
                                 </td>
                             </tr>
                             {% endfor %}
-                            <!-- TODO: ADD RECEITA -->
-                            <a href="" class="add" type="submit">
+                            <a href="/admin/recipes/createrecipe?id={{ user.getId }}&is_private=1" class="add">
                                 <i class="bi bi-plus-circle"></i>
                             </a>
                         </tbody>
@@ -194,7 +190,7 @@
                                 <td class="py-5">{{ recipe.getCategory }} </td>
                                 <td class="py-5 table-description">
                                     <div class="d-flex flex-wrap">
-                                        {{ user.getDescription }}
+                                        {{ recipe.getDescription }}
                                     </div>
                                 </td>
                             </tr>

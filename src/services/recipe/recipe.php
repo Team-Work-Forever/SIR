@@ -103,8 +103,7 @@ function createNewRecipe($req)
 
         // $params = '?' . http_build_query($req);
         // TODO: MODAL
-        // header('location: /app/createrecipe' . $params);
-        header('location: /app/createrecipe');
+        header('location: ' . $req['pathError']);
 
         return;
     }
@@ -112,7 +111,7 @@ function createNewRecipe($req)
     if ($image['type'] == "") {
         $recipe = createRecipe($data);
 
-        header('location: /app/updaterecipe?id=' . $recipe);
+        header('location: ' . $req['path'] . $recipe);
 
         return;
     }
@@ -125,7 +124,7 @@ function createNewRecipe($req)
 
     updateRecipeImage($recipe, $imageInserted);
 
-    header('location: /app/updaterecipe?id=' . $recipe);
+    header('location: ' . $req['path'] . $recipe);
 }
 
 function update($req)
@@ -140,7 +139,7 @@ function update($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+        header('location: ' . $req['pathError']);
 
         return;
     }
@@ -156,7 +155,7 @@ function update($req)
 
     updateRecipe($data);
 
-    header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+    header('location: ' . $req['path']);
 }
 
 function remove($req)

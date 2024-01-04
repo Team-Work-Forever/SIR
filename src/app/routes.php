@@ -14,6 +14,8 @@ $router->get('admin/users/updateuser', 'AdminUpdateUserController@index');
 $router->get('admin/users/userprofile', 'AdminUserProfileController@index');
 $router->get('admin/users/userprofile/recipe', 'AdminUserRecipeController@index');
 $router->get('admin/recipes', 'AdminRecipesController@index');
+$router->get('admin/recipes/createrecipe', 'AdminCreateRecipeController@index');
+$router->get('admin/recipes/updaterecipe', 'AdminUpdateRecipeController@index');
 $router->get('admin/variables', 'AdminVariablesController@index');
 $router->get('admin/variables/createcategory', 'AdminCreateCategoryController@index');
 $router->get('admin/variables/updatecategory', 'AdminUpdateCategoryController@index');

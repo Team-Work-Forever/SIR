@@ -47,7 +47,7 @@ function createNewUser($user)
         ':display_name' => $display_name,
         ':first_name' => $user['first_name'],
         ':last_name' => $user['last_name'],
-        ':description' => $user['description'],
+        ':description' => $user['description'] ?? '',
         ':avatar' => 'c93a0f1a-50fd-d119-f984-c7edd07ca624',
         ':birth_date' => $user['birth_date'],
         ':gender_id' => $user['gender'],
