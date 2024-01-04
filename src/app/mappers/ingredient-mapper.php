@@ -4,7 +4,12 @@ require_once __DIR__ . '../../../infra/repositories/units-repository.php';
 require_once __DIR__ . '../../mappers/unit-mapper.php';
 require_once __DIR__ . '../../models/ingredient-model.php';
 
-function toIngredientModel($ingredients)
+function toIngredientModel($ingredient)
+{
+    return new IngredientModel($ingredient['id'], $ingredient['name'], $ingredient['price'], toUnitModel(getUnitById($ingredient['unit'])),);
+}
+
+function toIngredientModelList($ingredients)
 {
     $list = [];
     foreach ($ingredients as $ingredient) {

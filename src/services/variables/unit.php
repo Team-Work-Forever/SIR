@@ -26,7 +26,7 @@ function createNewUnit($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
+        //TODO: FIX PARAM
         // $params = '?' . http_build_query($req);
         // header('location: /app/createrecipe' . $params);
         header('location: /admin/variables/createunit');
@@ -36,7 +36,7 @@ function createNewUnit($req)
 
     createUnit($data);
 
-    header('location: /admin/variables');
+    header('location: ' . $req['path']);
 }
 
 function update($req)
@@ -47,7 +47,7 @@ function update($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
+        //TODO: FIX PARAM
         header('location: /app/updateunit?id=' . $req['unit_id']);
 
         return;
@@ -55,7 +55,7 @@ function update($req)
 
     updateUnit($data);
 
-    header('location: /app/updateunit?id=' . $req['unit_id']);
+    header('location: ' . $req['path']);
 }
 
 function remove($req)

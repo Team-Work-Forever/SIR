@@ -16,10 +16,10 @@ class AdminVariablesController
 {
     public function index()
     {
-        $categories = toCategoryModel(getAllCategories());
-        $genders = toGenderModel(getAllGenders());
+        $categories = toCategoryModelList(getAllCategories());
+        $genders = toGenderModelList(getAllGenders());
         $units = toUnitModelList(getAllUnits());
-        $ingredients = toIngredientModel(getAllIngredients());
+        $ingredients = toIngredientModelList(getAllIngredients());
 
         return view("secure/admin/variables", [
             'administrator' => true, 'categories' => $categories, 'genders' => $genders, 'units' => $units, 'ingredients' => $ingredients

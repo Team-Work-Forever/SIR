@@ -32,7 +32,7 @@ function getAllCategories()
 
 function getCategoryById($id)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM categories WHERE id = ? and deleted_at is null LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM categories WHERE id = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -40,7 +40,7 @@ function getCategoryById($id)
 
 function getCategoryByName($name)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT id FROM categories WHERE name = ? and deleted_at is null LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT id FROM categories WHERE name = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $name);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -56,7 +56,7 @@ function updateCategory($category)
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 
     return $PDOStatement->execute([
-        ':id' => $category['id'],
+        ':id' => $category['category_id'],
         ':name' => $category['name']
     ]);
 }

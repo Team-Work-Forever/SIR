@@ -16,6 +16,6 @@ class CreateRecipeController
         $title = "Criar Receita";
         $submit = "Continuar";
         $submit_action = "createRecipe";
-        return view("secure/user/recipe", ['errors' =>  $errors, 'title' => $title, 'submit' => $submit, 'action' => $submit_action, 'categories' => toCategoryModel(getAllCategories()), 'profile' => $_SESSION['id']]);
+        return view("secure/user/recipe", ['errors' =>  $errors, 'title' => $title, 'submit' => $submit, 'action' => $submit_action, 'categories' => toCategoryModelList(getAllCategories()), 'profile' => $_SESSION['id']]);
     }
 }

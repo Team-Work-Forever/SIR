@@ -1,0 +1,70 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Variável {% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="row p-2">
+                <div class="col-1">
+                    <a href="javascript:history.go(-1)" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ title }}</h1>
+                </div>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpace">
+        <div class="mx-3 px-2 py-2">
+            <form action="/src/services/variables/{{variableName}}.php" enctype="multipart/form-data" method="post">
+                <div class="col my-4">
+                    {% if errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for error in errors %}
+                        {{ error }}<br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <div class="col my-2">
+                        <input id="name" name="name" type="text" class="form-control" placeholder="Name" value="{{ app.request.get('name') is defined ? app.request.get('name') : variable.getName }}" required />
+                    </div>
+                    {% if variableName == 'ingredient' %}
+                    <div class="col my-2">
+                        <input id="price" name="price" type="number" step="any" class="form-control" placeholder="Preço" value="{{ app.request.get('price') is defined ? app.request.get('price') : variable.getPrice }}" required />
+                    </div>
+                    <select id="unit_id" class="form-select" name="unit_id">
+                        {% if action == 'updateIngredient' %}
+                        <option selected value="{{ variable.getUnit.getId }}">{{ variable.getUnit.getName }} - {{ variable.getUnit.getUnit }}
+                        </option>
+                        {% endif %}
+                        {% for unit in units %}
+                        <option value="{{ unit.getId }}">{{ unit.getName }} - {{ unit.getUnit }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                    {% if variableName == 'unit' %}
+                    <div class="col my-2">
+                        <input id="unit" name="symbol" type="text" class="form-control" placeholder="Símbolo" value="{{ app.request.get('unit') is defined ? app.request.get('unit') : variable.getUnit }}" required />
+                    </div>
+                    {% endif %}
+                </div>
+                <input type="hidden" name="{{variableName}}_id" value="{{ variable.getId }}">
+                <input type="hidden" name="path" value="/admin/variables">
+                <div class="row d-flex justify-content-center mt-5">
+                    <button type="submit" name="{{variableName}}" value="{{action}}" class="btn blue">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

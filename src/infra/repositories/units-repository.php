@@ -17,7 +17,7 @@ function createUnit($unit)
 
     $success = $PDOStatement->execute([
         ':name' => $unit['name'],
-        ':unit' => $unit['unit']
+        ':unit' => $unit['symbol']
     ]);
 
     return $success;
@@ -25,7 +25,7 @@ function createUnit($unit)
 
 function getUnitById($id)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM units WHERE id = ? and deleted_at is null;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM units WHERE id = ?;');
     $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -52,9 +52,9 @@ function updateUnit($unit)
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 
     $success = $PDOStatement->execute([
-        ':id' => $unit['id'],
+        ':id' => $unit['unit_id'],
         ':name' => $unit['name'],
-        ':unit' => $unit['unit']
+        ':unit' => $unit['symbol']
     ]);
 
     return $success;
@@ -65,7 +65,7 @@ function deleteUnitById($id)
     $sqlUpdate = "UPDATE  
             units SET
                 deleted_at = CURRENT_TIMESTAMP
-            WHERE id = :id ;";
+            WHERE id = :id;";
 
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 

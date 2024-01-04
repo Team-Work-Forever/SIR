@@ -2,7 +2,12 @@
 
 require_once __DIR__ . '../../models/gender-model.php';
 
-function toGenderModel($genders)
+function toGenderModel($gender)
+{
+    return new GenderModel($gender['id'], $gender['name'],);
+}
+
+function toGenderModelList($genders)
 {
     $list = [];
 

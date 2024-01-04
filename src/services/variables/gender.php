@@ -26,7 +26,7 @@ function createNewGender($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
+        //TODO: FIX PARAM
         // $params = '?' . http_build_query($req);
         // header('location: /app/createrecipe' . $params);
         header('location: /admin/variables/creategender');
@@ -36,7 +36,7 @@ function createNewGender($req)
 
     createGender($data);
 
-    header('location: /admin/variables');
+    header('location: ' . $req['path']);
 }
 
 function update($req)
@@ -47,15 +47,15 @@ function update($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
-        header('location: /app/updategender?id=' . $req['gender_id']);
+        //TODO: FIX PARAM
+        header('location: /admin/variables/updategender?id=' . $req['gender_id']);
 
         return;
     }
 
     updateGender($data);
 
-    header('location: /app/updategender?id=' . $req['gender_id']);
+    header('location: ' . $req['path']);
 }
 
 function remove($req)

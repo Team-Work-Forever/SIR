@@ -27,8 +27,7 @@
                                 {% for recipe in publicRecipes %}
                                 <tr>
                                     <th class="py-5">
-                                        <a href="/admin/users/userprofile/recipe?id={{ recipe.getId }}"
-                                            class="selectionIcon">
+                                        <a href="/admin/users/userprofile/recipe?id={{ recipe.getId }}" class="selectionIcon">
                                             <i class="bi bi-egg-fill"></i>
                                         </a>
                                     </th>
@@ -54,7 +53,7 @@
                                     <td class="py-5">{{ recipe.getCategory }} </td>
                                     <td class="py-5 table-description">
                                         <div class="d-flex flex-wrap">
-                                            {{ user.getDescription }}
+                                            {{ recipe.getDescription }}
                                         </div>
                                     </td>
                                 </tr>
@@ -90,8 +89,7 @@
                                 {% for recipe in privateRecipes %}
                                 <tr>
                                     <th class="py-5">
-                                        <a href="/admin/users/userprofile/recipe?id={{ recipe.getId }}"
-                                            class="selectionIcon">
+                                        <a href="/admin/users/userprofile/recipe?id={{ recipe.getId }}" class="selectionIcon">
                                             <i class="bi bi-egg-fill"></i>
                                         </a>
                                     </th>
@@ -117,7 +115,7 @@
                                     <td class="py-5">{{ recipe.getCategory }} </td>
                                     <td class="py-5 table-description">
                                         <div class="d-flex flex-wrap">
-                                            {{ user.getDescription }}
+                                            {{ recipe.getDescription }}
                                         </div>
                                     </td>
                                 </tr>
@@ -155,8 +153,7 @@
                                             <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
                                             <input type="hidden" name="creator_id" value="{{ recipe.getCreatorId }}">
                                             <input type="hidden" name="path" value="/admin/recipes">
-                                            <button class="remove buttonTransparent" name="recipe"
-                                                value="changeStatusRecipe">
+                                            <button class="remove buttonTransparent" name="recipe" value="changeStatusRecipe">
                                                 <i class="bi bi-arrow-counterclockwise"></i>
                                             </button>
                                         </form>
@@ -167,7 +164,7 @@
                                     <td class="py-5">{{ recipe.getCategory }} </td>
                                     <td class="py-5 table-description">
                                         <div class="d-flex flex-wrap">
-                                            {{ user.getDescription }}
+                                            {{ recipe.getDescription }}
                                         </div>
                                     </td>
                                 </tr>

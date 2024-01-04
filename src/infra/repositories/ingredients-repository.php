@@ -5,13 +5,11 @@ function createNewIngredient($ingredient)
 {
     $sqlCreate = "INSERT INTO
     ingredients (
-        id,
         name,
         price,
         unit
         )
     VALUES (
-        :id,
         :name,
         :price,
         :unit
@@ -20,10 +18,9 @@ function createNewIngredient($ingredient)
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlCreate);
 
     $success = $PDOStatement->execute([
-        ':id' => $ingredient['id'],
         ':name' => $ingredient['name'],
         ':price' => $ingredient['price'],
-        ':unit' => $ingredient['unit']
+        ':unit' => $ingredient['unit_id']
     ]);
 
     return $success;
@@ -42,7 +39,7 @@ function getAllIngredients()
 
 function getIngredientsById($id)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM ingredients WHERE id = ? and deleted_at is null;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM ingredients WHERE id = ?;');
     $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -60,10 +57,10 @@ function updateIngredient($ingredient)
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 
     return $PDOStatement->execute([
-        ':id' => $ingredient['id'],
+        ':id' => $ingredient['ingredient_id'],
         ':name' => $ingredient['name'],
         ':price' => $ingredient['price'],
-        ':unit' => $ingredient['unit']
+        ':unit' => $ingredient['unit_id']
     ]);
 }
 

@@ -25,8 +25,7 @@ function createNewCategory($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors'] = $data['invalid'];
-
-        //TODO: FIX
+        //TODO: FIX PARAM
         // $params = '?' . http_build_query($req);
         // header('location: /app/createrecipe' . $params);
         header('location: /admin/variables/createcategory');
@@ -36,7 +35,7 @@ function createNewCategory($req)
 
     createCategory($data);
 
-    header('location: /admin/variables');
+    header('location: ' . $req['path']);
 }
 
 function update($req)
@@ -47,15 +46,15 @@ function update($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
-        header('location: /app/updatecategory?id=' . $req['category_id']);
+        //TODO: FIX PARAM
+        header('location: /admin/variables/updatecategory?id=' . $req['category_id']);
 
         return;
     }
 
     updateCategory($data);
 
-    header('location: /app/updatecategory?id=' . $req['category_id']);
+    header('location: ' . $req['path']);
 }
 
 function remove($req)

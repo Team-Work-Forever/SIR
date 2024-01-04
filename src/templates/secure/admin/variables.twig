@@ -30,16 +30,14 @@
                                         </form>
                                     </td>
                                     <td class="py-2">
-                                        <!-- TODO: UPDATE CATEGORY -->
-                                        <a href="">
+                                        <a href="/admin/variables/updatecategory?id={{ category.getId }}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                     </td>
                                     <td class="py-2">{{ category.getName }}</td>
                                 </tr>
                                 {% endfor %}
-                                <!-- TODO: ADD CATEGORY -->
-                                <a href="" class="add" type="submit">
+                                <a href="/admin/variables/createcategory" class="add">
                                     <i class="bi bi-plus-circle"></i>
                                 </a>
                             </tbody>
@@ -71,16 +69,14 @@
                                         </form>
                                     </td>
                                     <td class="py-2">
-                                        <!-- TODO: UPDATE GENDER -->
-                                        <a href="">
+                                        <a href="/admin/variables/updategender?id={{ gender.getId }}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                     </td>
                                     <td class="py-2">{{ gender.getName }}</td>
                                 </tr>
                                 {% endfor %}
-                                <!-- TODO: ADD GENDER -->
-                                <a href="" class="add" type="submit">
+                                <a href="/admin/variables/creategender" class="add">
                                     <i class="bi bi-plus-circle"></i>
                                 </a>
                             </tbody>
@@ -116,8 +112,7 @@
                                         </form>
                                     </td>
                                     <td class="py-2">
-                                        <!-- TODO: UPDATE UNIT -->
-                                        <a href="">
+                                        <a href="/admin/variables/updateunit?id={{ unit.getId }}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                     </td>
@@ -125,8 +120,7 @@
                                     <td class="py-2">{{ unit.getUnit }}</td>
                                 </tr>
                                 {% endfor %}
-                                <!-- TODO: ADD UNIT -->
-                                <a href="" class="add" type="submit">
+                                <a href="/admin/variables/createunit" class="add">
                                     <i class="bi bi-plus-circle"></i>
                                 </a>
                             </tbody>
@@ -144,6 +138,7 @@
                                     <th scope="col">Apagar</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Nome</th>
+                                    <th scope="col">Preço</th>
                                     <th scope="col">Unidade</th>
                                 </tr>
                             </thead>
@@ -159,18 +154,17 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <!-- TODO: UPDATE INGREDIENT -->
-                                        <a href="">
+                                        <a href="/admin/variables/updateingredient?id={{ ingredient.getId }}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                     </td>
 
                                     <td>{{ ingredient.getName }}</td>
+                                    <td>{{ ingredient.getPrice }} €</td>
                                     <td>{{ ingredient.getUnit.getName }}</td>
                                 </tr>
                                 {% endfor %}
-                                <!-- TODO: ADD INGREDIENT -->
-                                <a href="" class="add" type="submit">
+                                <a href="/admin/variables/createingredient" class="add">
                                     <i class="bi bi-plus-circle"></i>
                                 </a>
                             </tbody>

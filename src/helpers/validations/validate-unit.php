@@ -11,8 +11,8 @@ function isUnitValid($req)
         $errors['name'] = 'The name field cannot be empty and must be between 2 and 25 characters.';
     }
 
-    if (empty($req['unit']) || strlen($req['unit']) > 25) {
-        $errors['unit'] = 'The unit field cannot be empty and cannot have more than 25 characters.';
+    if (empty($req['unit']) || strlen($req['unit']) > 10) {
+        $errors['unit'] = 'The unit field cannot be empty and cannot have more than 10 characters.';
     }
 
     if (isset($errors)) {

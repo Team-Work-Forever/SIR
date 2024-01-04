@@ -12,6 +12,6 @@ class IndexController
     {
         $errors = $_SESSION['errors'];
         unset($_SESSION['errors']);
-        return view("public/index", ['genders' => toGenderModel(getAllGenders()), 'errors' => $errors]);
+        return view("public/index", ['genders' => toGenderModelList(getAllGenders()), 'errors' => $errors]);
     }
 }

@@ -10,7 +10,7 @@ function isIngredientUnitValid($req)
         $errors['name'] = 'The name field cannot be empty and must be between 2 and 25 characters.';
     }
 
-    if (filter_var($req['price'], FILTER_VALIDATE_INT) === false || filter_var($req['price'], FILTER_VALIDATE_INT) <= 0) {
+    if (filter_var($req['price'], FILTER_VALIDATE_FLOAT) === false || filter_var($req['price'], FILTER_VALIDATE_FLOAT) <= 0) {
         $errors['price'] = 'The price must be a positive number.';
     }
 

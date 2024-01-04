@@ -19,7 +19,7 @@ class AdminUpdateUserController
             unset($_SESSION['errors']);
             $title = "Editar Utilizador";
             $submit_action = "updateUserAdmin";
-            return view("secure/admin/user", ['administrator' => true, 'errors' =>  $errors, 'user' => $user, 'title' => $title, 'action' => $submit_action, 'genders' => toGenderModel(getAllGenders()),]);
+            return view("secure/admin/user", ['administrator' => true, 'errors' =>  $errors, 'user' => $user, 'title' => $title, 'action' => $submit_action, 'genders' => toGenderModelList(getAllGenders()),]);
         } else {
             return header('location: /admin/users');
         }

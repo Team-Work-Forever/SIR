@@ -28,7 +28,7 @@ class UpdateRecipeController
             unset($_SESSION['errors']);
             unset($_SESSION['errors_step']);
             unset($_SESSION['errors_ingredient']);
-            return view("secure/user/recipe", ['ingredients' => toIngredientModel(getAllIngredients()), 'errors' =>  $errors, 'errors_step' =>  $errors_step, 'errors_ingredient' =>  $errors_ingredient, 'recipe' => $recipe, 'title' => $title, 'submit' => $submit, 'action' => $submit_action, 'categories' => toCategoryModel(getAllCategories()), 'profile' => $_SESSION['id']]);
+            return view("secure/user/recipe", ['ingredients' => toIngredientModelList(getAllIngredients()), 'errors' =>  $errors, 'errors_step' =>  $errors_step, 'errors_ingredient' =>  $errors_ingredient, 'recipe' => $recipe, 'title' => $title, 'submit' => $submit, 'action' => $submit_action, 'categories' => toCategoryModelList(getAllCategories()), 'profile' => $_SESSION['id']]);
         } else {
             return header('location: /app/myrecipes');
         }

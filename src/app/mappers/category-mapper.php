@@ -2,7 +2,12 @@
 
 require_once __DIR__ . '../../models/category-model.php';
 
-function toCategoryModel($categories)
+function toCategoryModel($category)
+{
+    return new CategoryModel($category['id'], $category['name'],);;
+}
+
+function toCategoryModelList($categories)
 {
     $list = [];
 

@@ -32,7 +32,7 @@ function getAllGenders()
 
 function getGenderById($id)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM genders WHERE id = ? and deleted_at is null LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM genders WHERE id = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -40,7 +40,7 @@ function getGenderById($id)
 
 function getGenderByName($name)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT id FROM genders WHERE name = ? and deleted_at is null LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT id FROM genders WHERE name = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $name);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -56,7 +56,7 @@ function updateGender($gender)
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 
     return $PDOStatement->execute([
-        ':id' => $gender['id'],
+        ':id' => $gender['gender_id'],
         ':name' => $gender['name']
     ]);
 }

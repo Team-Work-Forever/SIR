@@ -26,7 +26,7 @@ function create($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
+        //TODO: FIX PARAM
         // $params = '?' . http_build_query($req);
         // header('location: /app/createrecipe' . $params);
         header('location: /admin/variables/createingredient');
@@ -36,7 +36,7 @@ function create($req)
 
     createNewIngredient($data);
 
-    header('location: /admin/variables');
+    header('location: ' . $req['path']);
 }
 
 function update($req)
@@ -47,15 +47,15 @@ function update($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        //TODO: FIX
-        header('location: /app/updateingredient?id=' . $req['ingredient_id']);
+        //TODO: FIX PARAM
+        header('location: /admin/variables/updateingredient?id=' . $req['ingredient_id']);
 
         return;
     }
 
     updateIngredient($data);
 
-    header('location: /app/updateingredient?id=' . $req['ingredient_id']);
+    header('location: ' . $req['path']);
 }
 
 function remove($req)
