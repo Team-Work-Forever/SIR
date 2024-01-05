@@ -25,13 +25,10 @@ function createNewUnit($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors'] = $data['invalid'];
+        //TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
 
-        //TODO: FIX PARAM
-        // $params = '?' . http_build_query($req);
-        // header('location: /app/createrecipe' . $params);
-        header('location: /admin/variables/createunit');
-
-        return;
+        $params = '?' . http_build_query($req);
+        return header('location: /admin/variables/createunit' . $params);
     }
 
     createUnit($data);
@@ -46,11 +43,9 @@ function update($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors'] = $data['invalid'];
+        //TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
 
-        //TODO: FIX PARAM
-        header('location: /app/updateunit?id=' . $req['unit_id']);
-
-        return;
+        return header('location: /admin/variables/updateunit?id=' . $req['unit_id']);
     }
 
     updateUnit($data);

@@ -53,7 +53,7 @@
                     {% endif %}
                     {% if variableName == 'unit' %}
                     <div class="col my-2">
-                        <input id="unit" name="symbol" type="text" class="form-control" placeholder="Símbolo" value="{{ app.request.get('unit') is defined ? app.request.get('unit') : variable.getUnit }}" required />
+                        <input id="symbol" name="symbol" type="text" class="form-control" placeholder="Símbolo" value="{{ app.request.get('unit') is defined ? app.request.get('unit') : variable.getUnit }}" required />
                     </div>
                     {% endif %}
                 </div>
