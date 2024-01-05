@@ -222,12 +222,12 @@ function createStep($req)
         //TODO: ERROS EM MODALS
         header('location: ' . $req['pathError'] . $req['recipe_id']);
         return;
-    } else {
-        addStepToRecipe($data);
-        updateRecipeDate($data['recipe_id']);
-
-        header('location: ' . $req['path'] . $req['recipe_id']);
     }
+
+    addStepToRecipe($data);
+    updateRecipeDate($data['recipe_id']);
+
+    header('location: ' . $req['path'] . $req['recipe_id']);
 }
 
 function deleteStep($req)
@@ -256,12 +256,13 @@ function updateStep($req)
 
         //TODO: ERROS EM MODALS
         header('location: ' . $req['pathError'] . $req['recipe_id']);
-    } else {
-        updateStepRecipe($data);
-        updateRecipeDate($data['recipe_id']);
-
-        header('location: ' . $req['path'] . $req['recipe_id']);
+        return;
     }
+
+    updateStepRecipe($data);
+    updateRecipeDate($data['recipe_id']);
+
+    header('location: ' . $req['path'] . $req['recipe_id']);
 }
 
 function createIngredient($req)
@@ -283,20 +284,21 @@ function createIngredient($req)
             $_SESSION['errors_ingredient'] = $data['invalid'];
 
             $params = '?' . http_build_query($req);
-            //TODO: ERROS EM MODALS
-            // header('location: /app/updaterecipe?id=' . $req['id'] . $params);
-            continue;
+            //TODO: ERROS EM MODALS E PARAMS
+            header('location: ' . $req['pathError'] . $req['recipe_id']);
+            return;
+        }
+
+        if (getIngredientsRecipe($data)) {
+            updateIngredientRecipe($data);
+            updateRecipeDate($data['recipe_id']);
         } else {
-            if (getIngredientsRecipe($data)) {
-                updateIngredientRecipe($data);
-                updateRecipeDate($data['recipe_id']);
-            } else {
-                addIngredientRecipe($data);
-                updateRecipeDate($data['recipe_id']);
-            }
+            addIngredientRecipe($data);
+            updateRecipeDate($data['recipe_id']);
         }
     }
-    header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+
+    header('location: ' . $req['path'] . $req['recipe_id']);
 }
 
 function deleteIngredient($req)
@@ -304,12 +306,7 @@ function deleteIngredient($req)
     deleteIngredientRecipe($req);
     updateRecipeDate($req['recipe_id']);
 
-    if (administrator()) {
-        header('location: /admin/users/userprofile/recipe?id=' . $req['recipe_id']);
-        return;
-    }
-
-    header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+    header('location: ' . $req['path'] . $req['recipe_id']);
 }
 
 function updateState($req)
@@ -328,11 +325,12 @@ function createTip($req)
         $_SESSION['errors_tip'] = $data['invalid'];
 
         header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
-    } else {
-        addTipRecipe($data);
-
-        header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
+        return;
     }
+
+    addTipRecipe($data);
+
+    header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
 }
 
 function createTipImage($req)
@@ -347,13 +345,14 @@ function createTipImage($req)
         $_SESSION['errors_tip'] = $data['invalid'];
 
         header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
-    } else {
-        $image['content'] = file_get_contents($image["tmp_name"]);
-
-        $imageInserted = createImage($image);
-
-        addTipImageRecipe($req['recipe_id'], $imageInserted, $image['name']);
-
-        header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
+        return;
     }
+
+    $image['content'] = file_get_contents($image["tmp_name"]);
+
+    $imageInserted = createImage($image);
+
+    addTipImageRecipe($req['recipe_id'], $imageInserted, $image['name']);
+
+    header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
 }

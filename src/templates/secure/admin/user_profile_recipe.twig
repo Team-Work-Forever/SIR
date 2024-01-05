@@ -94,15 +94,15 @@
                                 <td>
                                     <form action="/src/services/recipe/recipe.php" method="post">
                                         <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
-                                        <input type="hidden" name="id" value="{{ ingredient.getId }}">
+                                        <input type="hidden" name="ingredient_id" value="{{ ingredient.getId }}">
+                                        <input type="hidden" name="path" value="/admin/users/userprofile/recipe?id=">
                                         <button class="remove buttonTransparent" name="ingredient" value="removeIngredient">
                                             <i class="bi bi-trash3"></i>
                                         </button>
                                     </form>
                                 </td>
                                 <td>
-                                    <!-- TODO: UPDATE INGREDIENT -->
-                                    <a href="" class="editIcon buttonTransparent">
+                                    <a href="/admin/users/userprofile/recipe/createingredient?id={{ recipe.getId }}" class="editIcon buttonTransparent">
                                         <i class="bi bi-pencil"></i>
                                     </a>
                                 </td>
@@ -111,8 +111,7 @@
                                 <td>{{ ingredient.getQuantity }} {{ ingredient.getUnit.getName }} </td>
                             </tr>
                             {% endfor %}
-                            <!-- TODO: ADD INGREDIENT -->
-                            <a href="" class="add">
+                            <a href="/admin/users/userprofile/recipe/createingredient?id={{ recipe.getId }}" class="add">
                                 <i class="bi bi-plus-circle"></i>
                             </a>
                         </tbody>

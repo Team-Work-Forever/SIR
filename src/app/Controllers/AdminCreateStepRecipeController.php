@@ -15,7 +15,7 @@ class AdminCreateStepRecipeController
             $title = "Criar Ação";
             $submit_action = "addStep";
 
-            return view("secure/admin/recipevariable", [
+            return view("secure/admin/recipe_step", [
                 'administrator' => true,
                 'errors' =>  $errors,
                 'title' => $title,

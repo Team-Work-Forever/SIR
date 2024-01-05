@@ -84,6 +84,6 @@ function deleteIngredientRecipe($ingredient)
 
     return $PDOStatement->execute([
         ':recipe_id' => $ingredient['recipe_id'],
-        ':id' => $ingredient['id']
+        ':id' => $ingredient['ingredient_id']
     ]);
 }

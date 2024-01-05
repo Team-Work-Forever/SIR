@@ -19,7 +19,7 @@ class AdminUpdateStepRecipeController
             $title = "Editar Ação";
             $submit_action = "editStep";
 
-            return view("secure/admin/recipevariable", [
+            return view("secure/admin/recipe_step", [
                 'administrator' => true,
                 'errors' =>  $errors,
                 'variable' => $step,
