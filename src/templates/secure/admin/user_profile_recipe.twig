@@ -139,6 +139,7 @@
                                     <form action="/src/services/recipe/recipe.php" method="post">
                                         <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
                                         <input type="hidden" name="step_id" value="{{ step.getId }}">
+                                        <input type="hidden" name="path" value="/admin/users/userprofile/recipe?id=">
                                         <button class="remove buttonTransparent" name="step" value="removeStep">
                                             <i class="bi bi-trash3"></i>
                                         </button>
@@ -164,7 +165,47 @@
                     </table>
                 </div>
             </div>
-
+        </div>
+        <div class="row mx-2 mt-4">
+            <div class="container col-12">
+                <!-- Tips -->
+                <h2 class="title text-decoration-underline">Dicas</h2>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Apagar</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Imagem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tip in recipe.getRecipeTips %}
+                            <tr>
+                                <td>
+                                    <form action="/src/services/recipe/recipe.php" method="post">
+                                        <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
+                                        <input type="hidden" name="tip_id" value="{{ tip.getId }}">
+                                        <input type="hidden" name="path" value="/admin/users/userprofile/recipe?id=">
+                                        <button class="remove buttonTransparent" name="tip" value="removeTip">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>{{ tip.getDescription }}</td>
+                                <td>
+                                    {% if tip.getImage is defined  %}
+                                    <div class="imageTipContainer p-1">
+                                        <img src="data:{{ tip.getImage.getType }};base64, {{ tip.getImage.getContent }}" class="tipImage image-fluid" alt="">
+                                    </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
 </div>

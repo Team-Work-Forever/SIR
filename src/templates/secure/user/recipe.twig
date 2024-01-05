@@ -171,6 +171,7 @@
                                             <form action="/src/services/recipe/recipe.php" method="post">
                                                 <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
                                                 <input type="hidden" name="step_id" value="{{ step.getId }}">
+                                                <input type="hidden" name="path" value="/app/updaterecipe?id=">
                                                 <button class="remove buttonTransparent" name="step" value="removeStep">
                                                     <i class="bi bi-trash3"></i>
                                                 </button>

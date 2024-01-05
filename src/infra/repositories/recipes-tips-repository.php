@@ -73,6 +73,6 @@ function deleteTipRecipe($tip)
 
     return $PDOStatement->execute([
         ':recipe_id' => $tip['recipe_id'],
-        ':id' => $tip['id']
+        ':id' => $tip['tip_id']
     ]);
 }
