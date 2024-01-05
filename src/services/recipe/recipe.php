@@ -349,7 +349,7 @@ function createTipImage($req)
 
     $imageInserted = createImage($image);
 
-    addTipImageRecipe($req['recipe_id'], $imageInserted, $image['name']);
+    addTipImageRecipe($req, $imageInserted, $image['name']);
 
     header('location: /app/detailsrecipe?id=' . $req['recipe_id']);
 }

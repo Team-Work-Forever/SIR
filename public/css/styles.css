@@ -638,8 +638,10 @@ td {
 /* Details Recipe */
 
 .tip{
-    height: 55px;
+    min-height: 55px;
+    max-width: 600px;
     margin-top: 1px;
+    word-break: break-all;
 }
 
 .tipInput {
@@ -664,6 +666,11 @@ td {
     object-position: center center;
     border-radius: 1%;
     border: 1px solid var(--gray-selection);
+}
+
+.imageTipContainer.creator {
+    width: 475px;
+    height: 330px;
 }
 
 .hidden-submit {

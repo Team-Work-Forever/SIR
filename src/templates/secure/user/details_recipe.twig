@@ -158,14 +158,18 @@
                         {% for tip in recipe.getRecipeTips %}
                         <div class="d-flex justify-content-end">
                             {% if tip.getImage is defined  %}
-                            <div class="row my-1 justify-content-end">
-                                <div class="imageTipContainer p-1">
+                            <div class="row my-1 d-flex justify-content-end">
+                                <div class="imageTipContainer creator p-1">
+                                    <h6 class="d-flex justify-content-end p-1">{{ tip.getCreatedAt }} - {{ tip.getCreatorId.getDisplayName }}</h6>
                                     <img src="data:{{ tip.getImage.getType }};base64, {{ tip.getImage.getContent }}" class="tipImage image-fluid" alt="">
                                 </div>
                             </div>
                             {% else %}
                             <div class="alert alert-light tip my-1" role="alert">
-                                {{ tip.getDescription }}
+                                <h6 class="d-flex justify-content-end">{{ tip.getCreatedAt }} - {{ tip.getCreatorId.getDisplayName }}</h6>
+                                <h5>
+                                    {{ tip.getDescription }}
+                                </h5>
                             </div>
                             {% endif %}
                         </div>
@@ -175,6 +179,7 @@
                     <div class="row d-flex align-items-end justify-content-center mt-2 mx-2 px-1">
                         <form action="/src/services/recipe/recipe.php" method="post" class="col-9">
                             <div class="text-field backgroundTransparent d-flex justify-content-around">
+                                <input type="hidden" name="creator_id" value="{{ profile }}">
                                 <input name="description" placeholder="Escreva uma mensagem" maxlength="50" minlength="2" type="text">
                                 <span>
                                     <button name="tip" value="addTip" class="btn send">
@@ -186,6 +191,7 @@
                         </form>
                         <form action="/src/services/recipe/recipe.php" method="post" class="col-1" enctype="multipart/form-data" id="recipeForm">
                             <input type="file" name="image" id="imageUpload{{ recipe.getId }}" class="tipInput" onchange="updateButton(event)" data-ms-tipimage="{{ recipe.getId }}" />
+                            <input type="hidden" name="creator_id" value="{{ profile }}">
                             <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
                             <button type="submit" name="tip" value="addTipImage" class="hidden-submit" id="hiddenSubmitButton"></button>
                             <button type="button" class="btn backgroundTransparent addButton text-black col-1" onclick="document.getElementById('imageUpload{{ recipe.getId }}').click(); return false;">

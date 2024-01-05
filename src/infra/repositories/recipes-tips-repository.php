@@ -7,43 +7,49 @@ function addTipRecipe($recipesTip)
     $sqlCreate = "INSERT INTO
     recipesTips (
         recipe_id,
-        description
+        description,
+        creator_id
         )
     VALUES (
         :recipe_id,
-        :description
+        :description,
+        :creator_id
     )";
 
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlCreate);
 
     $success = $PDOStatement->execute([
         ':recipe_id' => $recipesTip['recipe_id'],
-        ':description' => $recipesTip['description']
+        ':description' => $recipesTip['description'],
+        ':creator_id' => $recipesTip['creator_id']
     ]);
 
     return $success;
 }
 
-function addTipImageRecipe($recipeId, $image, $imageName)
+function addTipImageRecipe($req, $image, $imageName)
 {
     $sqlCreate = "INSERT INTO
     recipesTips (
         recipe_id,
         description,
-        image_id
+        image_id,
+        creator_id
         )
     VALUES (
         :recipe_id,
         :description,
-        :image_id
+        :image_id,
+        :creator_id
     )";
 
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlCreate);
 
     $success = $PDOStatement->execute([
-        ':recipe_id' => $recipeId,
+        ':recipe_id' => $req['recipe_id'],
         ':description' => $imageName,
-        ':image_id' => $image
+        ':image_id' => $image,
+        ':creator_id' => $req['creator_id']
     ]);
 
     return $success;

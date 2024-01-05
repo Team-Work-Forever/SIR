@@ -109,6 +109,7 @@ CREATE TABLE recipesTips (
     description text NOT NULL,
     image_id VARCHAR(36) DEFAULT NULL,
     recipe_id varchar(36) NOT NULL,
+    creator_id varchar(36) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP DEFAULT NULL,
@@ -118,7 +119,10 @@ CREATE TABLE recipesTips (
             references recipes (id),
     constraint image_id_fk2
         foreign key (image_id)
-            references images (id)
+            references images (id),
+    constraint creator_id_fk3
+        foreign key (creator_id)
+            references users (id)
 );
 
 CREATE TABLE recipesIngredients (
