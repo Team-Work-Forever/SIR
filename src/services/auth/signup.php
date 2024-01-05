@@ -18,10 +18,10 @@ function signUp($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        $params = '?' . http_build_query($req);
+        $params = '?first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&day=' . $req['day'] . '&month=' . $req['month'] . '&year=' . $req['year'] . '&gender=' . $req['gender'];
 
         //TODO: ERROS EM MODALS
-        header('location: /secure/user/recipe' . $params);
+        header('location: /' . $params);
     } else {
 
         $user = createNewUser($data);

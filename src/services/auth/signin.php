@@ -35,9 +35,9 @@ function checkErrors($data, $req)
 {
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
-        // $params = '?' . http_build_query($req);
+        $params = '?email=' . $req['email'];
         //TODO: ERROS EM MODALS
-        header('location: /');
+        header('location: /' . $params);
         return false;
     }
 
