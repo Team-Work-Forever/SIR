@@ -38,10 +38,9 @@ function create($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        $params = '?' . http_build_query($req);
+        $params = '?first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&email=' . $req['email'] . '&day=' . $req['day'] . '&month=' . $req['month'] . '&year=' . $req['year'] . '&gender=' . $req['gender'] . '&description=' . $req['description'];
 
-        //TODO: ERROS EM MODALS
-        header('location: /admin/users/createuser');
+        header('location: /admin/users/createuser' . $params);
         return;
     }
 
@@ -68,10 +67,9 @@ function update($req)
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
 
-        $params = '?' . http_build_query($req);
+        $params = '&first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&description=' . $req['description'];
 
-        //TODO: ERROS EM MODALS
-        header('location: /admin/users/updateuser?id=' . $req['user_id']);
+        header('location: /admin/users/updateuser?id=' . $req['user_id'] . $params);
         return;
     }
 
@@ -102,10 +100,10 @@ function changeUser($req)
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
 
-        $params = '?' . http_build_query($req);
+        $params = '&first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&description=' . $req['description'];
 
         //TODO: ERROS EM MODALS
-        header('location: /app/profile?id=' . $req['user_id']);
+        header('location: /app/profile?id=' . $req['user_id'] . $params);
         return;
     }
 

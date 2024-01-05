@@ -61,7 +61,7 @@
                                     <select id="day" class="col mx-2 form-select" aria-label="Dia" name="day" required>
                                     </select>
                                     <!-- Month -->
-                                    <select id="month" class="col mx-2 form-select" aria-label="Mês" name="mounth" required>
+                                    <select id="month" class="col mx-2 form-select" aria-label="Mês" name="month" required>
                                     </select>
                                     <!-- Year -->
                                     <select id="year" class="col mx-2 form-select" aria-label="Ano" name="year" required>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="col my-2">
                         <!-- E-mail -->
-                        <input id="e_mail" name="email" type="email" class="form-control" placeholder="E-mail" value="{{ app.request.get('email') is defined ? app.request.get('email') : user.getEmail }}" required />
+                        <input id="email" name="email" type="email" class="form-control" placeholder="E-mail" value="{{ app.request.get('email') is defined ? app.request.get('email') : user.getEmail }}" required />
                     </div>
                     <div class="col my-2">
                         <!-- Password -->
