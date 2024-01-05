@@ -1,0 +1,65 @@
+{% extends 'secure/dashboard.twig' %}
+{% block title %} Variável Receita{% endblock %}
+
+{% block outlet %}
+<div class="align-items-center m-auto vw-100 vh-100">
+    <div class="text-black">
+        <!-- Header -->
+        <header class="p-3">
+            <div class="row p-2">
+                <div class="col-1">
+                    <a href="javascript:history.go(-1)" class="goBack">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                </div>
+                <div class="col-10 d-flex justify-content-center">
+                    <h1>{{ title }}</h1>
+                </div>
+            </div>
+            <div class="line"></div>
+        </header>
+    </div>
+
+    <main class="overflow-auto scrollDashboardSpace">
+        <div class="mx-3 px-2 py-2">
+            <form action="/src/services/recipe/recipe.php" method="post">
+                <div class="col my-4">
+                    {% if errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for error in errors %}
+                        {{ error }}<br>
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <textarea id="description" name="description" class="form-control" placeholder="Descrição" required>
+                        {% if app.request.get('description') is defined %}
+                            {{ app.request.get('description') }}
+                        {% else %}
+                            {{ variable.getDescription }}
+                        {% endif %}
+                    </textarea>
+                    <div class="col my-2">
+                        <input id="step_number" name="step_number" type="number" class="form-control" placeholder="Número do Passo" value="{{ app.request.get('step_number') is defined ? app.request.get('step_number') : variable.getStepNumber }}" required />
+                    </div>
+                </div>
+                <input type="hidden" name="step_id" value="{{ variable.getId }}">
+                <input type="hidden" name="name" value="">
+                <input type="hidden" name="recipe_id" value="{{ recipe_id }}">
+                {% if action == 'addStep' %}
+                <input type="hidden" name="pathError" value="/admin/users/userprofile/recipe/createstep?recipe_id=">
+                {% else %}
+                <input type="hidden" name="pathError" value="/admin/users/userprofile/recipe/updatestep?id={{ variable.getId }}&recipe_id=">
+                {% endif %}
+                <input type="hidden" name="path" value="/admin/users/userprofile/recipe?id=">
+                <div class="row d-flex justify-content-center mt-5">
+                    <button type="submit" name="step" value="{{action}}" class="btn blue">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

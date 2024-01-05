@@ -96,11 +96,11 @@
                 </div>
                 {% if action == 'updateRecipe' %}
                 <input type="hidden" name="pathError" value="/admin/recipes/updaterecipe?id={{ profile.getId }}&recipe_id={{ recipe.getId }}">
-                <input type="hidden" name="path" value="/admin/users/userprofile?id={{ profile.getId }}">
+                <input type="hidden" name="path" value="/admin/users/userprofile/recipe?id=">
                 {% else %}
                 <input type="hidden" name="is_private" value="{{ privacy }}">
                 <input type="hidden" name="pathError" value="/admin/recipes/createrecipe?id={{ profile.getId }}&is_private={{ privacy }}">
-                <input type="hidden" name="path" value="/admin/recipes/updaterecipe?id={{ profile.getId }}&recipe_id=">
+                <input type="hidden" name="path" value="/admin/users/userprofile/recipe?id=">
                 {% endif %}
                 <div class="col d-flex justify-content-center mt-2 mb-5">
                     <button class="btn blue" type="submit" name="recipe" value="{{ action }}">{{ submit }}</button>

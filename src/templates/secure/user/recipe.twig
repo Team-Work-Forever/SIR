@@ -169,7 +169,7 @@
                                         <td>
                                             <form action="/src/services/recipe/recipe.php" method="post">
                                                 <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
-                                                <input type="hidden" name="id" value="{{ step.getId }}">
+                                                <input type="hidden" name="step_id" value="{{ step.getId }}">
                                                 <button class="remove buttonTransparent" name="step" value="removeStep">
                                                     <i class="bi bi-trash3"></i>
                                                 </button>
@@ -307,11 +307,13 @@
                             <textarea id="step_description" type="text" class="form-control" placeholder="Descrição" name="description" value="" required></textarea>
                         </div>
                         <div class="col my-2">
-                            <input id="step_number" type="number" class="form-control" placeholder="Passo Número" name="step_number" value="" required />
+                            <input id="step_number" type="number" class="form-control" placeholder="Número do Passo" name="step_number" value="" required />
                         </div>
                         <input type="hidden" name="recipe_id" value="{{ recipe.getId }}">
-                        <input type="hidden" id="step_id" name="id" value="">
+                        <input type="hidden" id="step_id" name="step_id" value="">
                         <input type="hidden" id="step_name" name="name" value="">
+                        <input type="hidden" id="path" name="pathError" value="/app/updaterecipe?id=">
+                        <input type="hidden" id="path" name="path" value="/app/updaterecipe?id=">
                     </div>
                     <div class="modal-footer row d-flex justify-content-center mt-5">
                         <button onclick="clearStepVariables();" type="button" class="btn green" data-bs-dismiss="modal">

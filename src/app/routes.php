@@ -13,6 +13,8 @@ $router->get('admin/users/createuser', 'AdminCreateUserController@index');
 $router->get('admin/users/updateuser', 'AdminUpdateUserController@index');
 $router->get('admin/users/userprofile', 'AdminUserProfileController@index');
 $router->get('admin/users/userprofile/recipe', 'AdminUserRecipeController@index');
+$router->get('admin/users/userprofile/recipe/createstep', 'AdminCreateStepRecipeController@index');
+$router->get('admin/users/userprofile/recipe/updatestep', 'AdminUpdateStepRecipeController@index');
 $router->get('admin/recipes', 'AdminRecipesController@index');
 $router->get('admin/recipes/createrecipe', 'AdminCreateRecipeController@index');
 $router->get('admin/recipes/updaterecipe', 'AdminUpdateRecipeController@index');

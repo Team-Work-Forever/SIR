@@ -2,7 +2,12 @@
 
 require_once __DIR__ . '../../models/recipe-step-model.php';
 
-function toRecipeStepModel($steps)
+function toRecipeStepModel($step)
+{
+    return new RecipeStepModel($step['id'], $step['recipe_id'], $step['name'], $step['step_number'], $step['description'],);
+}
+
+function toRecipeStepModelList($steps)
 {
     $list = [];
 

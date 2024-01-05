@@ -45,7 +45,7 @@ function getIngredientsRecipe($ingredient)
 function getAllIngredientsFormRecipe($id)
 {
     $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipesIngredients WHERE recipe_id = ? and deleted_at is null;');
-    $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
+    $PDOStatement->bindValue(1, $id);
     $PDOStatement->execute();
     $recipesIngredients = [];
     while ($recipesIngredientsLits = $PDOStatement->fetch()) {

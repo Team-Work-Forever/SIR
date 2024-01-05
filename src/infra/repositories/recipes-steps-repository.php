@@ -35,7 +35,7 @@ function addStepToRecipe($recipesStep)
 function getAllStepsFormRecipe($id)
 {
     $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipesSteps WHERE recipe_id = ? and deleted_at is null Order by step_number;');
-    $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
+    $PDOStatement->bindValue(1, $id);
     $PDOStatement->execute();
     $recipesSteps = [];
     while ($recipesStepsLits = $PDOStatement->fetch()) {
@@ -43,6 +43,14 @@ function getAllStepsFormRecipe($id)
     }
 
     return $recipesSteps;
+}
+
+function getRecipeStepById($id)
+{
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM recipesSteps WHERE id = ? LIMIT 1;');
+    $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
+    $PDOStatement->execute();
+    return $PDOStatement->fetch();
 }
 
 function updateStepRecipe($step)
@@ -59,7 +67,7 @@ function updateStepRecipe($step)
         ':step_number' => $step['step_number'],
         ':description' => $step['description'],
         ':recipe_id' => $step['recipe_id'],
-        ':id' => $step['id']
+        ':id' => $step['step_id']
     ]);
 }
 
@@ -74,6 +82,6 @@ function deleteStepRecipe($step)
 
     return $PDOStatement->execute([
         ':recipe_id' => $step['recipe_id'],
-        ':id' => $step['id']
+        ':id' => $step['step_id']
     ]);
 }

@@ -219,20 +219,21 @@ function createStep($req)
         $_SESSION['errors_step'] = $data['invalid'];
 
         $params = '?' . http_build_query($req);
-
         //TODO: ERROS EM MODALS
-        // header('location: /app/updaterecipe?id=' . $req['id'] . $params);
+        header('location: ' . $req['pathError'] . $req['recipe_id']);
+        return;
     } else {
         addStepToRecipe($data);
         updateRecipeDate($data['recipe_id']);
 
-
-        header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+        header('location: ' . $req['path'] . $req['recipe_id']);
     }
 }
 
 function deleteStep($req)
 {
+    var_dump($req);
+
     deleteStepRecipe($req);
     updateRecipeDate($req['recipe_id']);
 
@@ -254,12 +255,12 @@ function updateStep($req)
         $_SESSION['errors_step'] = $data['invalid'];
 
         //TODO: ERROS EM MODALS
-        header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+        header('location: ' . $req['pathError'] . $req['recipe_id']);
     } else {
         updateStepRecipe($data);
         updateRecipeDate($data['recipe_id']);
 
-        header('location: /app/updaterecipe?id=' . $req['recipe_id']);
+        header('location: ' . $req['path'] . $req['recipe_id']);
     }
 }
 
