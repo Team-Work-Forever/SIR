@@ -42,6 +42,6 @@ class RecipeTipModel
         $dateString = $this->created_at;
         $dateTime = new DateTime($dateString);
 
-        return $dateTime->format('d/m/Y');
+        return $dateTime->format('d/m/Y H:i');
     }
 }

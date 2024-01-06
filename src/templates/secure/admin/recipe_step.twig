@@ -34,7 +34,7 @@
                     {% endif %}
                 </div>
                 <div class="col">
-                    <textarea id="description" name="description" class="form-control" placeholder="Descrição" required>
+                    <textarea id="step_description" name="step_description" class="form-control" placeholder="Descrição" required>
                         {% if app.request.get('description') is defined %}
                             {{ app.request.get('description') }}
                         {% else %}

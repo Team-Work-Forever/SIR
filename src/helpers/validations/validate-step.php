@@ -6,8 +6,8 @@ function isStepValid($req)
         $req[$key] =  trim($req[$key]);
     }
 
-    if (empty($req['description'])) {
-        $errors['description'] = 'The description field cannot be empty.';
+    if (empty($req['step_description'])) {
+        $errors['step_description'] = 'The description field cannot be empty.';
     }
 
     if (empty($req['step_number'])) {

@@ -175,6 +175,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Apagar</th>
+                                <th scope="col">Enviado Por</th>
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Imagem</th>
                             </tr>
@@ -192,6 +193,7 @@
                                         </button>
                                     </form>
                                 </td>
+                                <td>{{ tip.getCreatorId.getDisplayName }} - {{ tip.getCreatorId.getEmail }} - {{ tip.getCreatedAt }}</td>
                                 <td>{{ tip.getDescription }}</td>
                                 <td>
                                     {% if tip.getImage is defined  %}

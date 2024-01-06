@@ -26,7 +26,7 @@ function addStepToRecipe($recipesStep)
         ':recipe_id' => $recipesStep['recipe_id'],
         ':name' => $recipesStep['name'],
         ':step_number' => $recipesStep['step_number'],
-        ':description' => $recipesStep['description']
+        ':description' => $recipesStep['step_description']
     ]);
 
     return $success;
@@ -65,7 +65,7 @@ function updateStepRecipe($step)
 
     return $PDOStatement->execute([
         ':step_number' => $step['step_number'],
-        ':description' => $step['description'],
+        ':description' => $step['step_description'],
         ':recipe_id' => $step['recipe_id'],
         ':id' => $step['step_id']
     ]);

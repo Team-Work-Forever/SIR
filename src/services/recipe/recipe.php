@@ -105,9 +105,9 @@ function createNewRecipe($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        // $params = '?' . http_build_query($req);
-        // TODO: MODAL
-        header('location: ' . $req['pathError']);
+        $params = '&' . http_build_query($req);
+        // TODO: MODAL NO CLIENT
+        header('location: ' . $req['pathError'] . $params);
 
         return;
     }
@@ -142,8 +142,10 @@ function update($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors'] = $data['invalid'];
+        $params = '&' . http_build_query($req);
 
-        header('location: ' . $req['pathError']);
+        // TODO: MODAL NO CLIENT
+        header('location: ' . $req['pathError'] . $params);
 
         return;
     }
@@ -221,11 +223,9 @@ function createStep($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors_step'] = $data['invalid'];
-
-        $params = '?' . http_build_query($req);
-        //TODO: ERROS EM MODALS
-        header('location: ' . $req['pathError'] . $req['recipe_id']);
-        return;
+        $params = '&' . http_build_query($req);
+        //TODO: ERROS EM MODALS NO CLIENT
+        return header('location: ' . $req['pathError'] . $req['recipe_id'] . $params);
     }
 
     addStepToRecipe($data);
@@ -248,12 +248,10 @@ function updateStep($req)
 
     if (isset($data['invalid'])) {
 
-
         $_SESSION['errors_step'] = $data['invalid'];
-
-        //TODO: ERROS EM MODALS
-        header('location: ' . $req['pathError'] . $req['recipe_id']);
-        return;
+        $params = '&' . http_build_query($req);
+        //TODO: ERROS EM MODALS NO CLIENT
+        return header('location: ' . $req['pathError'] . $req['recipe_id'] . $params);
     }
 
     updateStepRecipe($data);
@@ -280,8 +278,7 @@ function createIngredient($req)
 
             $_SESSION['errors_ingredient'] = $data['invalid'];
 
-            $params = '?' . http_build_query($req);
-            //TODO: ERROS EM MODALS E PARAMS
+            //TODO: ERROS EM MODALS
             header('location: ' . $req['pathError'] . $req['recipe_id']);
             return;
         }
