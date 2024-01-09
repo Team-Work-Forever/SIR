@@ -2,6 +2,34 @@ function goTo(path) {
   window.location.href = path;
 }
 
+/* Open Modal */
+document.addEventListener("DOMContentLoaded", function () {
+  var params = new URLSearchParams(window.location.search);
+  var modalName = params.get("modal");
+
+  if (modalName) {
+    openModal(modalName);
+  }
+});
+
+function openModal(modalName) {
+  var modal = document.getElementById(modalName);
+
+  modal.classList.add("show");
+  modal.style.display = "block";
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+
+function closeModal(modalName) {
+  var modal = document.getElementById(modalName);
+
+  modal.classList.remove("show");
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
 /* Shares */
 function share(message, type) {
   const currentURL = window.location.href;

@@ -157,7 +157,7 @@
                 </div>
                 <input type="hidden" name="user_id" value="{{ user.getId }}">
                 <div class="modal-footer row d-flex justify-content-center mt-5">
-                    <button type="button" class="btn green" data-bs-dismiss="modal">
+                    <button onclick="closeModal('editProfile')" type="button" class="btn green" data-bs-dismiss="modal">
                         Cancelar
                     </button>
                     <button type="submit" name="user" value="updateUser" class="btn blue">Confirmar</button>

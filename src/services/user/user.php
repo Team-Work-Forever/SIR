@@ -97,14 +97,17 @@ function changeUser($req)
 
     $data = isUserValid($req, $image);
 
+
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
 
-        $params = '&first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&description=' . $req['description'];
+        $params = '&first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&description=' . trim($req['description']);
 
-        //TODO: ERROS EM MODALS
-        header('location: /app/profile?id=' . $req['user_id'] . $params);
-        return;
+        if (!administrator()) {
+            $params = $params . '&modal=editProfile';
+        }
+
+        return header('location: /app/profile?id=' . $req['user_id'] . $params);
     }
 
     if ($image['type'] != "") {

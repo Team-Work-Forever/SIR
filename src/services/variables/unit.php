@@ -25,7 +25,6 @@ function createNewUnit($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors'] = $data['invalid'];
-        //TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
 
         $params = '?' . http_build_query($req);
         return header('location: /admin/variables/createunit' . $params);
@@ -43,7 +42,6 @@ function update($req)
     if (isset($data['invalid'])) {
 
         $_SESSION['errors'] = $data['invalid'];
-        //TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
 
         return header('location: /admin/variables/updateunit?id=' . $req['unit_id']);
     }

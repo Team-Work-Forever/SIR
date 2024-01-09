@@ -106,7 +106,7 @@ function createNewRecipe($req)
         $_SESSION['errors'] = $data['invalid'];
 
         $params = '&' . http_build_query($req);
-        // TODO: MODAL NO CLIENT
+
         header('location: ' . $req['pathError'] . $params);
 
         return;
@@ -144,10 +144,7 @@ function update($req)
         $_SESSION['errors'] = $data['invalid'];
         $params = '&' . http_build_query($req);
 
-        // TODO: MODAL NO CLIENT
-        header('location: ' . $req['pathError'] . $params);
-
-        return;
+        return header('location: ' . $req['pathError'] . $params);
     }
 
     if ($image['type'] != "") {
@@ -224,7 +221,11 @@ function createStep($req)
 
         $_SESSION['errors_step'] = $data['invalid'];
         $params = '&' . http_build_query($req);
-        //TODO: ERROS EM MODALS NO CLIENT
+
+        if (!administrator()) {
+            $params = $params . '&modal=addAction';
+        }
+
         return header('location: ' . $req['pathError'] . $req['recipe_id'] . $params);
     }
 
@@ -250,7 +251,11 @@ function updateStep($req)
 
         $_SESSION['errors_step'] = $data['invalid'];
         $params = '&' . http_build_query($req);
-        //TODO: ERROS EM MODALS NO CLIENT
+
+        if (!administrator()) {
+            $params = $params . '&modal=addAction';
+        }
+
         return header('location: ' . $req['pathError'] . $req['recipe_id'] . $params);
     }
 
@@ -278,8 +283,13 @@ function createIngredient($req)
 
             $_SESSION['errors_ingredient'] = $data['invalid'];
 
-            //TODO: ERROS EM MODALS
-            header('location: ' . $req['pathError'] . $req['recipe_id']);
+            $params = '&' . http_build_query($req);
+
+            if (!administrator()) {
+                $params = $params . '&modal=addIngredients';
+            }
+
+            header('location: ' . $req['pathError'] . $req['recipe_id'] . $params);
             return;
         }
 

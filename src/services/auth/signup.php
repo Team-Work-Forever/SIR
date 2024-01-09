@@ -18,9 +18,8 @@ function signUp($req)
 
         $_SESSION['errors'] = $data['invalid'];
 
-        $params = '?first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&day=' . $req['day'] . '&month=' . $req['month'] . '&year=' . $req['year'] . '&gender=' . $req['gender'];
+        $params = '?first_name=' . $req['first_name'] . '&last_name=' . $req['last_name'] . '&newemail=' . $req['email'] . '&day=' . $req['day'] . '&month=' . $req['month'] . '&year=' . $req['year'] . '&gender=' . $req['gender'] . '&modal=register';
 
-        //TODO: ERROS EM MODALS
         header('location: /' . $params);
     } else {
 
