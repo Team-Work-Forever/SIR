@@ -266,7 +266,7 @@
                     </div>
                 </div>
                 <div class="modal-footer row d-flex justify-content-center mt-5">
-                    <button onclick="closeModal('addIngredients'); clearIngredients();" type="button" class="btn green" data-bs-dismiss="modal">
+                    <button onclick="clearIngredients();" type="button" class="cancel btn green" data-bs-dismiss="modal">
                         Cancelar
                     </button>
                     <input type="hidden" id="ingredients" value="" name="ingredients">
@@ -319,7 +319,7 @@
                         <input type="hidden" id="path" name="path" value="/app/updaterecipe?id=">
                     </div>
                     <div class="modal-footer row d-flex justify-content-center mt-5">
-                        <button onclick="clearStepVariables(); closeModal('addAction');" type="button" class="btn green" data-bs-dismiss="modal">
+                        <button onclick="clearStepVariables();" type="button" class="cancel btn green" data-bs-dismiss="modal">
                             Cancelar
                         </button>
                         <button onsubmit="clearStepVariables();" type="submit" name="step" value="" id="submitButton" class="btn blue">Salvar</button>

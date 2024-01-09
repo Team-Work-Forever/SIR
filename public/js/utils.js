@@ -15,19 +15,44 @@ document.addEventListener("DOMContentLoaded", function () {
 function openModal(modalName) {
   var modal = document.getElementById(modalName);
 
+  var overlay = document.createElement("div");
+  overlay.classList.add("modal-overlay");
+  document.body.appendChild(overlay);
+
   modal.classList.add("show");
   modal.style.display = "block";
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
+
+  window.addEventListener("click", function (event) {
+    if (
+      event.target.classList.contains("modal-overlay") ||
+      (event.target.classList.contains("modal") &&
+        !event.target.classList.contains("modal-overlay"))
+    ) {
+      closeModal(modalName, overlay);
+    }
+  });
+
+  var cancelButton = modal.querySelector(".cancel");
+  if (cancelButton) {
+    cancelButton.addEventListener("click", function () {
+      closeModal(modalName, overlay);
+    });
+  }
 }
 
-function closeModal(modalName) {
+function closeModal(modalName, overlay) {
   var modal = document.getElementById(modalName);
 
   modal.classList.remove("show");
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
+
+  if (overlay && overlay.parentNode) {
+    overlay.parentNode.removeChild(overlay);
+  }
 }
 
 /* Shares */
