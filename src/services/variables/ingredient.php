@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../infra/repositories/ingredients-repository.php';
 require_once __DIR__ . '/../../helpers/validations/validate-ingredient-unit.php';
-
+@require_once __DIR__ . '../../../helpers/session.php';
 
 if (isset($_POST['ingredient'])) {
     if ($_POST['ingredient'] == 'createIngredient') {

@@ -8,8 +8,9 @@ class AdminCreateCategoryController
 {
     public function index()
     {
-        $errors = $_SESSION['errors'];
-        unset($_SESSION['errors']);
+        $errors = $_SESSION['errors_category'];
+        var_dump($errors);
+        unset($_SESSION['errors_category']);
         $title = "Criar Categoria";
         $submit_action = "createCategory";
         $variableName = "category";

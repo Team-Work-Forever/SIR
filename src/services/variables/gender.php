@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../infra/repositories/genders-repository.php';
 require_once __DIR__ . '/../../helpers/validations/validate-variable.php';
-
+@require_once __DIR__ . '../../../helpers/session.php';
 
 if (isset($_POST['gender'])) {
     if ($_POST['gender'] == 'createGender') {

@@ -13,8 +13,8 @@ class AdminUpdateCategoryController
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $category = toCategoryModel(getCategoryById($id));
-            $errors = $_SESSION['errors'];
-            unset($_SESSION['errors']);
+            $errors = $_SESSION['errors_category'];
+            unset($_SESSION['errors_category']);
             $title = "Editar Categoria";
             $submit_action = "updateCategory";
             $variableName = "category";

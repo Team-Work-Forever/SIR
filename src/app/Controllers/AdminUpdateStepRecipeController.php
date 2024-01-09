@@ -14,8 +14,8 @@ class AdminUpdateStepRecipeController
             $id = $_GET['id'];
             $recipe_id = $_GET['recipe_id'];
             $step = toRecipeStepModel(getRecipeStepById($id));
-            $errors = $_SESSION['errors'];
-            unset($_SESSION['errors']);
+            $errors = $_SESSION['errors_step'];
+            unset($_SESSION['errors_step']);
             $title = "Editar Ação";
             $submit_action = "editStep";
 

@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../infra/repositories/units-repository.php';
 require_once __DIR__ . '/../../helpers/validations/validate-unit.php';
-
+@require_once __DIR__ . '../../../helpers/session.php';
 
 if (isset($_POST['unit'])) {
     if ($_POST['unit'] == 'createUnit') {

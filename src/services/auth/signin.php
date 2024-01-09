@@ -54,8 +54,7 @@ function doLogin($data)
 
     if (administrator()) {
         $home_url = 'http://' . $_SERVER['HTTP_HOST'] . '/admin';
-        header('Location: ' . $home_url);
-        return;
+        return header('Location: ' . $home_url);
     }
 
     $home_url = 'http://' . $_SERVER['HTTP_HOST'] . '/app';

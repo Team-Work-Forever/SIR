@@ -10,8 +10,8 @@ class AdminCreateStepRecipeController
     {
         if (isset($_GET['recipe_id'])) {
             $recipe_id = $_GET['recipe_id'];
-            $errors = $_SESSION['errors'];
-            unset($_SESSION['errors']);
+            $errors = $_SESSION['errors_step'];
+            unset($_SESSION['errors_step']);
             $title = "Criar Ação";
             $submit_action = "addStep";
 

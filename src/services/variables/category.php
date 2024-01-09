@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../infra/repositories/categories-repository.php';
 require_once __DIR__ . '/../../helpers/validations/validate-variable.php';
-
+@require_once __DIR__ . '../../../helpers/session.php';
 
 if (isset($_POST['category'])) {
     if ($_POST['category'] == 'createCategory') {
@@ -24,8 +24,8 @@ function createNewCategory($req)
 
     if (isset($data['invalid'])) {
 
-        $_SESSION['errors'] = $data['invalid'];
-        //TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
+        $_SESSION['errors_category'] = $data['invalid'];
+        // TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
         $params = '?' . http_build_query($req);
 
         return header('location: /admin/variables/createcategory' . $params);
@@ -42,7 +42,7 @@ function update($req)
 
     if (isset($data['invalid'])) {
 
-        $_SESSION['errors'] = $data['invalid'];
+        $_SESSION['errors_category'] = $data['invalid'];
         //TODO: FIX SESSION[ERRORS] IS NOT RECEIVED IN THE CONTROLLER
 
         return header('location: /admin/variables/updatecategory?id=' . $req['category_id']);

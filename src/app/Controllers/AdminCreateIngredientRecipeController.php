@@ -16,8 +16,8 @@ class AdminCreateIngredientRecipeController
             $id = $_GET['id'];
             $recipe = toRecipeModel(getRecipeById($id));
             $ingredients = toIngredientModelList(getAllIngredients());
-            $errors = $_SESSION['errors'];
-            unset($_SESSION['errors']);
+            $errors = $_SESSION['errors_ingredient'];
+            unset($_SESSION['errors_ingredient']);
             $title = "Criar Ingredientes";
             $submit_action = "addIngredient";
 
