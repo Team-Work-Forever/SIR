@@ -3,60 +3,16 @@
 
 {% block outlet %}
 <div class="flex-column vw-100 vh-100">
-    <div class="text-black">
-        <!-- Header -->
-        <header class="p-3">
-            <form action="">
-                <div class="text-field">
-                    <input id="searchInput" placeholder="Pesquisar" type="text">
-                    <span>
-                        <button>
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <div class="d-flex justify-content-center mt-4">
-                <div class="selector"></div>
-            </div>
-        </header>
-    </div>
-
     <main class="overflow-auto d-flex flex-column ms-5 gap-3 py-4 scrollDashboardSpaceAdmin">
-        <!-- Tendencies -->
+        <!-- Charts -->
         <div class="container">
-            <h2 class="title">Tendências</h2>
-            {% if not public|length %}
-            <h4 class="d-flex justify-content-center my-5">Não existe nenhuma receita nas tendências!</h4>
-            {% endif %}
-            <div class="d-flex flex-wrap">
-                {% for recipe in public %}
-                <div class="card cardItem" onclick="goTo('app/detailsrecipe?id={{ recipe.getId }}')">
-                    <img src="data:{{ recipe.getCover.getType }};base64, {{ recipe.getCover.getContent }}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <div class="row">
-                            <h5 class="card-title col-9">{{ recipe.getTitle }}</h5>
-                            <button class="buttonTransparent col-1 mt-1" onclick="shareRecipe('{{ host }}', '{{ recipe.getId }}', event)">
-                                <i class="bi bi-share-fill"></i>
-                            </button>
-                            <form action="/src/services/recipe/recipe.php" method="post" class="mx-2 py-2 col-1">
-                                <input type="hidden" name="id" value="{{ recipe.getId }}">
-                                <button class="buttonTransparent" type="submit" name="favorite" value="changeFavoriteHome">
-                                    <i class="{% if recipe.getIsFavorite %}bi bi-star-fill{% else %}bi bi-star{% endif %}"></i>
-                                </button>
-                            </form>
-                        </div>
-
-                        <p class="card-text">{{ recipe.getDescription }}</p>
-                        <p class="card-text"><small class="text-body-secondary">{{recipe.getLastModificationTimeText}}
-                                {{ recipe.getLastModificationTime }}</small></p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+            <h2 class="title">Gráficos</h2>
+            <canvas id="myChart"></canvas>
         </div>
     </main>
 </div>
 <script src="{{ loadJs('search.js') }}"></script>
 <script src="{{ loadJs('selector.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ loadJs('charts.js') }}"></script>
 {% endblock %}

@@ -1,6 +1,7 @@
 <?php
 
 $router->get('', 'IndexController@index');
+$router->get('forgot', 'ForgotController@index');
 $router->get('app', 'HomeController@index');
 $router->get('app/myrecipes', 'MyRecipesController@index');
 $router->get('app/createrecipe', 'CreateRecipeController@index');

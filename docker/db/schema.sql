@@ -180,3 +180,11 @@ CREATE TABLE recipesFavorites (
         foreign key (recipe_id)
             references recipes (id)
 );
+
+CREATE TABLE tokens(
+    email varchar(50) NOT NULL,
+    token varchar(255) NOT NULL,
+    type varchar(25) NOT NULL,
+    deleted_at TIMESTAMP DEFAULT NULL,
+    primary key (email, token)
+)

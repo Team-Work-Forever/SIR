@@ -1,0 +1,97 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
+
+    :root {
+        --font-family: 'Amarante', 'Arial', serif;
+
+        --main-color: #00454B;
+        --selection-color: #FF9608;
+        --hover-link-color: #F9C784;
+
+        --title-color: #001524;
+        --title-card-color: #212529;
+
+        --red-color: #8C1C13;
+        --hover: #ffffff;
+        --mid-blue: #577590;
+        --mid-green: #006D77;
+
+        --gray-mid: #F5F5F5;
+        --gray-selection: #DEE2E6;
+        --dark-gray: #6C757D;
+    }
+
+    * {
+        margin: 0px;
+        box-sizing: border-box;
+        padding: 0px;
+        font-family: var(--font-family);
+    }
+
+    header {
+        background-color: var(--gray-mid);
+        padding: 16px;
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--title-color);
+    }
+
+    h5,
+    h2,
+    p {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    p {
+        margin-top: 36px;
+        color: var(--title-card-color);
+    }
+
+    h2 {
+        margin-top: 26px;
+        text-decoration: underline;
+    }
+
+    h5 {
+        text-align: center;
+        margin-top: 36px;
+        color: var(--title-color);
+    }
+
+    a {
+        background-color: var(--main-color);
+        border-radius: 7px;
+        color: var(--hover);
+        outline: none;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    .button-container {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<header>
+    <h1>Recuperação da Palavra-chave</h1>
+</header>
+
+<h2>Olá {{ displayName }}!</h2>
+
+<p>Parece que se esqueceu da palavra-chave da sua
+    conta! Para
+    redefinir uma nova carregue no botão que se encontra imediatamente de seguida:
+</p>
+
+<div class="button-container">
+    <a href="{{ token }}">
+        Nova palavra-chave
+    </a>
+</div>
+
+<h5>Se não foi requisitada nenhuma alteração de palavra-chave, pode ignorar e apagar este email.</h5>

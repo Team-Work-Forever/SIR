@@ -8,7 +8,7 @@ function createNewUser($user)
     $idUUID = createUUID();
     $display_name = $user['first_name'] . ' ' . $user['last_name'];
     $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
-    $user['birth_date'] = $user['day'] . '/' . $user['mounth'] . '/' . $user['year'];
+    $user['birth_date'] = $user['day'] . '/' . $user['month'] . '/' . $user['year'];
     $sqlCreate = "INSERT INTO 
     users (
         id,
@@ -140,7 +140,7 @@ function updateUserPassword($user)
     $sqlUpdate = "UPDATE  
             users SET
                 password = :password
-            WHERE id = :id ;";
+            WHERE id = :id;";
 
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
 

@@ -10,10 +10,10 @@ class Twig
 {
     private static $twig;
 
-    public static function getTemplateRenderer(): Environment
+    public static function getTemplateRenderer($path = 'src/templates'): Environment
     {
         if (!static::$twig) {
-            $loader = new FilesystemLoader('src/templates');
+            $loader = new FilesystemLoader($path);
             static::$twig = new Environment($loader);
             static::$twig->addFunction(new \Twig\TwigFunction('loadCss', [__CLASS__, 'loadCss']));
             static::$twig->addFunction(new \Twig\TwigFunction('loadAsset', [__CLASS__, 'loadAsset']));

@@ -19,19 +19,19 @@
         {% if administrator is not defined %}
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="/app" class="nav-link">
+                <a onclick="goTo('/app')" data-mc-path="/app" class="nav-link">
                     <i class="bi me-2 bi-house-door-fill"></i>
                     <span>Início</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/app/myrecipes" class="nav-link">
+                <a onclick="goTo('/app/myrecipes')" data-mc-path="/app/myrecipes" class="nav-link">
                     <i class="bi me-2 bi-book"></i>
                     <span>Minhas Receitas</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/app/profile?id={{profile}}" class="nav-link">
+                <a onclick="goTo('/app/profile?id={{profile}}')" data-mc-path="/app/profile?id={{profile}}" class="nav-link">
                     <i class="bi me-2 bi-person-fill"></i>
                     <span>Perfil</span>
                 </a>
@@ -40,25 +40,25 @@
         {% else %}
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="/admin" class="nav-link">
+                <a onclick="goTo('/admin')" data-mc-path="/admin" class="nav-link">
                     <i class="bi me-2 bi-house-door-fill"></i>
                     <span>Início</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/admin/users" class="nav-link">
+                <a onclick="goTo('/admin/users')" data-mc-path="/admin/users" class="nav-link">
                     <i class="bi me-2 bi-person-fill"></i>
                     <span>Utilizadores</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/admin/recipes" class="nav-link">
+                <a onclick="goTo('/admin/recipes')" data-mc-path="/admin/recipes" class="nav-link">
                     <i class="bi me-2 bi-egg-fill"></i>
                     <span>Receitas</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/admin/variables" class="nav-link">
+                <a onclick="goTo('/admin/variables')" data-mc-path="/admin/variables" class="nav-link">
                     <i class="bi me-2 bi-gear-fill"></i>
                     <span>Outras Variáveis</span>
                 </a>
@@ -78,4 +78,5 @@
     </aside>
     {% block outlet %}{% endblock %}
 </div>
+<script src="{{ loadJs('utils.js') }}"></script>
 {% endblock %}
