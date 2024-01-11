@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var firstNavItem = navItems[0];
     firstNavItem.classList.add("active");
     const path = firstNavItem.dataset.mcPath;
-    // localStorage.setItem("activeNavItem", firstNavItem.getAttribute("href"));
     localStorage.setItem("activeNavItem", path);
   } else {
     navItems.forEach(function (item) {
@@ -54,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (!item.classList.contains("active")) {
-        // localStorage.setItem("activeNavItem", item.getAttribute("href"));
         localStorage.setItem("activeNavItem", path);
 
         navItems.forEach(function (otherItem) {

@@ -20,6 +20,11 @@
     --dark-gray: #6C757D;
 }
 
+#sa {
+    display: flex;
+    flex-direction: row;
+}
+
 .forgot-text{
     color: var(--gray-mid);
 }
@@ -286,34 +291,6 @@ section {
     box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0.15);
     transition: width ease-out 150ms;
 }
-
-@media (max-width: 767px) {
-    .side-menu {
-        width: 100vw;
-    }
-
-    .side-menu.compact {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .side-menu.compact .nav-pills {
-        display: none;
-    }
-
-    .side-menu.compact .hamburger {
-        display: block;
-    }
-
-    .side-menu:not(.compact) .nav-pills {
-        flex-direction: column;
-        padding: 10px;
-        display: flex;
-    }
-}
-
 
 .side-menu img:nth-child(2) {
     display: none;
@@ -887,5 +864,94 @@ td {
     
     .toast.active {
         transform: translateY(0%);
+    }
+}
+
+/* Adicione estas regras ao seu código CSS */
+
+@media (max-width: 767px) {
+    .side-menu {
+        width: 100%;
+        z-index: 11;
+    }
+
+    .side-menu.compact {
+        width: 100%;
+        display: none;
+        box-shadow: 0px 4px 40px 0px rgba(66, 71, 76, 0);
+        flex-direction: column;
+        align-items: start;
+        justify-content: flex-start;
+    }
+
+    .side-menu.compact .nav-pills {
+        display: none;
+    }
+
+    .side-menu.compact .hamburger {
+        display: block;
+    }
+
+    .side-menu:not(.compact) .nav-pills {
+        flex-direction: column;
+        padding: 10px;
+        display: flex;
+    }
+
+    .side-menu.compact .nav-link.exit {
+        display: none;
+    }
+
+    .side-menu>hr {
+        display: none;
+    }
+
+    .side-menu.compact>.badge {
+        background-color: var(--hover);
+        min-height: 0px;
+        height: 0px;
+        display: none;
+    }
+
+    .side-menu.compact img:nth-child(2) {
+        display: none;
+    }
+
+    .delete {
+        position: absolute;
+        font-size: 36px;
+        top: 124px;
+        right: 26px;
+        width: 64px;
+        height: 64px;
+    }
+
+    .edit {
+        position: absolute;
+        font-size: 36px;
+        top: 46px;
+        right: 26px;
+        width: 64px;
+        height: 64px;
+    }
+
+    main {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    #sa {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .scrollDashboardSpace {
+        height: calc(100% - 16rem);
+        width: 100%;
+    }
+
+    .scrollDashboardSpaceAdmin {
+        height: calc(100% - 6rem);
+        width: 100%;
     }
 }
