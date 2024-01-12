@@ -83,6 +83,15 @@ function getNumberUsers()
     return $users['quantity'];
 }
 
+function getNumberOfUsersByGender($gender)
+{
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT Count(*) as quantity FROM users WHERE gender_id = ?;');
+    $PDOStatement->bindValue(1, $gender, PDO::PARAM_INT);
+    $PDOStatement->execute();
+    $gender = $PDOStatement->fetch();
+    return $gender['quantity'];
+}
+
 function getAllRemovedUsers()
 {
     $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM users WHERE is_admin = 0 and deleted_at is not null;');

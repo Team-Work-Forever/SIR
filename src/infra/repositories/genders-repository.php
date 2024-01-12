@@ -30,6 +30,17 @@ function getAllGenders()
     return $genders;
 }
 
+function getAllGendersWithDeletedIncluded()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM genders;');
+    $genders = [];
+    while ($gendersLits = $PDOStatement->fetch()) {
+        $genders[] = $gendersLits;
+    }
+
+    return $genders;
+}
+
 function getGenderById($id)
 {
     $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM genders WHERE id = ? LIMIT 1;');
