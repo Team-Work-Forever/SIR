@@ -52,6 +52,15 @@ function createRecipe($recipe)
 }
 
 
+function getNumberOfRecipesByCategory($category)
+{
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT Count(*) as quantity FROM recipes WHERE category_id = ? and deleted_at is null;');
+    $PDOStatement->bindValue(1, $category, PDO::PARAM_INT);
+    $PDOStatement->execute();
+    $category = $PDOStatement->fetch();
+    return $category['quantity'];
+}
+
 function getAllRecipesFromAuthenticatedUser()
 {
     $userId = userId();
@@ -112,6 +121,22 @@ function getRecipeById($id)
     $PDOStatement->bindValue(1, $id);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
+}
+
+function getNumberPublicRecipes()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT Count(*) as quantity FROM recipes WHERE is_private = 0 and deleted_at is null;');
+    $recipes = $PDOStatement->fetch();
+
+    return $recipes['quantity'];
+}
+
+function getNumberPrivatesRecipes()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT Count(*) as quantity FROM recipes WHERE is_private = 1 and deleted_at is null;');
+    $recipes = $PDOStatement->fetch();
+
+    return $recipes['quantity'];
 }
 
 function getAllPublicRecipes()

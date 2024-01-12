@@ -867,8 +867,6 @@ td {
     }
 }
 
-/* Adicione estas regras ao seu código CSS */
-
 @media (max-width: 767px) {
     .side-menu {
         width: 100%;

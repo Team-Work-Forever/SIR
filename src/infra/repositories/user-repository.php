@@ -75,6 +75,14 @@ function getAllUsers()
     return $users;
 }
 
+function getNumberUsers()
+{
+    $PDOStatement = $GLOBALS['pdo']->query('SELECT Count(*) as quantity FROM users WHERE is_admin = 0 and deleted_at is null;');
+    $users = $PDOStatement->fetch();
+
+    return $users['quantity'];
+}
+
 function getAllRemovedUsers()
 {
     $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM users WHERE is_admin = 0 and deleted_at is not null;');

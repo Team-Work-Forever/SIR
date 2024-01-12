@@ -6,8 +6,26 @@
     <main class="overflow-auto d-flex flex-column ms-5 gap-3 py-4 scrollDashboardSpaceAdmin">
         <!-- Charts -->
         <!-- TODO: GRÁFICOS E PESQUISAS PARA TODOS OS MENUS NO ADMIN -->
+        <div class="row mt-5">
+            <h3 class="col-6">Número de Utilizadores</h3>
+            <p class="col-6 p-2">{{ users }}</p>
+        </div>
+        <div class="row my-2">
+            <h3>Número de Receitas</h3>
+        </div>
+        <div class="row mb-5">
+            <div class="row">
+                <h5 class="text-decoration-underline col-6">Públicas</h5>
+                <p class="col-6 p-2">{{ publicRecipes }}</p>
+            </div>
+            <div class="row">
+                <h5 class="text-decoration-underline col-6">Privadas</h5>
+                <p class="col-6 p-2">{{ privateRecipes }}</p>
+            </div>
+        </div>
+        <h2 class="title">Gráficos</h2>
         <div class="container">
-            <h2 class="title">Gráficos</h2>
+            <input type="hidden" id="categories" value="{{ categories }}" />
             <canvas id="myChart"></canvas>
         </div>
     </main>
