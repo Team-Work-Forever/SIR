@@ -7,10 +7,20 @@
         <div class="mt-5 mx-3 px-2 py-2">
             <div class="row">
                 <!-- Utilizadores -->
+                <form action="" class="my-5">
+                    <div class="text-field">
+                        <input id="searchInput" placeholder="Pesquisar" type="text">
+                        <span>
+                            <button>
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
                 <div class="container col-12">
                     <h2 class="title text-decoration-underline">Utilizadores</h2>
                     <div class="table-container">
-                        <table class="table">
+                        <table class="table active-users-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Abrir Perfil</th>
@@ -68,7 +78,7 @@
                     <!-- Removed Profiles -->
                     <h2 class="title text-decoration-underline">Utilizadores Removidos</h2>
                     <div class="table-container">
-                        <table class="table">
+                        <table class="table removed-users-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Reverter</th>
@@ -110,5 +120,6 @@
         </div>
     </main>
 </div>
+<script src="{{ loadJs('search-users.js') }}"></script>
 
 {% endblock %}

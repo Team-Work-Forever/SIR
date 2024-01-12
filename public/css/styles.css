@@ -434,13 +434,13 @@ section {
 }
 
 /* Selector */
-.selector {
+#selector {
     position: relative;
     display: flex;
     gap: 24px;
 }
 
-.selector .selector-element {
+#selector .selector-element {
     color: var(--dark-gray);
     width: 114px;
     height: 43px;
@@ -450,8 +450,7 @@ section {
     text-align: center;
 }
 
-.selector-frame {
-    position: absolute;
+#selector .selector-element.active {
     border: 2px solid var(--dark-gray);
     border-radius: 6px;
     width: 114px;
@@ -459,6 +458,16 @@ section {
     background-color: transparent;
     transition: all 150ms ease-in-out;
 }
+
+/* .selector-frame {
+    position: absolute;
+    border: 2px solid var(--dark-gray);
+    border-radius: 6px;
+    width: 114px;
+    height: 43px;
+    background-color: transparent;
+    transition: all 150ms ease-in-out;
+} */
 
 /* Sections Dashboard */
 .editImageWrapper {
@@ -829,7 +838,6 @@ td {
     pointer-events: auto;
 }
 
-/* TODO: MAKE THIS HAPPEN */
 .toast .close {
     z-index: 6;
     position: absolute;
