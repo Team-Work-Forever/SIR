@@ -74,7 +74,9 @@ new Chart(ctx1, {
   },
   options: {
     scales: {
-      indexAxis: "x",
+      y: {
+        beginAtZero: true,
+      },
     },
   },
 });

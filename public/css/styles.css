@@ -435,15 +435,22 @@ section {
 
 /* Selector */
 #selector {
-    position: relative;
     display: flex;
     gap: 24px;
+    min-width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+#selector::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 #selector .selector-element {
     color: var(--dark-gray);
-    width: 114px;
-    height: 43px;
+    min-width: 114px;
+    min-height: 43px;
     border: 2px solid var(--gray-selection);
     border-radius: 6px;
     padding: 6px;
@@ -458,16 +465,6 @@ section {
     background-color: transparent;
     transition: all 150ms ease-in-out;
 }
-
-/* .selector-frame {
-    position: absolute;
-    border: 2px solid var(--dark-gray);
-    border-radius: 6px;
-    width: 114px;
-    height: 43px;
-    background-color: transparent;
-    transition: all 150ms ease-in-out;
-} */
 
 /* Sections Dashboard */
 .editImageWrapper {

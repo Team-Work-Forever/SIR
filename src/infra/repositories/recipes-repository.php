@@ -139,6 +139,31 @@ function getNumberPrivatesRecipes()
     return $recipes['quantity'];
 }
 
+function getAllPublicRecipesByCategories($categories)
+{
+    $placeholders = implode(',', array_fill(0, count($categories), '?'));
+
+    $query = 'SELECT * FROM recipes 
+    WHERE is_private = 0 and deleted_at is null and category_id in (' . $placeholders . ')';
+
+    error_log('query: ' . $query);
+    $PDOStatement = $GLOBALS['pdo']->prepare($query);
+
+    foreach ($categories as $index => $category_id) {
+        error_log('bindValue: ' . $index + 1 . ' => ' . $category_id);
+        $PDOStatement->bindValue($index + 1, $category_id, PDO::PARAM_INT);
+    }
+
+    $PDOStatement->execute();
+
+    $recipes = [];
+    while ($recipesLits = $PDOStatement->fetch()) {
+        $recipes[] = $recipesLits;
+    }
+
+    return $recipes;
+}
+
 function getAllPublicRecipes()
 {
     $PDOStatement = $GLOBALS['pdo']->query('SELECT * FROM recipes WHERE is_private = 0 and deleted_at is null;');

@@ -1,10 +1,10 @@
 class SelectorItem {
-  constructor(title, selected = false) {
+  constructor(title, selected = false, url = undefined) {
+    this.url = url;
     this.title = title;
     this.selected = selected;
 
     this.html = this.init();
-    this.toggle(this.selected);
   }
 
   init() {
@@ -15,27 +15,48 @@ class SelectorItem {
     return selectorElement;
   }
 
-  toggle(selected) {
-    this.selected = selected ?? !this.selected;
+  toggle() {
+    this.selected = !this.selected;
 
     if (this.selected) {
       this.html.classList.add("active");
+      this.url?.searchParams.append(this.title, true);
     } else {
       this.html.classList.remove("active");
+      this.url?.searchParams.delete(this.title);
+    }
+
+    if (this.url) {
+      window.location.href = this.url.href;
     }
   }
 }
 
 class Selector {
-  constructor(options) {
+  constructor() {
     this.items = [];
+    this.url = new URL(window.location.href);
+
     this.selector = document.getElementById("selector");
+    const options = JSON.parse(this.selector.dataset.mcCategories);
 
     // add selectors and init the Todos selector
-    this.addSelector(new SelectorItem("Todos", true));
+    this.addSelector(new SelectorItem("Todos"));
+
     options.forEach((option) => {
-      this.addSelector(new SelectorItem(option));
+      this.addSelector(new SelectorItem(option.name, false, this.url));
     });
+
+    // If there is a query string, select the items
+    this.url.searchParams.forEach((value, key) => {
+      const item = this.getElementByTitle(key);
+      item.selected = true;
+      item.html.classList.add("active");
+    });
+
+    if (this.url.searchParams.size === 0) {
+      this.items[0].toggle();
+    }
   }
 
   addSelector(item) {
@@ -51,6 +72,16 @@ class Selector {
     this.items.forEach((item) => {
       item.selected = false;
       item.html.classList.remove("active");
+      this.url.searchParams.delete(item.title);
+
+      window.location.href = this.url.href;
+    });
+  }
+
+  toggleAll() {
+    this.items.forEach((item) => {
+      item.selected = true;
+      item.html.classList.add("active");
     });
   }
 
@@ -74,10 +105,20 @@ class Selector {
         // TUDO selecionado
         if (this.isFirstSelected()) {
           this.unToggleAll();
+
           return item.toggle();
         }
 
-        // If the first item is selected, unselect all others
+        // If all elements are selected, select the first one
+        if (this.items.slice(1).every((item) => item.selected)) {
+          this.items.forEach((item) => {
+            if (item.selected) {
+              item.toggle();
+            }
+          });
+
+          this.items[0].toggle();
+        }
       }
     });
   }
@@ -87,4 +128,4 @@ class Selector {
   }
 }
 
-new Selector(["Carne", "Adeus", "Boa Noite"]).listen();
+new Selector().listen();
